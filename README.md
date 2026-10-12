@@ -38,7 +38,14 @@ Teams that only write code are."**
 - Copilot code review on BeamRS pull requests
   [#4](https://github.com/Dedac/BeamRS/pull/4) and
   [#6](https://github.com/Dedac/BeamRS/pull/6)
-- Anonymized enterprise team cases (to be added per section)
+- Anonymized enterprise cases:
+  - **Case A, "The Relay" (2025):** an enterprise service template plus a
+    generation-one agent workflow: a reusable instruction file, bootstrap and
+    validation prompts, and role agents (ideator → planner → coder → tester)
+    that pass work forward through written plans. Used across an AI
+    reference architecture (document ingestion, chat orchestration, web UI).
+  - **Case B, QRSPI+ in real work:** the structured workflow applied to
+    enterprise delivery (details to be added).
 
 ### External research
 
@@ -99,8 +106,27 @@ Teams that only write code are."**
   (19% slower while feeling about 20% faster). Follow immediately with METR's
   2026 update: AI likely helps now, but self-perception is unreliable.
   *"Plausible isn't proven applies to how fast we feel, too."*
-- Enterprise case: agent work that looked finished but missed a constraint or
-  architecture decision.
+- **Enterprise case A, "The Relay" (generation one).** It worked well
+  enough to ship real features, and it shows all three lessons:
+  - **What worked:** an 11-line human feature request became a
+    ~290-line, agent-written plan with research, tasks, and validation
+    gates. Standard validation scripts (start, health check, test, lint,
+    logs, stop) gave agents one dependable way to run and check the
+    system.
+  - **Instruction overload:** one instruction file holds a wall of
+    "ALWAYS" and "NEVER" rules, repeated in each agent file.
+  - **Magic words:** the instructions tell the agent to "ULTRATHINK" for
+    hard problems. A literal magic word.
+  - **Persuasive plans:** plans grew to 700–1,400 lines and ended with the
+    agent's own confidence score.
+  - **The agent graded its own homework:** a validation report marks
+    "unit tests pass with >90% coverage" as ✅ PASS, and its own evidence
+    column says 83%. Other criteria were marked done because the code
+    "was verified," not because anyone tested them.
+  - Hook: *"The report said PASS. The number next to it said otherwise.
+    Plausible isn't proven."*
+  - Hook: *"Our first process asked the agent how confident it was. Our
+    second asked another agent to prove it wrong."*
 
 ### 3. Turn the process into infrastructure (7 min)
 
@@ -120,8 +146,12 @@ Teams that only write code are."**
   exists."*
 - Be honest about costs: more steps and slower starts. Use the quick-fix route
   for small changes.
-- Enterprise case: a team that turned informal conventions into reusable
-  instructions or review gates.
+- **Enterprise case B: QRSPI+ in real work.** Show how the generation-one
+  gaps were closed: research isolated from goals, a failing test before
+  production code, and review by independent agents instead of
+  self-assessment. (Add specifics and one before/after result.)
+- What carried forward from The Relay: standard validation scripts and
+  shared instruction files became the foundation, not the whole process.
 
 ### 4. Two layers of agent review (9 min)
 
@@ -287,5 +317,8 @@ history as a short case study:
 - BeamRS is a demo app with an unauthenticated identity model, not production
   software.
 - If a section has no strong enterprise case, shorten or merge it.
+- Anonymize Case A before showing anything: remove internal application
+  IDs, file paths, user names, and service names. Present it as a
+  generation that worked and taught us, not as a failure.
 - Check every research figure against its primary source before putting it on
   a slide.
