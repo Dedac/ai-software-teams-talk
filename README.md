@@ -2,6 +2,12 @@
 
 *How AI changes the work, the workflow, and the shape of effective teams.*
 
+## Presentation
+
+Open the [presentation](presentation/index.html) in a browser, or see the
+[presenting and PDF export guide](presentation/README.md). The deck uses large,
+high-contrast type for a large audience and includes presenter notes.
+
 ## Abstract
 
 Are traditional software teams a thing of the past? With a world of new and
