@@ -39,12 +39,12 @@ Teams that only write code are."**
   [#4](https://github.com/Dedac/BeamRS/pull/4) and
   [#6](https://github.com/Dedac/BeamRS/pull/6)
 - Anonymized enterprise cases:
-  - **Case A, generation one (2025):** an enterprise service template plus a
-    generation-one agent workflow: a reusable instruction file, bootstrap and
+  - **Case A, "The Relay" (2025):** an enterprise service template plus a
+    separate agent workflow implementation: a reusable instruction file, bootstrap and
     validation prompts, and role agents (ideator → planner → coder → tester)
     that pass work forward through written plans. Used across an AI
     reference architecture (document ingestion, chat orchestration, web UI).
-  - **Case B, generation two (2026):** QRSPI+, used by a real enterprise
+  - **Case B, QRSPI+ (2026):** used by a real enterprise
     team. Its v0.7.2 release was planned, built,
     integrated, and acceptance-tested by the previous version of the
     workflow: 38 tasks in 20 waves, 32 tracked issues closed, 2,083
@@ -111,7 +111,9 @@ Teams that only write code are."**
   (19% slower while feeling about 20% faster). Follow immediately with METR's
   2026 update: AI likely helps now, but self-perception is unreliable.
   *"Plausible isn't proven applies to how fast we feel, too."*
-- **Enterprise case A: generation one.** It worked well
+- **Enterprise case A: "The Relay."** Named for its role agents
+  (ideator → planner → coder → tester), each handing a written plan to the
+  next like a baton. It worked well
   enough to ship real features, and it shows all three lessons:
   - **What worked:** an 11-line human feature request became a
     ~290-line, agent-written plan with research, tasks, and validation
@@ -151,8 +153,7 @@ Teams that only write code are."**
   exists."*
 - Be honest about costs: more steps and slower starts. Use the quick-fix route
   for small changes.
-- **Enterprise case B: QRSPI+ in a real enterprise (generation two, 2
-  min).** The same workflow used by an enterprise team also built its own
+- **Enterprise case B: QRSPI+ in a real enterprise (2 min).** The same workflow used by an enterprise team also built its own
   next release.
   - **The run:** one release of 38 tasks, split into 20 waves of parallel
     work, each task built in isolation, then merged, reviewed, and
@@ -166,15 +167,15 @@ Teams that only write code are."**
     re-landed with 4 of 4 acceptance tests passing.
   - **Honest reporting:** the release record left 3 of 7 acceptance criteria
     unchecked and explained why, instead of declaring everything done.
-    Contrast with generation one's self-graded ✅ PASS next to 83%.
+    Contrast with The Relay's self-graded ✅ PASS next to 83%.
   - **The process improved itself:** the run filed 15 new issues about its
     own gaps. The next release (v0.7.3) added an automatic check that every
     merge contains exactly the planned tasks, and capped the active
     instructions under a measured budget (under 30,000 tokens), a direct
-    answer to generation one's instruction overload.
-  - Generation one versus two:
+    answer to The Relay's instruction overload.
+  - Two implementations side by side:
 
-    | | Generation one | QRSPI+ (generation two) |
+    | | The Relay | QRSPI+ |
     |---|---|---|
     | Who checks the work | The agent grades itself | Independent agents, then a person |
     | Instructions | One growing file of rules | Focused steps, measured size budget |
@@ -184,10 +185,10 @@ Teams that only write code are."**
 
   - Hook: *"The safeguard vanished in a merge. Integration review missed it.
     An agent whose only job was to doubt the result caught it."*
-  - Hook: *"Gen one asked the agent if it was done. Gen two asked another
+  - Hook: *"The Relay asked the runner if the leg went well. QRSPI+ asked another
     agent to prove it wasn't, then added a check so that mistake can't slip
     through silently again."*
-- What carried forward from generation one: standard validation scripts and
+- What carried over from The Relay: standard validation scripts and
   shared instruction files became the foundation, not the whole process.
 
 ### 4. Two layers of agent review (9 min)
@@ -358,6 +359,6 @@ history as a short case study:
   enterprise or team.
 - Anonymize Case A before showing anything: remove internal application
   IDs, file paths, user names, and service names. Present it as a
-  generation that worked and taught us, not as a failure.
+  implementation that worked and taught us, not as a failure.
 - Check every research figure against its primary source before putting it on
   a slide.
