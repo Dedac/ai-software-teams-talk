@@ -79,6 +79,9 @@
     .verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 22px; }
     .verdict .big { margin: 20px 0; }
     .verdict p { font-size: 32px; }
+    .verdict .big.study { font-size: 80px; margin: 14px 0 18px; }
+    .verdict .tag { font-size: 23px; }
+    .verdict p.muted { font-size: 28px; }
     .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
     .comparison p { padding: 20px 0; font-size: 32px; border-top: 1px solid var(--gh-muted); }
     .resources { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; }
@@ -134,7 +137,7 @@
         <h1>Are Traditional<br>Software Teams<br>a Thing of the Past?</h1>
         <p class="lead muted">How AI changes the work, the workflow,<br>and the shape of effective teams.</p>
         <aside class="notes">
-          <p>Introduce the question, not a prediction that teams will disappear.</p>
+          <p>Frame this as a question about how software work and team constraints are changing.</p>
           <p>Have BeamRS or a prepared recording ready. Show the demo with the next slide rather than a schematic illustration. BeamRS is a demo app with an unauthenticated identity model, not production software.</p>
         </aside>
       </section>
@@ -162,7 +165,7 @@
         <h2>If code took no time,<br>what would still stop<br>your team <span class="accent">shipping?</span></h2>
         <aside class="notes">
           <p>Pause for audience answers: unclear requirements, review, integration, risk, and deciding what deserves to exist. Use their answers to frame the shift.</p>
-          <p>DORA 2025 describes AI as an amplifier of existing strengths and weaknesses, with throughput gains accompanied by instability. Do not imply all teams experience the same result.</p>
+          <p>DORA 2025 describes AI as an amplifier of existing strengths and weaknesses, with throughput gains accompanied by instability. Results vary across teams.</p>
           <p><a href="https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report">DORA 2025</a> and the <a href="https://services.google.com/fh/files/misc/2025_dora_ai_capabilities_model.pdf">AI Capabilities Model</a>.</p>
         </aside>
       </section>
@@ -175,8 +178,8 @@
         </div>
         <p class="lead bottom">They didn't have a speed problem.</p>
         <aside class="notes">
-          <p>Tell this as a personal story from before AI tools. Do not name the company, application, or teams. These details come from the presenter's own experience in the outline, not a published study.</p>
-          <p>Ask: With today's agents, what would have changed? Use the faster-dead-end counterfactual orally, explicitly as hypothetical; it is not a measured productivity claim.</p>
+          <p>Tell this as a personal story from before AI tools, keeping the company, application, and teams anonymous. These details come from the presenter's own experience in the outline, not a published study.</p>
+          <p>Ask: With today's agents, what would have changed? Frame the faster-dead-end counterfactual as a hypothetical; it has no measured productivity result.</p>
           <p>Spoken hook: Agents make building cheap. They don't make it worth building.</p>
         </aside>
       </section>
@@ -186,7 +189,7 @@
         <p class="lead">Tasks closed. Pull requests merged. Code generated.<br><span class="muted">None tells you whether it was worth doing.</span></p>
         <aside class="notes">
           <p>Agents inflate activity measures. Unfinished work is inventory: until it reaches users and earns or saves something, it is a cost.</p>
-          <p>Every line has to be reviewed, run, secured, and maintained. Cheap to write does not mean cheap to own. Keep the highway analogy spoken-only.</p>
+          <p>Every line has to be reviewed, run, secured, and maintained. Cheap to write does not mean cheap to own.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -219,7 +222,7 @@
           <p>RPI means Research, Plan, Implement. QRSPI made questions, design discussion, and structure explicit before implementation. QRSPI+ extends that approach with goals, delivery phases, parallelization, integration, acceptance testing, and replanning. The next slide compares the workflows.</p>
           <p><a href="https://alexlavaee.me/blog/from-rpi-to-qrspi/">From RPI to QRSPI</a> explains the earlier evolution; <a href="https://github.com/dfrysinger/qrspi-plus">QRSPI+</a> documents the expanded implementation. They are related approaches, not interchangeable names or guarantees of correctness.</p>
           <p>Ask whether one person knows exactly what to say to make the agent behave. That is a single point of failure.</p>
-          <p><a href="https://research.trychroma.com/context-rot">Chroma's Context Rot study</a> supports focused context rather than ever-longer prompts. Do not present practitioner context-window budgets as universal model limits.</p>
+          <p><a href="https://research.trychroma.com/context-rot">Chroma's Context Rot study</a> supports focused context rather than ever-longer prompts. Practitioner context-window budgets are practical heuristics, not universal model limits.</p>
         </aside>
       </section>
       <section class="slide bg-midnight workflow-diagrams">
@@ -287,13 +290,17 @@
           <p>Sources: <a href="https://alexlavaee.me/blog/from-rpi-to-qrspi/">RPI and QRSPI overview</a>; <a href="https://github.com/dfrysinger/qrspi-plus#pipeline-overview">QRSPI+ pipeline overview</a>. The point is explicit alignment and independent evidence, not that more boxes alone make a workflow better.</p>
         </aside>
       </section>
-      <section class="slide bg-midnight statement">
-        <p class="eyebrow">Measure the system</p>
-        <h2>Feeling faster<br>isn't <span class="accent">evidence.</span></h2>
-        <p class="lead">Use validated delivery time, not perceived speed.</p>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Measure the system / METR</p>
+        <h2>Feeling faster isn't <span class="accent">evidence.</span></h2>
+        <div class="verdict">
+          <div class="panel"><p class="tag">Early 2025 study</p><div class="big study">19% slower</div><p class="muted">Experienced developers with AI.<br>They believed it made them ~20% faster.</p></div>
+          <div class="panel"><p class="tag">February 2026 update</p><div class="big study accent">Likely faster</div><p class="muted">Raw estimates: 4–18% faster.<br>Too much selection bias to trust the size.</p></div>
+        </div>
+        <p class="lead bottom">Measure validated delivery time, not how fast it feels.</p>
         <aside class="notes">
-          <p>Ask how much faster AI makes the audience. The outline cites METR's 2025 study in which experienced open-source developers took longer with AI while believing it helped. Treat that result as historical and specific to that study.</p>
-          <p>Immediately pair it with METR's February 2026 update: AI likely helps now, but selection effects prevent a reliable estimate. Do not turn the 2025 result into a current universal claim. Numeric study estimates are deliberately not printed on this slide.</p>
+          <p>Ask how much faster AI makes the audience first. METR's early-2025 randomized study of experienced open-source developers found tasks took 19% longer with AI, while developers estimated afterwards that AI had sped them up by about 20%. Treat that as historical and specific to that study.</p>
+          <p>METR's February 2026 update: METR believes developers are likely sped up now. Raw estimates were an 18% speedup for returning developers and 4% for new recruits, but both confidence intervals cross zero, and many developers refused to work without AI or withheld tasks. METR calls the data only very weak evidence for the size of the change; these estimates describe the studied groups. Plausible isn't proven applies to how fast we feel, too.</p>
           <p><a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">METR 2025 study</a> / <a href="https://metr.org/blog/2026-02-24-uplift-update/">2026 update</a>.</p>
         </aside>
       </section>
@@ -308,9 +315,9 @@
         </div>
         <p class="lead">Written plans and shared validation scripts<br><span class="accent">helped agents ship real features.</span></p>
         <aside class="notes">
-          <p>Present this anonymized enterprise implementation as something that worked and taught us, not as a failure. It combined a reusable service template with role agents and written handoffs across ingestion, chat orchestration, and a web UI.</p>
+          <p>Present this anonymized enterprise implementation as a working approach that taught us useful lessons. It combined a reusable service template with role agents and written handoffs across ingestion, chat orchestration, and a web UI.</p>
           <p>Shared start, health-check, test, lint, logs, and stop scripts provided a dependable way to validate the system. These became the foundation for the next workflow, not something to discard.</p>
-          <p>The limitations were repeated walls of ALWAYS and NEVER instructions, a literal ULTRATHINK instruction, and lengthy plans ending in the agent's own confidence score. Do not show internal names, paths, identities, or raw enterprise artifacts.</p>
+          <p>The limitations were repeated walls of ALWAYS and NEVER instructions, a literal ULTRATHINK instruction, and lengthy plans ending in the agent's own confidence score. Keep the enterprise anonymous by omitting internal names, paths, identities, and raw artifacts.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -363,8 +370,8 @@
         </div>
         <p class="lead bottom muted">Scale is context. The important part is what slipped.</p>
         <aside class="notes">
-          <p>The workflow was used by a real enterprise team; do not name the enterprise. Its previous version built the v0.7.2 release, with 38 tasks in 20 waves, 32 tracked issues closed, and 2,083 automated tests passing. Those are release-record counts, not a productivity benchmark or a guarantee of correctness.</p>
-          <p>Sources from the outline: <a href="https://github.com/dfrysinger/qrspi-plus/pull/299">release PR #299</a> and the <a href="https://github.com/dfrysinger/qrspi-plus/releases/tag/v0.7.3">v0.7.3 release record</a>. Do not conflate the release built with the later release's process improvements.</p>
+          <p>The workflow was used by a real enterprise team; keep the enterprise anonymous. Its previous version built the v0.7.2 release, with 38 tasks in 20 waves, 32 tracked issues closed, and 2,083 automated tests passing. Those are release-record counts, not a productivity benchmark or a guarantee of correctness.</p>
+          <p>Sources from the outline: <a href="https://github.com/dfrysinger/qrspi-plus/pull/299">release PR #299</a> and the <a href="https://github.com/dfrysinger/qrspi-plus/releases/tag/v0.7.3">v0.7.3 release record</a>. Distinguish the release built with the previous version from the later release's process improvements.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -390,7 +397,7 @@
           <div><h3 class="accent">QRSPI+</h3><p>Independent checks, then a person.</p><p>Focused steps, measured budget.</p><p>A miss becomes a new check.</p></div>
         </div>
         <aside class="notes">
-          <p>Compare the two implementations without claiming perfection. The Relay's validation scripts and shared instructions remained valuable foundations.</p>
+          <p>Compare both implementations, noting their strengths and remaining gaps. The Relay's validation scripts and shared instructions remained valuable foundations.</p>
           <p>Other differences: research is isolated from the desired answer, and production code is blocked until a failing test exists. The safeguard miss proves layered checking still matters.</p>
         </aside>
       </section>
@@ -432,8 +439,8 @@
         </div>
         <p class="lead bottom accent">All three fixes added regression tests.</p>
         <aside class="notes">
-          <p>These three findings and their fixes are documented in <a href="https://github.com/Dedac/BeamRS/pull/6">BeamRS PR #6</a>. Avoid implementation jargon; explain the consequences.</p>
-          <p>Specific evidence makes findings actionable. Do not generalize this small case into a measured acceptance rate for agent review.</p>
+          <p>These three findings and their fixes are documented in <a href="https://github.com/Dedac/BeamRS/pull/6">BeamRS PR #6</a>. Explain the consequences in plain language.</p>
+          <p>Specific evidence makes findings actionable. This small case provides no measured acceptance rate for agent review.</p>
         </aside>
       </section>
       <section class="slide bg-midnight statement">
@@ -522,7 +529,7 @@
         <aside class="notes">
           <p>Ask who learned by fixing small bugs. If agents take those tasks, teams need deliberate ways to teach debugging, decomposition, and judgment. Use AI as a tutor, not simply an answer machine.</p>
           <p>The outline cites <a href="https://arxiv.org/abs/2601.20245">Anthropic's skill-formation study</a>: using AI to learn a new library impaired learning in some modes, especially debugging, while conceptual explanation preserved learning.</p>
-          <p><a href="https://digitaleconomy.stanford.edu/news/canariesaug26/">Stanford's revised August 2026 Canaries study</a> describes reduced early-career hiring in AI-exposed occupations. It is descriptive, not causal; do not claim AI caused a specific employment decline.</p>
+          <p><a href="https://digitaleconomy.stanford.edu/news/canariesaug26/">Stanford's revised August 2026 Canaries study</a> describes reduced early-career hiring in AI-exposed occupations. The study is descriptive and does not establish that AI caused a specific employment decline.</p>
         </aside>
       </section>
       <section class="slide bg-midnight statement">
@@ -530,9 +537,9 @@
         <h2>Add agents to<br>your org chart.<br><span class="accent">Where do review arrows go?</span></h2>
         <aside class="notes">
           <p>Invite the audience to mentally add agents as boxes to their org chart. Who verifies each result? Who resolves disagreements? Who can stop work that no longer has value?</p>
-          <p>The <a href="https://aiinstitute.hbs.edu/the-cybernetic-teammate-how-ai-is-reshaping-collaboration-and-expertise-in-the-workplace/">HBS/P&amp;G Cybernetic Teammate study</a> found individuals with AI could match two-person teams without AI and reduce expertise silos. It studied product development, not software teams; use it as a question, not proof that engineering headcount should be cut.</p>
-          <p>The <a href="https://www.anthropic.com/news/impact-software-development">Anthropic Economic Index software analysis</a> shows substantial delegation in Claude Code conversations. Its sample is not the entire software industry.</p>
-          <p>Use the concrete team cases already discussed. The outline suggests further team-design cases but does not supply evidence for them; do not invent extra enterprise examples.</p>
+          <p>The <a href="https://aiinstitute.hbs.edu/the-cybernetic-teammate-how-ai-is-reshaping-collaboration-and-expertise-in-the-workplace/">HBS/P&amp;G Cybernetic Teammate study</a> found individuals with AI could match two-person teams without AI and reduce expertise silos. It studied product development, so it offers a discussion prompt about team design rather than evidence for reducing engineering headcount.</p>
+          <p>The <a href="https://www.anthropic.com/news/impact-software-development">Anthropic Economic Index software analysis</a> shows substantial delegation in Claude Code conversations. Its sample covers only part of the software industry.</p>
+          <p>Use the concrete team cases already discussed. The outline supplies no evidence for additional enterprise examples.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -612,7 +619,7 @@
         </div>
         <aside class="notes">
           <p>The repository README contains the full research bibliography. Primary-source links are also attached to the relevant slides' notes. The Relay and the rewrite are anonymized presenter-provided cases, not public datasets.</p>
-          <p>This deck avoids putting research statistics on screen without a separate primary-source check. Displayed case figures are traceable to the supplied outline and its release-record links.</p>
+          <p>The only research figures on screen are METR's, taken directly from METR's published study and update. Displayed case figures are traceable to the supplied outline and its release-record links.</p>
         </aside>
       </section>
     </div>
