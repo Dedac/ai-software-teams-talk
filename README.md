@@ -185,9 +185,9 @@ Teams that only write code are."**
 
   - Hook: *"The safeguard vanished in a merge. Integration review missed it.
     An agent whose only job was to doubt the result caught it."*
-  - Hook: *"The Relay asked the runner if the leg went well. QRSPI+ asked another
-    agent to prove it wasn't, then added a check so that mistake can't slip
-    through silently again."*
+  - Hook: *"The Relay asked each runner how their leg went. QRSPI+ asked
+    another agent to prove the work wrong, then added a check so that mistake
+    can't slip through silently again."*
 - What carried over from The Relay: standard validation scripts and
   shared instruction files became the foundation, not the whole process.
 
