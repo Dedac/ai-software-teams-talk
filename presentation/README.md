@@ -8,10 +8,12 @@ Open [`index.html`](index.html) in a browser. No build, server, or internet
 connection is needed; the fonts are bundled locally. Keep the `assets/` folder
 next to the HTML file when sharing the deck.
 
-The 34-slide deck follows the [repository outline](../README.md), with a
+The 35-slide deck follows the [repository outline](../README.md), with a
 high-contrast Midnight background, green accent, Hubot Sans headlines, and
 Mona Sans body text. Large headlines and sparse slide copy are designed for
 projection to a large audience. The final source slide is an appendix.
+Slides 8 and 9 introduce the RPI-to-QRSPI+ evolution and compare the workflow
+paths; the QRSPI+ diagram shows the full route, with quick-fix details in notes.
 
 ## Presenting
 
