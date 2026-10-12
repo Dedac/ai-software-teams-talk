@@ -38,8 +38,9 @@ caveats; this is not a separate-window presenter console.
 
 Prepare the BeamRS demo or recording separately and switch to it from the
 second slide, before continuing to the thesis. Enterprise cases remain anonymized.
-Case figures trace to the supplied outline; research estimates are kept off
-the projected slides, with historical and study-scope caveats in the notes.
+Case figures trace to the supplied outline; the only research figures
+on slides are METR's, checked against METR's own posts, with study-scope
+caveats in the notes.
 
 ## PDF export
 
