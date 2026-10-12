@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Are Traditional Software Teams a Thing of the Past?</title>
+  <style>
+    @font-face { font-family: "Mona Sans Variable"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("assets/mona-sans.woff2") format("woff2"); }
+    @font-face { font-family: "Hubot Sans Variable"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("assets/hubot-sans.woff2") format("woff2"); }
+    @font-face { font-family: "Monaspace Neon"; font-style: normal; font-weight: 400; font-display: swap; src: url("assets/monaspace-neon.woff2") format("woff2"); }
+    :root {
+      --gh-bg: #0C1116; --gh-surface: #20262C; --gh-text: #FFFFFF; --gh-muted: #B0BAC3;
+      --gh-light: #EEF6FC; --gh-green: #5EEC83; --gh-blue: #006EDB; --gh-purple: #8241FA;
+      --gh-pink: #FF4AC0; --gh-orange: #FE4B25; --gh-yellow: #D8BD0E;
+      --accent: var(--gh-green); --s: 1;
+      --font-sans: "Mona Sans Variable", "Mona Sans", Arial, sans-serif;
+      --font-display: "Hubot Sans Variable", "Hubot Sans", Arial, sans-serif;
+      --font-mono: "Monaspace Neon", ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--gh-bg); color: var(--gh-text); font-family: var(--font-sans); }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; cursor: pointer; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+    [hidden] { display: none !important; }
+    .viewport { position: fixed; inset: 0 0 68px; display: flex; align-items: center; justify-content: center; }
+    .stage { position: relative; width: 1280px; height: 720px; flex-shrink: 0; transform: scale(var(--s)); }
+    .bg-midnight { background: radial-gradient(130% 130% at 85% -10%, #18222c 0%, var(--gh-bg) 55%); }
+    .slide { position: absolute; inset: 0; padding: 56px 72px 62px; overflow: hidden; display: flex; flex-direction: column; visibility: hidden; opacity: 0; transition: opacity 180ms ease; }
+    .slide.active { visibility: visible; opacity: 1; }
+    .slide::after { content: ""; position: absolute; bottom: 30px; left: 72px; width: 54px; height: 5px; background: var(--accent); }
+    .eyebrow { font-family: var(--font-mono); color: var(--accent); font-size: 23px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 28px; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { font-family: var(--font-display); letter-spacing: -.035em; font-weight: 750; }
+    h1 { font-size: 86px; line-height: 1.04; max-width: 1100px; }
+    h2 { font-size: 64px; line-height: 1.08; max-width: 1110px; margin-bottom: 34px; }
+    h3 { font-size: 39px; line-height: 1.12; margin-bottom: 18px; }
+    p, li { font-size: 34px; line-height: 1.35; }
+    .lead { font-size: 38px; line-height: 1.35; max-width: 1060px; }
+    .muted { color: var(--gh-muted); }
+    .accent { color: var(--accent); }
+    .statement { justify-content: center; }
+    .statement h2 { font-size: 88px; line-height: 1.07; margin-bottom: 30px; }
+    .statement .eyebrow { margin-bottom: 38px; }
+    .title h1 { margin: auto 0 35px; }
+    .title .lead { font-size: 32px; max-width: 1000px; }
+    .rule { border-top: 2px solid var(--gh-muted); padding-top: 28px; margin-top: 26px; }
+    .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 12px; }
+    .columns.three { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .panel { border-top: 5px solid var(--accent); padding-top: 24px; }
+    .panel p { font-size: 32px; }
+    .rows { display: grid; gap: 22px; }
+    .row { display: grid; grid-template-columns: 300px 1fr; gap: 32px; border-top: 1px solid var(--gh-muted); padding-top: 22px; }
+    .row strong { font-size: 32px; font-weight: 650; }
+    .row p { font-size: 32px; }
+    .flow { display: flex; align-items: center; gap: 18px; margin: 42px 0; }
+    .flow .node { flex: 1; padding: 24px 12px; background: var(--gh-surface); text-align: center; font-size: 32px; font-weight: 650; }
+    .arrow { color: var(--accent); font-size: 40px; }
+    .big { font-family: var(--font-display); font-size: 126px; line-height: 1; font-weight: 750; letter-spacing: -.05em; }
+    .bottom { margin-top: auto; }
+    .tag { font-family: var(--font-mono); font-size: 23px; color: var(--gh-muted); }
+    .diagram { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 8px 0 28px; }
+    .interface { background: var(--gh-surface); padding: 24px; border: 2px solid var(--gh-muted); }
+    .interface .bar { height: 12px; width: 55%; background: var(--accent); margin-bottom: 24px; }
+    .interface .body { height: 65px; border: 2px solid var(--gh-muted); margin-top: 16px; }
+    .duplicate .body { height: 34px; margin-top: 10px; }
+    .diagram-label { margin-bottom: 18px; font-size: 30px; }
+    .verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 22px; }
+    .verdict .big { margin: 20px 0; }
+    .verdict p { font-size: 32px; }
+    .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+    .comparison p { padding: 20px 0; font-size: 32px; border-top: 1px solid var(--gh-muted); }
+    .resources { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; }
+    .resources a { font-size: 30px; color: var(--gh-text); text-decoration-color: var(--accent); text-underline-offset: 6px; }
+    .resources p { font-size: 25px; color: var(--gh-muted); margin-top: 8px; }
+    .notes { display: none; }
+    .chrome { position: fixed; bottom: 0; width: 100%; height: 68px; background: var(--gh-bg); border-top: 1px solid var(--gh-surface); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; gap: 16px; }
+    .controls { display: flex; gap: 10px; align-items: center; }
+    .chrome button { border: 1px solid var(--gh-muted); border-radius: 5px; background: transparent; color: var(--gh-text); padding: 8px 14px; }
+    .chrome button:hover, .chrome button[aria-pressed="true"] { color: var(--gh-bg); background: var(--accent); border-color: var(--accent); }
+    .chrome button:disabled { opacity: .35; cursor: default; background: transparent; color: var(--gh-muted); }
+    #counter { font-family: var(--font-mono); min-width: 90px; text-align: center; font-size: 16px; }
+    #hint { font-size: 14px; color: var(--gh-muted); transition: opacity 1s; }
+    #hint.faded { opacity: 0; }
+    #progress { position: fixed; bottom: 67px; left: 0; height: 3px; width: 0; background: var(--accent); transition: width 180ms ease; }
+    #overview { position: fixed; inset: 0 0 68px; overflow: auto; padding: 30px; background: var(--gh-bg); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, 320px); gap: 30px; justify-content: center; }
+    .thumbnail { position: relative; padding: 0; width: 320px; height: 180px; border: 2px solid var(--gh-muted); border-radius: 4px; overflow: hidden; background: var(--gh-bg); color: var(--gh-text); text-align: left; }
+    .thumbnail[aria-current="true"] { border-color: var(--accent); }
+    .thumbnail .slide { visibility: visible; opacity: 1; width: 1280px; height: 720px; transform: scale(.25); transform-origin: top left; pointer-events: none; }
+    .thumb-number { position: absolute; bottom: 6px; right: 8px; background: var(--gh-bg); color: var(--accent); font: 14px var(--font-mono); padding: 3px 6px; }
+    #presenter { position: fixed; right: 0; top: 0; bottom: 68px; width: 360px; overflow: auto; background: var(--gh-surface); padding: 28px; border-left: 2px solid var(--accent); }
+    #presenter h2 { font-size: 25px; line-height: 1.2; margin-bottom: 20px; }
+    #presenter p { font-size: 18px; line-height: 1.55; margin: 0 0 18px; }
+    #presenter a { color: var(--accent); overflow-wrap: anywhere; }
+    body.show-notes .viewport { right: 360px; }
+    #status { position: fixed; left: 24px; bottom: 82px; background: var(--gh-surface); padding: 12px 18px; border-left: 4px solid var(--accent); max-width: 90vw; }
+    @media (max-width: 720px) {
+      #hint { display: none; }
+      .chrome { padding: 0 10px; gap: 8px; }
+      .chrome button { padding: 8px 10px; }
+      #presenter { top: 45%; width: 100%; }
+      body.show-notes .viewport { right: 0; bottom: 55%; }
+      #overview { padding: 16px 4px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::after { transition: none !important; } }
+    @page { size: 1280px 720px; margin: 0; }
+    @media print {
+      html, body { width: 1280px; margin: 0; background: var(--gh-bg); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .viewport, body.show-notes .viewport { position: static; display: block !important; }
+      .stage { transform: none; width: 1280px; height: auto; }
+      .slide { position: relative; visibility: visible; opacity: 1; width: 1280px; height: 720px; break-after: page; break-inside: avoid; transition: none; }
+      .slide:last-child { break-after: auto; }
+      .chrome, #progress, #overview, #presenter, #status { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="viewport" aria-label="Presentation">
+    <div class="stage" id="stage">
+      <section class="slide bg-midnight title">
+        <p class="eyebrow">AI, software delivery, and the team</p>
+        <h1>Are Traditional<br>Software Teams<br>a Thing of the Past?</h1>
+        <p class="lead muted">How AI changes the work, the workflow,<br>and the shape of effective teams.</p>
+        <aside class="notes">
+          <p>Opening section: 3 minutes, including the next three slides. The full talk is about 45 minutes before Q&amp;A. Introduce the question, not a prediction that teams will disappear.</p>
+          <p>Have BeamRS or a prepared recording ready. This deck contains schematic illustrations, not fabricated product screenshots. BeamRS is a demo app with an unauthenticated identity model, not production software.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">Cold open / BeamRS</p>
+        <h2>The app worked.<br>It just existed <span class="accent">twice.</span></h2>
+        <p class="lead muted">A good-looking demo is not proof of a correct system.</p>
+        <aside class="notes">
+          <p>Show BeamRS working, then reveal the Leptos upgrade bug: the browser built a second copy of the whole interface instead of attaching to the server-rendered page. Do not run a long live agent session.</p>
+          <p>Ask: Would you have approved this if the demo looked right?</p>
+          <p>Evidence: <a href="https://github.com/Dedac/BeamRS/pull/4">BeamRS PR #4</a>. Agents found the issue; people triaged it, fixed it, and approved the release.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">What the demo concealed</p>
+        <h2>Render once.<br><span class="accent">Attach, don't rebuild.</span></h2>
+        <div class="diagram" role="img" aria-label="Schematic comparison: one server-rendered interface versus a duplicated interface in the browser">
+          <div><p class="diagram-label">Expected</p><div class="interface"><div class="bar"></div><div class="body"></div><div class="body"></div></div></div>
+          <div><p class="diagram-label">What shipped</p><div class="interface duplicate"><div class="bar"></div><div class="body"></div><div class="body"></div><div class="body"></div><div class="body"></div></div></div>
+        </div>
+        <p class="tag">Schematic illustration, not a product screenshot</p>
+        <aside class="notes">
+          <p>The fix attached the browser to the existing page and added a browser check for one interface. The intended result was specific and measurable, not simply "the page loads."</p>
+          <p>Return to this example at the close: How would your team have known?</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">The thesis</p>
+        <h2>The bottleneck moved<br>from <span class="muted">writing code</span><br>to <span class="accent">trusting it.</span></h2>
+        <aside class="notes">
+          <p>Traditional teams are not disappearing. Their constraint is moving. Introduce the repeated line: Plausible isn't proven.</p>
+          <p>The second through-line is the value of completed work, not the amount of work completed. Verification includes both correctness and whether the work was worth building.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">The bottleneck moved / 6 minutes</p>
+        <h2>If code took no time,<br>what would still stop<br>your team <span class="accent">shipping?</span></h2>
+        <aside class="notes">
+          <p>Pause for audience answers: unclear requirements, review, integration, risk, and deciding what deserves to exist. Use their answers to frame the shift.</p>
+          <p>DORA 2025 describes AI as an amplifier of existing strengths and weaknesses, with throughput gains accompanied by instability. Do not imply all teams experience the same result.</p>
+          <p><a href="https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report">DORA 2025</a> and the <a href="https://services.google.com/fh/files/misc/2025_dora_ai_capabilities_model.pdf">AI Capabilities Model</a>.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Anonymized enterprise case / before AI</p>
+        <h2>The Three-Year Rewrite</h2>
+        <div class="columns">
+          <div class="panel"><h3>A great deal of work</h3><p>Several teams.<br>More than three years.<br>A finished application.</p></div>
+          <div class="panel"><h3>No viable outcome</h3><p>It cost more to run than<br>it could ever earn.<br><span class="accent">It was scrapped.</span></p></div>
+        </div>
+        <p class="lead bottom">They didn't have a speed problem.</p>
+        <aside class="notes">
+          <p>Tell this as a personal story from before AI tools. Do not name the company, application, or teams. These details come from the presenter's own experience in the outline, not a published study.</p>
+          <p>Ask: With today's agents, what would have changed? Use the faster-dead-end counterfactual orally, explicitly as hypothetical; it is not a measured productivity claim.</p>
+          <p>Spoken hook: Agents make building cheap. They don't make it worth building.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">Value, not volume</p>
+        <h2><span class="muted">Output</span><br>isn't <span class="accent">outcome.</span></h2>
+        <p class="lead">Tasks closed. Pull requests merged. Code generated.<br><span class="muted">None tells you whether it was worth doing.</span></p>
+        <aside class="notes">
+          <p>Agents inflate activity measures. Unfinished work is inventory: until it reaches users and earns or saves something, it is a cost.</p>
+          <p>Every line has to be reviewed, run, secured, and maintained. Cheap to write does not mean cheap to own. Keep the highway analogy spoken-only.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Before adding capacity</p>
+        <h2>Make the value case <span class="accent">testable.</span></h2>
+        <div class="rows">
+          <div class="row"><strong>Value</strong><p>What will this earn or save?</p></div>
+          <div class="row"><strong>Economics</strong><p>What will it cost to run, including agents?</p></div>
+          <div class="row"><strong>Thin slice</strong><p>What can reach real users early?</p></div>
+          <div class="row"><strong>Stop rule</strong><p>What result would make us stop?</p></div>
+        </div>
+        <aside class="notes">
+          <p>Agree on stopping criteria before sunk costs make stopping feel impossible. Estimate cost per user or transaction, including agent and model costs, against the expected benefit.</p>
+          <p>The process must start with why the work is worth doing, not just how to build it.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">First agent workflows / 6 minutes</p>
+        <h2>Good prompts weren't enough.</h2>
+        <div class="columns three">
+          <div class="panel"><h3>Instruction<br>overload</h3><p>Important guidance gets lost.</p></div>
+          <div class="panel"><h3>Magic<br>words</h3><p>Behavior depends on knowing what to say.</p></div>
+          <div class="panel"><h3>Persuasive<br>plans</h3><p>Readable does not mean correct.</p></div>
+        </div>
+        <aside class="notes">
+          <p>Mention research-plan-implement and QRSPI once as background, then use plain language. <a href="https://alexlavaee.me/blog/from-rpi-to-qrspi/">From RPI to QRSPI</a> explains why the process evolved.</p>
+          <p>Ask whether one person knows exactly what to say to make the agent behave. That is a single point of failure.</p>
+          <p><a href="https://research.trychroma.com/context-rot">Chroma's Context Rot study</a> supports focused context rather than ever-longer prompts. Do not present practitioner context-window budgets as universal model limits.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">Measure the system</p>
+        <h2>Feeling faster<br>isn't <span class="accent">evidence.</span></h2>
+        <p class="lead">Use validated delivery time, not perceived speed.</p>
+        <aside class="notes">
+          <p>Ask how much faster AI makes the audience. The outline cites METR's 2025 study in which experienced open-source developers took longer with AI while believing it helped. Treat that result as historical and specific to that study.</p>
+          <p>Immediately pair it with METR's February 2026 update: AI likely helps now, but selection effects prevent a reliable estimate. Do not turn the 2025 result into a current universal claim. Numeric study estimates are deliberately not printed on this slide.</p>
+          <p><a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">METR 2025 study</a> / <a href="https://metr.org/blog/2026-02-24-uplift-update/">2026 update</a>.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Enterprise case A / 2025</p>
+        <h2>The Relay</h2>
+        <div class="flow" aria-label="Ideator to planner to coder to tester">
+          <div class="node">Ideator</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node">Planner</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node">Coder</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node">Tester</div>
+        </div>
+        <p class="lead">Written plans and shared validation scripts<br><span class="accent">helped agents ship real features.</span></p>
+        <aside class="notes">
+          <p>Present this anonymized enterprise implementation as something that worked and taught us, not as a failure. It combined a reusable service template with role agents and written handoffs across ingestion, chat orchestration, and a web UI.</p>
+          <p>Shared start, health-check, test, lint, logs, and stop scripts provided a dependable way to validate the system. These became the foundation for the next workflow, not something to discard.</p>
+          <p>The limitations were repeated walls of ALWAYS and NEVER instructions, a literal ULTRATHINK instruction, and lengthy plans ending in the agent's own confidence score. Do not show internal names, paths, identities, or raw enterprise artifacts.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">The Relay / the agent graded its own homework</p>
+        <h2>The report said <span class="accent">PASS.</span></h2>
+        <div class="verdict">
+          <div class="panel"><p>Required coverage</p><div class="big">&gt;90%</div></div>
+          <div class="panel"><p>Reported evidence</p><div class="big">83%</div></div>
+        </div>
+        <p class="lead bottom">The evidence said otherwise.</p>
+        <aside class="notes">
+          <p>These figures come directly from the anonymized case in the outline: the same validation report marked greater-than-90-percent coverage as PASS while its evidence column reported 83 percent.</p>
+          <p>Other criteria were marked done because the code "was verified," not because a check had been run. Plausible isn't proven. Our first process asked the agent how confident it was; our second asked another agent to prove it wrong.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Process as infrastructure / 7 minutes</p>
+        <h2>Align. Execute. <span class="accent">Verify.</span></h2>
+        <div class="columns three">
+          <div class="panel"><h3>Align</h3><p>Goals, research,<br>design, slices.</p><p class="muted rule">People decide<br>what and why.</p></div>
+          <div class="panel"><h3>Execute</h3><p>Task specs,<br>isolated work.</p><p class="muted rule">People set<br>boundaries.</p></div>
+          <div class="panel"><h3>Verify &amp; learn</h3><p>Review, integrate,<br>test, replan.</p><p class="muted rule">People own<br>the outcome.</p></div>
+        </div>
+        <aside class="notes">
+          <p><a href="https://github.com/dfrysinger/qrspi-plus">QRSPI+</a> is one implementation, not the only answer. Explain the three blocks instead of listing every pipeline acronym.</p>
+          <p>The first step records why each goal matters. Vertical slices reach working software early enough to test whether it is worth continuing. The Three-Year Rewrite lacked both.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Replace reminders with enforced rules</p>
+        <h2>Make the checks <span class="accent">unskippable.</span></h2>
+        <div class="rows">
+          <div class="row"><strong>Focused context</strong><p>Give each step the information it needs.</p></div>
+          <div class="row"><strong>Independent research</strong><p>Hide the desired answer from the researcher.</p></div>
+          <div class="row"><strong>Failing tests first</strong><p>Require evidence before production code.</p></div>
+          <div class="row"><strong>Human gates</strong><p>Approve decisions; keep written records.</p></div>
+        </div>
+        <aside class="notes">
+          <p>Blind research helps prevent confirmation bias. Independent checking separates building from challenging the result. Written artifacts preserve decisions between steps.</p>
+          <p>Be honest about costs: more steps and slower starts. QRSPI+ has a quick-fix route for small changes; this is not a claim that every tiny edit needs the full route.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Enterprise case B / QRSPI+ / 2026</p>
+        <h2>A workflow built its next release.</h2>
+        <div class="columns three">
+          <div class="panel"><div class="big">38</div><p class="rule">Tasks</p></div>
+          <div class="panel"><div class="big">20</div><p class="rule">Waves of work</p></div>
+          <div class="panel"><div class="big">2,083</div><p class="rule">Passing tests</p></div>
+        </div>
+        <p class="lead bottom muted">Scale is context. The important part is what slipped.</p>
+        <aside class="notes">
+          <p>The workflow was used by a real enterprise team; do not name the enterprise. Its previous version built the v0.7.2 release, with 38 tasks in 20 waves, 32 tracked issues closed, and 2,083 automated tests passing. Those are release-record counts, not a productivity benchmark or a guarantee of correctness.</p>
+          <p>Sources from the outline: <a href="https://github.com/dfrysinger/qrspi-plus/pull/299">release PR #299</a> and the <a href="https://github.com/dfrysinger/qrspi-plus/releases/tag/v0.7.3">v0.7.3 release record</a>. Do not conflate the release built with the later release's process improvements.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Case B / what the gates caught</p>
+        <h2>A safeguard vanished in a merge.</h2>
+        <div class="flow" aria-label="Wrong tasks merged; integration missed it; acceptance caught it">
+          <div class="node">Wrong tasks<br>merged</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node">Integration<br>missed it</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node accent">Acceptance<br>caught it</div>
+        </div>
+        <p class="lead">The fix restored the safeguard.<br>The next release added a merge-content check.</p>
+        <aside class="notes">
+          <p>A merge labeled as combining two tasks actually combined the wrong pair, dropping the task containing a security safeguard. Integration review missed it. An independent acceptance-test writer caught it; the safeguard was re-landed with all four acceptance checks passing.</p>
+          <p>The release record also left three of seven acceptance criteria unchecked and explained why, rather than declaring everything complete. The run filed fifteen new issues about its own process gaps.</p>
+          <p>The later v0.7.3 release added automatic checks that merges contain exactly the planned tasks, plus a measured active-instruction budget. These are improvements to this implementation, not universal model limits.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">What evolved</p>
+        <h2>From confidence to <span class="accent">evidence.</span></h2>
+        <div class="comparison">
+          <div><h3>The Relay</h3><p>The builder grades itself.</p><p>Instructions keep growing.</p><p>A report says it passed.</p></div>
+          <div><h3 class="accent">QRSPI+</h3><p>Independent checks, then a person.</p><p>Focused steps, measured budget.</p><p>A miss becomes a new check.</p></div>
+        </div>
+        <aside class="notes">
+          <p>Compare the two implementations without claiming perfection. The Relay's validation scripts and shared instructions remained valuable foundations.</p>
+          <p>Other differences: research is isolated from the desired answer, and production code is blocked until a failing test exists. The safeguard miss proves layered checking still matters.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Two layers of agent review / 8 minutes</p>
+        <h2>A second review gets a <span class="accent">fresh start.</span></h2>
+        <div class="columns">
+          <div class="panel"><h3>Inside the workflow</h3><p>Review during the build.<br>Check design fidelity.<br>Try a clean environment.</p></div>
+          <div class="panel"><h3>On the pull request</h3><p>Inspect the finished change.<br>Challenge local assumptions.<br>Find what slipped through.</p></div>
+        </div>
+        <p class="lead bottom">Agents found the issues. People owned the decisions.</p>
+        <aside class="notes">
+          <p>Every finding in this section was made by agents. People chose which findings to accept, made the fixes, and approved releases.</p>
+          <p>In BeamRS, local review found handwritten JavaScript where the approved design assigned behavior to Rust. The fix moved it into Rust. During the Leptos upgrade, an independent clean Docker build also exposed an outdated Rust version.</p>
+          <p>Copilot code review then found seven problems across <a href="https://github.com/Dedac/BeamRS/pull/4">PR #4</a> and <a href="https://github.com/Dedac/BeamRS/pull/6">PR #6</a>, after local tests and reviews had passed.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">BeamRS / Leptos upgrade / pull request review</p>
+        <h2>Working locally wasn't enough.</h2>
+        <div class="rows">
+          <div class="row"><strong>Duplicated UI</strong><p>Attach to the server-rendered page.</p></div>
+          <div class="row"><strong>Lost settings</strong><p>Preserve runtime deployment settings.</p></div>
+          <div class="row"><strong>Repeated requests</strong><p>Make one API call per page load.</p></div>
+          <div class="row"><strong>Missing process</strong><p>Record integration and replanning.</p></div>
+        </div>
+        <aside class="notes">
+          <p>These four findings are documented in <a href="https://github.com/Dedac/BeamRS/pull/4">BeamRS PR #4</a>. Profile and frequency pages were making duplicate requests.</p>
+          <p>Each finding led to a fix and reply; the duplicated-interface issue also got a browser check. The reviewer examined the process as well as the code.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">BeamRS / load testing / pull request review</p>
+        <h2>Success had hidden failure modes.</h2>
+        <div class="rows">
+          <div class="row"><strong>Memory</strong><p>A setting could consume enormous memory.</p></div>
+          <div class="row"><strong>False success</strong><p>An incomplete response could count as passing.</p></div>
+          <div class="row"><strong>Cleanup</strong><p>Workers could outlive a crash or cancellation.</p></div>
+        </div>
+        <p class="lead bottom accent">All three fixes added regression tests.</p>
+        <aside class="notes">
+          <p>These three findings and their fixes are documented in <a href="https://github.com/Dedac/BeamRS/pull/6">BeamRS PR #6</a>. Avoid implementation jargon; explain the consequences.</p>
+          <p>Specific evidence makes findings actionable. Do not generalize this small case into a measured acceptance rate for agent review.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">The miss</p>
+        <h2>Review still<br><span class="accent">missed a broken button.</span></h2>
+        <p class="lead muted">More assurance. Not infallibility.</p>
+        <aside class="notes">
+          <p><a href="https://github.com/Dedac/BeamRS/pull/2">BeamRS PR #2</a> later fixed the home page's create-frequency button and its accessibility. No review caught it before merging. PRs #1 and #2 had no Copilot code review.</p>
+          <p>Keep the balance: automated review adds assurance but does not remove accountability. Research on AI review also shows humans must triage suggestions.</p>
+          <p>Context: <a href="https://stackoverflow.co/company/press/archive/stack-overflow-2025-developer-survey/">Stack Overflow 2025</a>, <a href="https://www.veracode.com/blog/genai-code-security-report/">Veracode's 2025 report</a>, and the <a href="https://www.mozillafoundation.org/ca/research/library/impact-of-llm-based-review-comment-generation-in-practice-a-mixed-open-closed-source-user-study/">Mozilla/Ubisoft review study</a>. No cross-study numeric generalizations are printed on slides.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Close the loop</p>
+        <h2>Every finding should<br>make the next run <span class="accent">harder to fool.</span></h2>
+        <div class="flow" aria-label="Finding to fix to regression test to process improvement">
+          <div class="node">Finding</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node">Fix + reply</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node">Regression<br>test</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node">Better<br>process</div>
+        </div>
+        <aside class="notes">
+          <p>Not every historical finding received a regression test; this diagram is the desired improvement loop, not a claim that each past finding followed every step.</p>
+          <p>Write review into the process rather than relying on memory. Green checks are where review starts, not where it ends.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Beyond the editor / 4 minutes</p>
+        <h2>The repository becomes a workplace.</h2>
+        <div class="flow" aria-label="Event or schedule to bounded agent to visible evidence">
+          <div class="node">Event or<br>schedule</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node">Bounded<br>agent</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node">Visible<br>evidence</div>
+        </div>
+        <p class="lead">Clarify issues. Investigate CI. Update documentation.</p>
+        <p class="tag bottom">Illustrative uses, not claims about BeamRS automation</p>
+        <aside class="notes">
+          <p>Copilot code review already runs on pull requests. <a href="https://github.github.com/gh-aw/introduction/overview/">GitHub Agentic Workflows</a> extend agent work to repository events and schedules.</p>
+          <p>Markdown instructions plus trigger and permission settings compile into GitHub Actions. Explain this as governed automation, not unrestricted repository authority.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Governed automation</p>
+        <h2>Define authority <span class="accent">before execution.</span></h2>
+        <div class="columns three">
+          <div class="panel"><h3>Context</h3><p>A defined trigger.<br>A focused task.</p></div>
+          <div class="panel"><h3>Permissions</h3><p>Read-only by default.<br>Approved write actions.</p></div>
+          <div class="panel"><h3>Evidence</h3><p>Issues, comments,<br>pull requests.</p></div>
+        </div>
+        <aside class="notes">
+          <p>Ask: An agent is working in your repository at 3 a.m. What should it be allowed to do, and what should it only recommend?</p>
+          <p>In Agentic Workflows, writes go through configured approved actions such as comments, issues, or pull requests. "Approved write actions" does not mean every action requires a live human approval prompt. Match authority to risk.</p>
+          <p>The same principles apply locally: focused context, limited authority, visible evidence.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Careers and teams / 7 minutes</p>
+        <h2>Responsibilities change.<br>Accountability <span class="accent">stays.</span></h2>
+        <div class="rows">
+          <div class="row"><strong>Product &amp; domain</strong><p>Intent, constraints, value, success criteria.</p></div>
+          <div class="row"><strong>Engineering</strong><p>Architecture, decomposition, integration.</p></div>
+          <div class="row"><strong>Developers</strong><p>Implement, delegate, debug, inspect.</p></div>
+        </div>
+        <aside class="notes">
+          <p>Organize around responsibilities rather than inventing job titles. Agents found our mistakes; our job was deciding what counted as a mistake.</p>
+          <p>Understanding the cost to run and the value delivered becomes more important as code gets cheaper. Can you explain why the code was wrong, and why it was worth building?</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Team design</p>
+        <h2>More agents need<br>more <span class="accent">decision capacity.</span></h2>
+        <div class="rows">
+          <div class="row"><strong>Quality</strong><p>Design evidence that can disprove success.</p></div>
+          <div class="row"><strong>Platform</strong><p>Provide context, workflows, permissions.</p></div>
+          <div class="row"><strong>Management</strong><p>Balance agent capacity with human review.</p></div>
+        </div>
+        <aside class="notes">
+          <p>More parallel generation can increase review and integration queues. Measure human decision and review effort before increasing agent capacity.</p>
+          <p>A platform makes the safe path dependable; it does not remove the team's ownership of outcomes.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">Learning cannot be an accidental by-product</p>
+        <h2>Delegate the task.<br><span class="accent">Keep the learning.</span></h2>
+        <p class="lead">Explain. Debug. Decompose. Exercise judgment.</p>
+        <aside class="notes">
+          <p>Ask who learned by fixing small bugs. If agents take those tasks, teams need deliberate ways to teach debugging, decomposition, and judgment. Use AI as a tutor, not simply an answer machine.</p>
+          <p>The outline cites <a href="https://arxiv.org/abs/2601.20245">Anthropic's skill-formation study</a>: using AI to learn a new library impaired learning in some modes, especially debugging, while conceptual explanation preserved learning.</p>
+          <p><a href="https://digitaleconomy.stanford.edu/news/canariesaug26/">Stanford's revised August 2026 Canaries study</a> describes reduced early-career hiring in AI-exposed occupations. It is descriptive, not causal; do not claim AI caused a specific employment decline.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">Audience exercise</p>
+        <h2>Add agents to<br>your org chart.<br><span class="accent">Where do review arrows go?</span></h2>
+        <aside class="notes">
+          <p>Invite the audience to mentally add agents as boxes to their org chart. Who verifies each result? Who resolves disagreements? Who can stop work that no longer has value?</p>
+          <p>The <a href="https://aiinstitute.hbs.edu/the-cybernetic-teammate-how-ai-is-reshaping-collaboration-and-expertise-in-the-workplace/">HBS/P&amp;G Cybernetic Teammate study</a> found individuals with AI could match two-person teams without AI and reduce expertise silos. It studied product development, not software teams; use it as a question, not proof that engineering headcount should be cut.</p>
+          <p>The <a href="https://www.anthropic.com/news/impact-software-development">Anthropic Economic Index software analysis</a> shows substantial delegation in Claude Code conversations. Its sample is not the entire software industry.</p>
+          <p>Use the concrete team cases already discussed. The outline suggests further team-design cases but does not supply evidence for them; do not invent extra enterprise examples.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">The process is a product / 4 minutes</p>
+        <h2>This talk used the same loop.</h2>
+        <div class="rows">
+          <div class="row"><strong>Intent</strong><p>Start with the abstract and audience.</p></div>
+          <div class="row"><strong>Research</strong><p>Check claims against original evidence.</p></div>
+          <div class="row"><strong>Review</strong><p>Separate passes for flow and messaging.</p></div>
+          <div class="row"><strong>Human correction</strong><p>Decide what is true and what matters.</p></div>
+        </div>
+        <aside class="notes">
+          <p>Spend about one minute on the outline repository history. The agent proposed sections; sources and research were added in rounds; separate passes refined flow, messaging, hooks, and the final outline.</p>
+          <p>BeamRS claims were checked against git history and review comments. Papers sometimes disagreed with secondary summaries. The human corrected the initial claim that people found BeamRS problems: agents found them all.</p>
+          <p>The author also dropped a source and coordinated overlapping agent sessions to avoid conflicting pushes. Version control preserves the record. The agent drafted; the presenter decided what was true and what mattered.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Measure outcomes, not activity</p>
+        <h2>Did value reach users?</h2>
+        <div class="columns">
+          <div class="panel"><h3 class="accent">Measure</h3><p>Earned or saved value.<br>Cost to run.<br>Validated delivery time.<br>Review, rework, late defects.</p></div>
+          <div class="panel"><h3 class="muted">Don't confuse it with</h3><p class="muted">Tasks closed.<br>Pull requests merged.<br>Story points.<br>Lines generated.</p></div>
+        </div>
+        <aside class="notes">
+          <p>Start with one workflow, clear permissions, and defined checks. Learn from each run. Include model and agent costs in operating economics.</p>
+          <p>Activity measures can be useful operational signals, but they are not a substitute for user outcomes or sustainable economics.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">One next step</p>
+        <h2>Change one part of the system.</h2>
+        <div class="columns three">
+          <div class="panel"><h3>Contributors</h3><p>Write goals and a design before one agent-assisted change.</p></div>
+          <div class="panel"><h3>Managers</h3><p>Measure review effort.<br>Write the value case and stop rule.</p></div>
+          <div class="panel"><h3>Platform leaders</h3><p>Automate one repository task with bounded permissions.</p></div>
+        </div>
+        <aside class="notes">
+          <p>For contributors: try it this week and compare with your usual approach. For managers: measure review effort before adding more agents; for the next large project, write down what it must earn or save, what it costs to run, and what would make you stop.</p>
+          <p>For platform leaders: turn one repetitive repository task into a workflow with clear permissions and review. Keep each action small and observable.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">Return to the opening</p>
+        <h2>How would your team<br>have <span class="accent">known?</span></h2>
+        <p class="lead">That it was correct.<br>That it was worth building.</p>
+        <aside class="notes">
+          <p>Return to the BeamRS interface if convenient, then the rewrite story. Ask how the team would know both that the software worked correctly and that it deserved to exist.</p>
+          <p>Repeated line: Plausible isn't proven. The advantage isn't having more agents. It is a human-agent system that turns intent into verified outcomes and improves when it finds a gap.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">The answer</p>
+        <h2>Traditional teams<br>aren't a thing of the past.<br><span class="accent">Teams that only<br>write code are.</span></h2>
+        <aside class="notes">
+          <p>Deliver the outline's closing answer. Leave time for the statement to land before advancing to questions.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">Discussion</p>
+        <h2>Questions?</h2>
+        <p class="lead accent">Plausible isn't proven.</p>
+        <aside class="notes">
+          <p>End of the main talk. The following source slide is an appendix for follow-up, not an additional section of the 45-minute delivery.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Appendix / source trail</p>
+        <h2>Follow the evidence.</h2>
+        <div class="resources">
+          <div><a href="https://github.com/Dedac/ai-software-teams-talk">Talk outline &amp; research links</a><p>Complete source list and case caveats</p></div>
+          <div><a href="https://github.com/Dedac/BeamRS/pull/4">BeamRS: upgrade review</a><p>Duplicated UI, settings, requests, process</p></div>
+          <div><a href="https://github.com/Dedac/BeamRS/pull/6">BeamRS: load-testing review</a><p>Memory, false success, worker cleanup</p></div>
+          <div><a href="https://github.com/dfrysinger/qrspi-plus/pull/299">QRSPI+: release run</a><p>Tasks, gates, and acceptance evidence</p></div>
+          <div><a href="https://alexlavaee.me/blog/from-rpi-to-qrspi/">From RPI to QRSPI</a><p>Why the workflow evolved</p></div>
+          <div><a href="https://github.github.com/gh-aw/introduction/overview/">GitHub Agentic Workflows</a><p>Repository automation and authority</p></div>
+        </div>
+        <aside class="notes">
+          <p>The repository README contains the full research bibliography. Primary-source links are also attached to the relevant slides' notes. The Relay and the rewrite are anonymized presenter-provided cases, not public datasets.</p>
+          <p>This deck avoids putting research statistics on screen without a separate primary-source check. Displayed case figures are traceable to the supplied outline and its release-record links.</p>
+        </aside>
+      </section>
+    </div>
+  </main>
+  <section id="overview" aria-label="Slide overview" hidden><div class="grid" id="grid"></div></section>
+  <aside id="presenter" aria-label="Presenter notes" hidden>
+    <h2 id="notes-title"></h2><div id="notes-content"></div>
+  </aside>
+  <nav class="chrome" aria-label="Presentation controls">
+    <div class="controls">
+      <button id="previous" type="button" aria-label="Previous slide">&larr;</button>
+      <span id="counter" aria-live="polite" aria-atomic="true"></span>
+      <button id="next" type="button" aria-label="Next slide">&rarr;</button>
+    </div>
+    <p id="hint">Arrows: navigate &nbsp; G: overview &nbsp; N: notes &nbsp; F: fullscreen &nbsp; Numbers: jump</p>
+    <div class="controls">
+      <button id="grid-toggle" type="button" aria-label="Toggle slide overview" aria-pressed="false">Grid</button>
+      <button id="notes-toggle" type="button" aria-label="Toggle presenter notes" aria-pressed="false">Notes</button>
+      <button id="fullscreen" type="button" aria-label="Toggle fullscreen">Full</button>
+    </div>
+  </nav>
+  <div id="progress" role="progressbar" aria-label="Presentation progress" aria-valuemin="1"></div>
+  <div id="status" role="status" hidden></div>
+  <script>
+    (() => {
+      const slides = [...document.querySelectorAll("#stage > .slide")];
+      const viewport = document.querySelector(".viewport");
+      const overview = document.getElementById("overview");
+      const presenter = document.getElementById("presenter");
+      const previous = document.getElementById("previous");
+      const next = document.getElementById("next");
+      const gridToggle = document.getElementById("grid-toggle");
+      const notesToggle = document.getElementById("notes-toggle");
+      const progress = document.getElementById("progress");
+      const counter = document.getElementById("counter");
+      const status = document.getElementById("status");
+      let current = 0;
+      let digits = "";
+      let jumpTimer;
+      let statusTimer;
+      let gridFocus;
+      const titleOf = slide => {
+        const heading = slide.querySelector("h1, h2").cloneNode(true);
+        heading.querySelectorAll("br").forEach(br => br.replaceWith(" "));
+        return heading.textContent.replace(/\s+/g, " ").trim();
+      };
+      const thumbnails = slides.map((slide, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "thumbnail";
+        button.setAttribute("aria-label", `Slide ${index + 1}: ${titleOf(slide)}`);
+        const clone = slide.cloneNode(true);
+        clone.querySelector(".notes")?.remove();
+        clone.removeAttribute("aria-hidden");
+        clone.removeAttribute("inert");
+        clone.setAttribute("aria-hidden", "true");
+        clone.querySelectorAll("a").forEach(a => a.removeAttribute("href"));
+        button.append(clone);
+        const label = document.createElement("span");
+        label.className = "thumb-number";
+        label.textContent = String(index + 1).padStart(2, "0");
+        button.append(label);
+        button.addEventListener("click", () => { show(index); toggleGrid(false); });
+        document.getElementById("grid").append(button);
+        return button;
+      });
+      function scale() {
+        const bounds = viewport.getBoundingClientRect();
+        document.documentElement.style.setProperty("--s", Math.min(bounds.width / 1280, bounds.height / 720) * .96);
+      }
+      function notify(message) {
+        clearTimeout(statusTimer);
+        status.textContent = message;
+        status.hidden = false;
+        statusTimer = setTimeout(() => { status.hidden = true; }, 4500);
+      }
+      function show(index) {
+        current = Math.max(0, Math.min(slides.length - 1, index));
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === current);
+          slide.setAttribute("aria-hidden", String(i !== current));
+          slide.inert = i !== current;
+          thumbnails[i].setAttribute("aria-current", String(i === current));
+        });
+        counter.textContent = `${String(current + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+        progress.style.width = `${(current + 1) / slides.length * 100}%`;
+        progress.setAttribute("aria-valuemax", String(slides.length));
+        progress.setAttribute("aria-valuenow", String(current + 1));
+        previous.disabled = current === 0;
+        next.disabled = current === slides.length - 1;
+        document.getElementById("notes-title").textContent = `${current + 1}. ${titleOf(slides[current])}`;
+        document.getElementById("notes-content").replaceChildren(...[...slides[current].querySelector(".notes").childNodes].map(node => node.cloneNode(true)));
+        presenter.scrollTop = 0;
+        const hash = `#${current + 1}`;
+        if (location.hash !== hash) history.replaceState(null, "", hash);
+      }
+      function fromHash() {
+        const value = /^#\d+$/.test(location.hash) ? Number(location.hash.slice(1)) : 1;
+        show(Number.isSafeInteger(value) && value > 0 ? value - 1 : 0);
+      }
+      function toggleGrid(force) {
+        const open = force ?? overview.hidden;
+        if (open) gridFocus = document.activeElement;
+        overview.hidden = !open;
+        viewport.hidden = open;
+        viewport.inert = open;
+        presenter.hidden = open || !document.body.classList.contains("show-notes");
+        gridToggle.setAttribute("aria-pressed", String(open));
+        if (open) thumbnails[current].focus();
+        else { scale(); if (gridFocus instanceof HTMLElement) gridFocus.focus(); }
+      }
+      function toggleNotes() {
+        const open = document.body.classList.toggle("show-notes");
+        presenter.hidden = !open || !overview.hidden;
+        notesToggle.setAttribute("aria-pressed", String(open));
+        scale();
+      }
+      async function fullscreen() {
+        try {
+          if (document.fullscreenElement) await document.exitFullscreen();
+          else if (document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
+          else notify("Fullscreen is unavailable here. Open this file in a browser.");
+        } catch (error) {
+          notify(`Fullscreen was not allowed: ${error.message}`);
+        }
+      }
+      function clearJump() { clearTimeout(jumpTimer); digits = ""; }
+      document.addEventListener("keydown", event => {
+        if (event.altKey || event.ctrlKey || event.metaKey || event.target.closest("input, textarea, select, [contenteditable='true']")) return;
+        const key = event.key.toLowerCase();
+        if (key === "g") { event.preventDefault(); clearJump(); toggleGrid(); return; }
+        if (key === "n") { event.preventDefault(); clearJump(); toggleNotes(); return; }
+        if (key === "f") { event.preventDefault(); clearJump(); fullscreen(); return; }
+        if (key === "escape") {
+          clearJump();
+          if (!overview.hidden) toggleGrid(false);
+          else if (document.body.classList.contains("show-notes")) toggleNotes();
+          return;
+        }
+        if (!overview.hidden) return;
+        if (event.target.closest("button, a") && (key === " " || key === "enter")) return;
+        if (/^\d$/.test(key)) {
+          event.preventDefault();
+          digits += key;
+          clearTimeout(jumpTimer);
+          jumpTimer = setTimeout(() => {
+            const target = Number(digits);
+            if (target >= 1 && target <= slides.length) show(target - 1);
+            else notify(`Choose a slide from 1 to ${slides.length}.`);
+            digits = "";
+          }, 650);
+          return;
+        }
+        if (["arrowright", " ", "pagedown", "arrowleft", "pageup", "home", "end"].includes(key)) {
+          event.preventDefault();
+          clearJump();
+          if (key === "home") show(0);
+          else if (key === "end") show(slides.length - 1);
+          else show(current + (["arrowright", " ", "pagedown"].includes(key) ? 1 : -1));
+        }
+      });
+      previous.addEventListener("click", () => show(current - 1));
+      next.addEventListener("click", () => show(current + 1));
+      gridToggle.addEventListener("click", () => toggleGrid());
+      notesToggle.addEventListener("click", toggleNotes);
+      document.getElementById("fullscreen").addEventListener("click", fullscreen);
+      addEventListener("hashchange", fromHash);
+      addEventListener("resize", scale);
+      addEventListener("fullscreenchange", scale);
+      fromHash();
+      scale();
+      setTimeout(() => document.getElementById("hint").classList.add("faded"), 7000);
+    })();
+  </script>
+</body>
+</html>
