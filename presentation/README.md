@@ -8,7 +8,7 @@ Open [`index.html`](index.html) in a browser. No build, server, or internet
 connection is needed; the fonts are bundled locally. Keep the `assets/` folder
 next to the HTML file when sharing the deck.
 
-The 35-slide deck follows the [repository outline](../README.md), with a
+The 34-slide deck follows the [repository outline](../README.md), with a
 high-contrast Midnight background, green accent, Hubot Sans headlines, and
 Mona Sans body text. Large headlines and sparse slide copy are designed for
 projection to a large audience. The final source slide is an appendix.
@@ -34,8 +34,8 @@ while sharing that screen with the audience. Review them beforehand or print
 the outline separately. They contain delivery cues, source links, and research
 caveats; this is not a separate-window presenter console.
 
-Prepare the BeamRS demo or recording separately. The opening illustration is
-explicitly a schematic, not a screenshot. Enterprise cases remain anonymized.
+Prepare the BeamRS demo or recording separately and switch to it from the
+second slide, before continuing to the thesis. Enterprise cases remain anonymized.
 Case figures trace to the supplied outline; research estimates are kept off
 the projected slides, with historical and study-scope caveats in the notes.
 
