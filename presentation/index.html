@@ -32,7 +32,7 @@
     .slide::after { content: ""; position: absolute; bottom: 30px; left: 72px; width: 54px; height: 5px; background: var(--accent); }
     .eyebrow { font-family: var(--font-mono); color: var(--accent); font-size: 23px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 28px; }
     h1, h2, h3, p { margin: 0; }
-    h1, h2, h3 { font-family: var(--font-display); letter-spacing: -.035em; font-weight: 750; }
+    h1, h2, h3 { font-family: var(--font-display); font-kerning: normal; letter-spacing: 0; font-weight: 750; }
     h1 { font-size: 86px; line-height: 1.04; max-width: 1100px; }
     h2 { font-size: 64px; line-height: 1.08; max-width: 1110px; margin-bottom: 34px; }
     h3 { font-size: 39px; line-height: 1.12; margin-bottom: 18px; }
@@ -57,15 +57,9 @@
     .flow { display: flex; align-items: center; gap: 18px; margin: 42px 0; }
     .flow .node { flex: 1; padding: 24px 12px; background: var(--gh-surface); text-align: center; font-size: 32px; font-weight: 650; }
     .arrow { color: var(--accent); font-size: 40px; }
-    .big { font-family: var(--font-display); font-size: 126px; line-height: 1; font-weight: 750; letter-spacing: -.05em; }
+    .big { font-family: var(--font-display); font-size: 126px; line-height: 1; font-weight: 750; font-kerning: normal; letter-spacing: 0; }
     .bottom { margin-top: auto; }
     .tag { font-family: var(--font-mono); font-size: 23px; color: var(--gh-muted); }
-    .diagram { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 8px 0 28px; }
-    .interface { background: var(--gh-surface); padding: 24px; border: 2px solid var(--gh-muted); }
-    .interface .bar { height: 12px; width: 55%; background: var(--accent); margin-bottom: 24px; }
-    .interface .body { height: 65px; border: 2px solid var(--gh-muted); margin-top: 16px; }
-    .duplicate .body { height: 34px; margin-top: 10px; }
-    .diagram-label { margin-bottom: 18px; font-size: 30px; }
     .verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 22px; }
     .verdict .big { margin: 20px 0; }
     .verdict p { font-size: 32px; }
@@ -124,31 +118,19 @@
         <h1>Are Traditional<br>Software Teams<br>a Thing of the Past?</h1>
         <p class="lead muted">How AI changes the work, the workflow,<br>and the shape of effective teams.</p>
         <aside class="notes">
-          <p>Opening section: 3 minutes, including the next three slides. The full talk is about 45 minutes before Q&amp;A. Introduce the question, not a prediction that teams will disappear.</p>
-          <p>Have BeamRS or a prepared recording ready. This deck contains schematic illustrations, not fabricated product screenshots. BeamRS is a demo app with an unauthenticated identity model, not production software.</p>
+          <p>Introduce the question, not a prediction that teams will disappear.</p>
+          <p>Have BeamRS or a prepared recording ready. Show the demo with the next slide rather than a schematic illustration. BeamRS is a demo app with an unauthenticated identity model, not production software.</p>
         </aside>
       </section>
       <section class="slide bg-midnight statement">
-        <p class="eyebrow">Cold open / BeamRS</p>
+        <p class="eyebrow">BeamRS</p>
         <h2>The app worked.<br>It just existed <span class="accent">twice.</span></h2>
         <p class="lead muted">A good-looking demo is not proof of a correct system.</p>
         <aside class="notes">
-          <p>Show BeamRS working, then reveal the Leptos upgrade bug: the browser built a second copy of the whole interface instead of attaching to the server-rendered page. Do not run a long live agent session.</p>
+          <p>Switch to the BeamRS demo or prepared recording. Show it working, then reveal the Leptos upgrade bug: the browser built a second copy of the whole interface instead of attaching to the server-rendered page.</p>
+          <p>The fix attached the browser to the existing page and added a browser check for one interface. The intended result was specific and measurable, not simply "the page loads." Return to this example at the close: How would your team have known?</p>
           <p>Ask: Would you have approved this if the demo looked right?</p>
           <p>Evidence: <a href="https://github.com/Dedac/BeamRS/pull/4">BeamRS PR #4</a>. Agents found the issue; people triaged it, fixed it, and approved the release.</p>
-        </aside>
-      </section>
-      <section class="slide bg-midnight">
-        <p class="eyebrow">What the demo concealed</p>
-        <h2>Render once.<br><span class="accent">Attach, don't rebuild.</span></h2>
-        <div class="diagram" role="img" aria-label="Schematic comparison: one server-rendered interface versus a duplicated interface in the browser">
-          <div><p class="diagram-label">Expected</p><div class="interface"><div class="bar"></div><div class="body"></div><div class="body"></div></div></div>
-          <div><p class="diagram-label">What shipped</p><div class="interface duplicate"><div class="bar"></div><div class="body"></div><div class="body"></div><div class="body"></div><div class="body"></div></div></div>
-        </div>
-        <p class="tag">Schematic illustration, not a product screenshot</p>
-        <aside class="notes">
-          <p>The fix attached the browser to the existing page and added a browser check for one interface. The intended result was specific and measurable, not simply "the page loads."</p>
-          <p>Return to this example at the close: How would your team have known?</p>
         </aside>
       </section>
       <section class="slide bg-midnight statement">
@@ -160,7 +142,7 @@
         </aside>
       </section>
       <section class="slide bg-midnight statement">
-        <p class="eyebrow">The bottleneck moved / 6 minutes</p>
+        <p class="eyebrow">The bottleneck moved</p>
         <h2>If code took no time,<br>what would still stop<br>your team <span class="accent">shipping?</span></h2>
         <aside class="notes">
           <p>Pause for audience answers: unclear requirements, review, integration, risk, and deciding what deserves to exist. Use their answers to frame the shift.</p>
@@ -206,7 +188,7 @@
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">First agent workflows / 6 minutes</p>
+        <p class="eyebrow">First agent workflows</p>
         <h2>Good prompts weren't enough.</h2>
         <div class="columns three">
           <div class="panel"><h3>Instruction<br>overload</h3><p>Important guidance gets lost.</p></div>
@@ -259,7 +241,7 @@
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">Process as infrastructure / 7 minutes</p>
+        <p class="eyebrow">Process as infrastructure</p>
         <h2>Align. Execute. <span class="accent">Verify.</span></h2>
         <div class="columns three">
           <div class="panel"><h3>Align</h3><p>Goals, research,<br>design, slices.</p><p class="muted rule">People decide<br>what and why.</p></div>
@@ -327,7 +309,7 @@
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">Two layers of agent review / 8 minutes</p>
+        <p class="eyebrow">Two layers of agent review</p>
         <h2>A second review gets a <span class="accent">fresh start.</span></h2>
         <div class="columns">
           <div class="panel"><h3>Inside the workflow</h3><p>Review during the build.<br>Check design fidelity.<br>Try a clean environment.</p></div>
@@ -393,7 +375,7 @@
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">Beyond the editor / 4 minutes</p>
+        <p class="eyebrow">Beyond the editor</p>
         <h2>The repository becomes a workplace.</h2>
         <div class="flow" aria-label="Event or schedule to bounded agent to visible evidence">
           <div class="node">Event or<br>schedule</div><span class="arrow" aria-hidden="true">&rarr;</span>
@@ -422,7 +404,7 @@
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">Careers and teams / 7 minutes</p>
+        <p class="eyebrow">Careers and teams</p>
         <h2>Responsibilities change.<br>Accountability <span class="accent">stays.</span></h2>
         <div class="rows">
           <div class="row"><strong>Product &amp; domain</strong><p>Intent, constraints, value, success criteria.</p></div>
@@ -468,7 +450,7 @@
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">The process is a product / 4 minutes</p>
+        <p class="eyebrow">The process is a product</p>
         <h2>This talk used the same loop.</h2>
         <div class="rows">
           <div class="row"><strong>Intent</strong><p>Start with the abstract and audience.</p></div>
@@ -477,7 +459,7 @@
           <div class="row"><strong>Human correction</strong><p>Decide what is true and what matters.</p></div>
         </div>
         <aside class="notes">
-          <p>Spend about one minute on the outline repository history. The agent proposed sections; sources and research were added in rounds; separate passes refined flow, messaging, hooks, and the final outline.</p>
+          <p>Describe the outline repository history. The agent proposed sections; sources and research were added in rounds; separate passes refined flow, messaging, hooks, and the final outline.</p>
           <p>BeamRS claims were checked against git history and review comments. Papers sometimes disagreed with secondary summaries. The human corrected the initial claim that people found BeamRS problems: agents found them all.</p>
           <p>The author also dropped a source and coordinated overlapping agent sessions to avoid conflicting pushes. Version control preserves the record. The agent drafted; the presenter decided what was true and what mattered.</p>
         </aside>
@@ -520,7 +502,7 @@
         <p class="eyebrow">The answer</p>
         <h2>Traditional teams<br>aren't a thing of the past.<br><span class="accent">Teams that only<br>write code are.</span></h2>
         <aside class="notes">
-          <p>Deliver the outline's closing answer. Leave time for the statement to land before advancing to questions.</p>
+          <p>Deliver the outline's closing answer. Let the statement land before advancing to questions.</p>
         </aside>
       </section>
       <section class="slide bg-midnight statement">
@@ -528,7 +510,7 @@
         <h2>Questions?</h2>
         <p class="lead accent">Plausible isn't proven.</p>
         <aside class="notes">
-          <p>End of the main talk. The following source slide is an appendix for follow-up, not an additional section of the 45-minute delivery.</p>
+          <p>End of the main talk. The following source slide is an appendix for follow-up.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
