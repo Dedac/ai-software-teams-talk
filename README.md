@@ -44,8 +44,13 @@ Teams that only write code are."**
     validation prompts, and role agents (ideator → planner → coder → tester)
     that pass work forward through written plans. Used across an AI
     reference architecture (document ingestion, chat orchestration, web UI).
-  - **Case B, QRSPI+ in real work:** the structured workflow applied to
-    enterprise delivery (details to be added).
+  - **Case B, QRSPI+ in real work (2026):** the generation-two workflow,
+    pulled out of real work. Its v0.7.2 release was planned, built,
+    integrated, and acceptance-tested by the previous version of the
+    workflow: 38 tasks in 20 waves, 32 tracked issues closed, 2,083
+    automated tests passing
+    ([PR #299](https://github.com/dfrysinger/qrspi-plus/pull/299),
+    [v0.7.3 release](https://github.com/dfrysinger/qrspi-plus/releases/tag/v0.7.3)).
 
 ### External research
 
@@ -146,10 +151,41 @@ Teams that only write code are."**
   exists."*
 - Be honest about costs: more steps and slower starts. Use the quick-fix route
   for small changes.
-- **Enterprise case B: QRSPI+ in real work.** Show how the generation-one
-  gaps were closed: research isolated from goals, a failing test before
-  production code, and review by independent agents instead of
-  self-assessment. (Add specifics and one before/after result.)
+- **Enterprise case B: QRSPI+ in real work (generation two, 2 min).** The
+  workflow built its own next release.
+  - **The run:** one release of 38 tasks, split into 20 waves of parallel
+    work, each task built in isolation, then merged, reviewed, and
+    acceptance-tested. It closed 32 tracked issues and finished with 2,083
+    automated tests passing.
+  - **What the gates caught:** during acceptance testing, an independent
+    test-writing agent found that a security safeguard had silently
+    disappeared. A merge labeled as combining two tasks had actually
+    combined the wrong pair, so the safeguard's task was dropped. Integration
+    review missed it; the acceptance agent caught it, and the fix was
+    re-landed with 4 of 4 acceptance tests passing.
+  - **Honest reporting:** the release record left 3 of 7 acceptance criteria
+    unchecked and explained why, instead of declaring everything done.
+    Contrast with Evergreen's self-graded ✅ PASS next to 83%.
+  - **The process improved itself:** the run filed 15 new issues about its
+    own gaps. The next release (v0.7.3) added an automatic check that every
+    merge contains exactly the planned tasks, and capped the active
+    instructions under a measured budget (under 30,000 tokens), a direct
+    answer to Evergreen's instruction overload.
+  - Generation one versus two:
+
+    | | Evergreen (gen one) | QRSPI+ (gen two) |
+    |---|---|---|
+    | Who checks the work | The agent grades itself | Independent agents, then a person |
+    | Instructions | One growing file of rules | Focused steps, measured size budget |
+    | Research | Knows what we want | Hidden from what we want |
+    | Code before tests | Not enforced | Blocked until a test fails |
+    | When something slips | Report still says PASS | Caught, re-landed, and turned into a new automatic check |
+
+  - Hook: *"The safeguard vanished in a merge. Integration review missed it.
+    An agent whose only job was to doubt the result caught it."*
+  - Hook: *"Gen one asked the agent if it was done. Gen two asked another
+    agent to prove it wasn't, then added a check so that mistake can't slip
+    through silently again."*
 - What carried forward from Evergreen: standard validation scripts and
   shared instruction files became the foundation, not the whole process.
 
@@ -317,6 +353,9 @@ history as a short case study:
 - BeamRS is a demo app with an unauthenticated identity model, not production
   software.
 - If a section has no strong enterprise case, shorten or merge it.
+- Case B uses a public repository, so it isn't anonymous. Confirm with its
+  author how to describe its origin in real work; the repository's
+  provenance file describes it as independent work.
 - Anonymize Case A before showing anything: remove internal application
   IDs, file paths, user names, and service names. Present it as a
   generation that worked and taught us, not as a failure.
