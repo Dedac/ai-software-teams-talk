@@ -123,7 +123,7 @@ Teams that only write code are."**
 - Enterprise case: a team that turned informal conventions into reusable
   instructions or review gates.
 
-### 4. Two layers of agent review (10 min)
+### 4. Two layers of agent review (9 min)
 
 All findings in this section were made by agents. People decided which to
 accept, made the fixes, and approved the releases.
@@ -235,7 +235,29 @@ without removing human accountability.
 - Enterprise cases: two or three contrasting team designs, including one that
   did not work.
 
-### 7. The process is a product (3 min)
+### 7. The process is a product (4 min)
+
+**This talk was built the same way (1 min).** Show the outline repository's
+history as a short case study:
+
+- **Start from intent:** the abstract went to an agent, which proposed a
+  first set of sections.
+- **Add sources, then research:** the blog post, QRSPI+, GitHub Agentic
+  Workflows, BeamRS, and outside studies were added in rounds.
+- **Repeated passes:** separate passes for flow, messaging, hooks, and the
+  final outline, rather than one big prompt.
+- **Check claims against evidence:** BeamRS details were checked against git
+  history and pull request review comments. Research figures were checked
+  against the original papers, which disagreed with some secondary summaries.
+- **The human corrected the story:** the agent's first draft said people
+  found the BeamRS problems. The author corrected it: agents found all of
+  them. The author also made editorial calls, such as dropping a source.
+- **Coordinate the agents:** when two agent sessions started the same update,
+  one was stopped before it could push conflicting changes.
+- **Keep a record:** the outline lives in a version-controlled repository, so
+  every change is visible.
+- Hook: *"Even this talk went through goals, research, review, and human
+  correction. The agent drafted; I decided what was true and what mattered."*
 
 - Start small: one workflow, clear permissions, defined checks, learn from
   each run.
