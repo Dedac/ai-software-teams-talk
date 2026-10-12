@@ -40,6 +40,22 @@ Teams that only write code are."**
   [#6](https://github.com/Dedac/BeamRS/pull/6)
 - Anonymized enterprise team cases (to be added per section)
 
+### External research
+
+| Study | Key finding | Used in |
+|---|---|---|
+| [DORA 2025 State of AI-assisted Software Development](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report) and [AI Capabilities Model](https://services.google.com/fh/files/misc/2025_dora_ai_capabilities_model.pdf) | AI amplifies a team's existing strengths and weaknesses; higher throughput comes with more instability. Small batches, strong version control, internal platforms, and AI access to internal data help. | 1, 7 |
+| [METR study of experienced open-source developers](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) (2025) | Tasks took 19% longer with AI, yet developers believed AI made them about 20% faster. | 2 |
+| [METR update](https://metr.org/blog/2026-02-24-uplift-update/) (Feb 2026) | AI now likely speeds developers up, but selection effects (developers refusing to work without AI) prevent a reliable estimate. Present the 2025 result as historical. | 2 |
+| [Chroma, "Context Rot"](https://research.trychroma.com/context-rot) (2025) | All 18 models tested got worse as input grew longer. Supports focused context per step. | 2, 3 |
+| [Stack Overflow Developer Survey 2025](https://stackoverflow.co/company/press/archive/stack-overflow-2025-developer-survey/) | 84% use or plan to use AI; 46% distrust its accuracy; 66% cite "almost right, but not quite" answers as the top frustration. | 4 |
+| [Veracode GenAI Code Security Report](https://www.veracode.com/blog/genai-code-security-report/) (2025) | 45% of AI-generated code samples contained security flaws; newer models were not more secure. | 4 |
+| [Mozilla and Ubisoft study of AI review comments](https://www.mozillafoundation.org/ca/research/library/impact-of-llm-based-review-comment-generation-in-practice-a-mixed-open-closed-source-user-study/) | Only about 7–8% of AI review comments were accepted as written. Automated review still needs human triage. | 4 |
+| [Stanford, "Canaries in the Coal Mine"](https://digitaleconomy.stanford.edu/news/canariesaug26/) (revised Aug 2026) | Employment of 22–25-year-olds fell in AI-exposed jobs, including software development, mainly through reduced hiring; experienced workers in jobs built on tacit knowledge grew. Descriptive, not causal. | 6 |
+| [Anthropic, "How AI Impacts Skill Formation"](https://arxiv.org/abs/2601.20245) (2026) | Developers learning a new library with AI scored 50% vs 67% without, with the biggest gap in debugging; using AI to explain concepts preserved learning. | 6 |
+| [HBS and P&G, "The Cybernetic Teammate"](https://aiinstitute.hbs.edu/the-cybernetic-teammate-how-ai-is-reshaping-collaboration-and-expertise-in-the-workplace/) | In a randomized study of 776 professionals, individuals with AI matched two-person teams without AI, and AI reduced expertise silos. Product development, not software. | 6 |
+| [Anthropic Economic Index: software development](https://www.anthropic.com/news/impact-software-development) (2025) | 79% of Claude Code conversations were automation (delegation) rather than augmentation. | 5, 6 |
+
 ## Outline (about 45 minutes before Q&A)
 
 ### 0. Cold open: "The app worked. It just existed twice." (3 min)
@@ -58,6 +74,8 @@ Teams that only write code are."**
 - Use the answers (unclear requirements, review, integration, risk) to frame
   the shift.
 - Analogy: agents add lanes, but review is still a one-lane exit ramp.
+- Research: DORA 2025 calls AI an amplifier. It raises throughput and
+  instability together, and magnifies whatever system it lands in.
 - Enterprise case: a team that sped up coding, then found review or
   integration became the constraint.
 - Transition: if the constraint moved, the process has to change too.
@@ -75,7 +93,12 @@ Teams that only write code are."**
   make the agent behave? That's not expertise. It's a single point of
   failure."*
 - Treat the blog's context-window numbers as practitioner rules of thumb, not
-  hard limits.
+  hard limits. Chroma's "Context Rot" study backs the direction: every model
+  tested degraded as input grew.
+- Audience moment: ask how much faster AI makes them, then show METR 2025
+  (19% slower while feeling about 20% faster). Follow immediately with METR's
+  2026 update: AI likely helps now, but self-perception is unreliable.
+  *"Plausible isn't proven applies to how fast we feel, too."*
 - Enterprise case: agent work that looked finished but missed a constraint or
   architecture decision.
 
@@ -144,6 +167,16 @@ Hooks:
 - *"Write the review into the process instead of relying on someone to
   remember it."*
 
+Research context:
+
+- Stack Overflow 2025: the top frustration is answers that are "almost right,
+  but not quite", which is exactly what layered review is for.
+- Veracode 2025: 45% of AI-generated code samples had security flaws, and
+  newer models didn't fix that.
+- Mozilla and Ubisoft: only about 7–8% of AI review comments were accepted as
+  written. Contrast with BeamRS, where findings were specific and actionable,
+  and note that humans still triaged every one.
+
 Keep the balance: agents are not infallible, and agent review adds assurance
 without removing human accountability.
 
@@ -186,6 +219,16 @@ without removing human accountability.
 - Junior engineers: *"Who here learned by fixing small bugs? Those are the
   first tasks agents take."* Teams must create new ways to learn debugging,
   decomposition, and judgment.
+  - Stanford "Canaries" (Aug 2026): early-career employment fell in AI-exposed
+    jobs, mainly through reduced hiring (descriptive, not causal).
+  - Anthropic skill-formation study: learning with AI scored 50% vs 67%,
+    with the biggest gap in debugging, unless AI was used as a tutor.
+- Team shape: HBS/P&G "Cybernetic Teammate" found individuals with AI matched
+  two-person teams without it and broke down expertise silos. Ask: *"If one
+  person with AI performs like a team, what is the team for?"*
+- Anthropic Economic Index: 79% of coding-agent conversations were delegation,
+  not collaboration. The work is shifting from doing to directing and
+  verifying.
 - Career skill: *"Could you explain why that code was wrong?"*
 - Org chart exercise: add agents as boxes and ask, *"Where do the review
   arrows go?"*
@@ -222,3 +265,5 @@ without removing human accountability.
 - BeamRS is a demo app with an unauthenticated identity model, not production
   software.
 - If a section has no strong enterprise case, shorten or merge it.
+- Check every research figure against its primary source before putting it on
+  a slide.
