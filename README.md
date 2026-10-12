@@ -23,6 +23,9 @@ on existing software.
 
 Repeated line: **"Plausible isn't proven."**
 
+Second through-line: **the value of completed work, not the amount of work
+completed.** Cheap code makes choosing what to build the scarce skill.
+
 Closing answer to the title: **"Traditional teams aren't a thing of the past.
 Teams that only write code are."**
 
@@ -39,6 +42,10 @@ Teams that only write code are."**
   [#4](https://github.com/Dedac/BeamRS/pull/4) and
   [#6](https://github.com/Dedac/BeamRS/pull/6)
 - Anonymized enterprise cases:
+  - **"The Three-Year Rewrite" (before AI tools):** from the presenter's
+    own experience. Several teams spent more than three years rewriting an
+    app, then found it cost more to run than it could ever earn. It was
+    scrapped.
   - **Case A, "The Relay" (2025):** an enterprise service template plus a
     separate agent workflow implementation: a reusable instruction file, bootstrap and
     validation prompts, and role agents (ideator → planner → coder → tester)
@@ -79,18 +86,45 @@ Teams that only write code are."**
 - Ask: *"Would you have approved this if the demo looked right?"*
 - Deliver the thesis.
 
-### 1. The bottleneck moved (4 min)
+### 1. The bottleneck moved (6 min)
 
 - Ask: *"If code took no time to write tomorrow, what would still stop your
   team from shipping?"*
 - Use the answers (unclear requirements, review, integration, risk) to frame
   the shift.
-- Analogy: agents add lanes, but review is still a one-lane exit ramp.
+- **Enterprise case: "The Three-Year Rewrite" (before AI tools).** Several
+  teams spent more than three years rewriting an app. When it was done, the
+  app cost more to run than it could ever earn in revenue, and it was
+  scrapped.
+  - The teams didn't have a speed problem. They completed a great deal of
+    work; none of it could ever pay for itself.
+  - Ask: *"With today's agents, what would have changed?"* Answer: they
+    could have reached the same dead end in one year instead of three, or
+    built something three times bigger that lost three times as much.
+  - Hook: *"Agents make building cheap. They don't make it worth building."*
+  - Hook: *"We measured how much we finished. Nobody measured whether it
+    was worth finishing."*
+- **Value of completed work over amount of work completed:**
+  - **Output isn't outcome.** Tasks closed, pull requests merged, story
+    points, and lines generated measure activity, not value. Agents inflate
+    all of them.
+  - **Unfinished work is inventory.** Until it reaches users and earns or
+    saves something, it's a cost. Agent-written code adds to that pile
+    faster.
+  - **Every line is a liability.** Code has to be reviewed, run, secured,
+    and maintained. Cheap to write doesn't mean cheap to own.
+  - **Know the economics early.** What will it cost to run, per user or
+    transaction, including agent and model costs, against what it will earn
+    or save? Ship a thin slice to production early to find out.
+  - **Agree on stopping criteria up front.** Decide what result would make
+    the team stop, before the sunk cost makes stopping feel impossible.
+- Analogy: agents add lanes, but review is still a one-lane exit ramp. And
+  the highway still has to lead somewhere worth going.
 - Research: DORA 2025 calls AI an amplifier. It raises throughput and
-  instability together, and magnifies whatever system it lands in.
-- Enterprise case: a team that sped up coding, then found review or
-  integration became the constraint.
-- Transition: if the constraint moved, the process has to change too.
+  instability together, and magnifies whatever system it lands in,
+  including a team building the wrong thing.
+- Transition: if the constraint moved, the process has to change too, and
+  it has to start with why the work is worth doing.
 
 ### 2. Why our first agent workflows weren't enough (6 min)
 
@@ -147,6 +181,10 @@ Teams that only write code are."**
 
 - Ideas to highlight: written records at each step, focused context, approval
   gates, vertical slices, rules the process enforces rather than reminders.
+- Value comes first: the first step records why each goal matters before
+  any research or code, and vertical slices reach working software early
+  enough to test whether it's worth continuing. The Three-Year Rewrite had
+  neither.
 - Hook: *"We deliberately hide from the research agent what we want"*, like a
   blind trial.
 - Hook: *"The agent cannot write production code until a failing test
@@ -191,7 +229,7 @@ Teams that only write code are."**
 - What carried over from The Relay: standard validation scripts and
   shared instruction files became the foundation, not the whole process.
 
-### 4. Two layers of agent review (9 min)
+### 4. Two layers of agent review (8 min)
 
 All findings in this section were made by agents. People decided which to
 accept, made the fixes, and approved the releases.
@@ -269,13 +307,13 @@ without removing human accountability.
   investigation, documentation updates.
 - Enterprise case: governed automation for triage or maintenance.
 
-### 6. What changes for careers and teams (8 min)
+### 6. What changes for careers and teams (7 min)
 
 - Organize around responsibilities, not invented job titles:
 
   | Responsibility | How it changes |
   |---|---|
-  | Product and domain leadership | Makes intent, constraints, and success criteria explicit |
+  | Product and domain leadership | Makes intent, constraints, success criteria, and the value case explicit |
   | Engineering leadership | Owns architecture, decomposition, and integration |
   | Developers | Implement, delegate, debug, and inspect unfamiliar code |
   | Quality specialists | Design evidence that can disprove apparent success |
@@ -297,7 +335,9 @@ without removing human accountability.
 - Anthropic Economic Index: 79% of coding-agent conversations were delegation,
   not collaboration. The work is shifting from doing to directing and
   verifying.
-- Career skill: *"Could you explain why that code was wrong?"*
+- Career skill: *"Could you explain why that code was wrong?"* And: *"Could
+  you explain why it was worth building?"* Engineers who understand the cost
+  to run and the value delivered become more valuable as code gets cheaper.
 - Org chart exercise: add agents as boxes and ask, *"Where do the review
   arrows go?"*
 - Enterprise cases: two or three contrasting team designs, including one that
@@ -329,20 +369,26 @@ history as a short case study:
 
 - Start small: one workflow, clear permissions, defined checks, learn from
   each run.
-- Measure validated delivery time, review effort, rework, late defects, and
-  cost, not generated code volume.
+- Measure the value of completed work, not the amount of work completed:
+  outcomes reached by users, cost to run (including agent and model costs),
+  validated delivery time, review effort, rework, and late defects. Not
+  tasks closed, pull requests merged, or code generated.
 - Hook: *"Every finding should make the next run harder to fool."*
 - One next step per audience:
   - **Individual contributors:** write goals and a design before involving an
     agent on one change this week; compare with your usual approach.
   - **Managers:** measure how much time people spend reviewing agent output
-    before adding more agents.
+    before adding more agents. For your next large project, write down what
+    it must earn or save, what it will cost to run, and what would make you
+    stop.
   - **Platform leaders:** turn one repetitive repository task into an
     automated workflow with clear permissions and review.
 
 ### Close
 
 - Return to the opening BeamRS screen: *"How would your team have known?"*
+- Then to the rewrite: *"And how would they have known it was worth
+  building at all?"*
 - Final line: *"The advantage isn't having more agents. It's building a
   human-agent system that turns intent into verified outcomes, and improves
   when it finds a gap."*
@@ -355,6 +401,8 @@ history as a short case study:
 - BeamRS is a demo app with an unauthenticated identity model, not production
   software.
 - If a section has no strong enterprise case, shorten or merge it.
+- Tell the Three-Year Rewrite as a personal story without naming the company,
+  app, or teams. Use only figures you can stand behind.
 - Describe Case B only as used in a real enterprise; don't name the
   enterprise or team.
 - Anonymize Case A before showing anything: remove internal application
