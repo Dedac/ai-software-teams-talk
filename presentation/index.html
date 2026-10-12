@@ -57,9 +57,25 @@
     .flow { display: flex; align-items: center; gap: 18px; margin: 42px 0; }
     .flow .node { flex: 1; padding: 24px 12px; background: var(--gh-surface); text-align: center; font-size: 32px; font-weight: 650; }
     .arrow { color: var(--accent); font-size: 40px; }
+    .workflow-diagrams h2 { font-size: 56px; margin-bottom: 24px; }
+    .workflow-diagrams .eyebrow { margin-bottom: 20px; }
+    .workflow-set { display: grid; gap: 20px; }
+    .workflow-lane { display: grid; grid-template-columns: 120px 1fr; gap: 20px; border-top: 1px solid var(--gh-muted); padding-top: 16px; }
+    .workflow-lane h3 { font-size: 28px; margin: 8px 0 0; }
+    .workflow-path { display: flex; align-items: center; gap: 8px; }
+    .workflow-path + .workflow-path { margin-top: 10px; }
+    .workflow-step { flex: 1; background: var(--gh-surface); padding: 12px 8px; text-align: center; font-size: 24px; line-height: 1.2; white-space: nowrap; }
+    .workflow-path .arrow { font-size: 24px; }
+    .workflow-continuation { font: 20px var(--font-mono); color: var(--accent); margin-right: 4px; }
+    .workflow-caption { font-size: 24px; margin-top: 10px; color: var(--gh-muted); }
+    .workflow-diagrams .tag { font-size: 20px; }
     .big { font-family: var(--font-display); font-size: 126px; line-height: 1; font-weight: 750; font-kerning: normal; letter-spacing: 0; }
     .bottom { margin-top: auto; }
     .tag { font-family: var(--font-mono); font-size: 23px; color: var(--gh-muted); }
+    .ledger { display: grid; grid-template-columns: 1.25fr 1fr; column-gap: 48px; margin-bottom: 28px; }
+    .ledger p { font-size: 30px; padding: 10px 0; border-top: 1px solid var(--gh-muted); }
+    .ledger strong { font-weight: 650; }
+    .ledger .ledger-head { font-family: var(--font-mono); font-size: 21px; text-transform: uppercase; letter-spacing: .06em; color: var(--accent); border-top: 0; padding-top: 0; }
     .verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 22px; }
     .verdict .big { margin: 20px 0; }
     .verdict p { font-size: 32px; }
@@ -174,21 +190,25 @@
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">Before adding capacity</p>
-        <h2>Make the value case <span class="accent">testable.</span></h2>
-        <div class="rows">
-          <div class="row"><strong>Value</strong><p>What will this earn or save?</p></div>
-          <div class="row"><strong>Economics</strong><p>What will it cost to run, including agents?</p></div>
-          <div class="row"><strong>Thin slice</strong><p>What can reach real users early?</p></div>
-          <div class="row"><strong>Stop rule</strong><p>What result would make us stop?</p></div>
+        <p class="eyebrow">The rewrite, revisited</p>
+        <h2>Four questions to answer<br><span class="accent">before year one ends.</span></h2>
+        <div class="ledger">
+          <p class="ledger-head">Ask up front</p><p class="ledger-head">The Three-Year Rewrite</p>
+          <p><strong>Value:</strong> What will it earn or save?</p><p class="muted">It could never pay for itself</p>
+          <p><strong>Economics:</strong> What will it cost to run?</p><p class="muted">It cost more to run than it earned</p>
+          <p><strong>Thin slice:</strong> What reaches users early?</p><p class="muted">Three-plus years to a finished app</p>
+          <p><strong>Stop rule:</strong> What result stops us?</p><p class="muted">Scrapped only after it was done</p>
         </div>
+        <p class="lead bottom">With agents, the same dead end arrives <span class="accent">faster.</span></p>
         <aside class="notes">
-          <p>Agree on stopping criteria before sunk costs make stopping feel impossible. Estimate cost per user or transaction, including agent and model costs, against the expected benefit.</p>
-          <p>The process must start with why the work is worth doing, not just how to build it.</p>
+          <p>Return to the Three-Year Rewrite. The team didn't fail because they built slowly; they failed because nobody tested whether the work could pay for itself until it was finished. Each row pairs a question with what happened in that story.</p>
+          <p>Economics: estimate the cost per user or transaction, including agent and model costs, against what it will earn or save. Thin slice: ship something small to production early to find out. Stop rule: agree what result would make the team stop, before sunk cost makes stopping feel impossible.</p>
+          <p>Unfinished work is inventory: until it reaches users, it is a cost, and agent-written code adds to that pile faster. Every line still has to be reviewed, run, secured, and maintained.</p>
+          <p>Spoken hook: "We measured how much we finished. Nobody measured whether it was worth finishing." Transition: the process has to start with why the work is worth doing, which leads into how our agent workflows evolved.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">First agent workflows</p>
+        <p class="eyebrow">First agent workflows / RPI &rarr; QRSPI &rarr; QRSPI+</p>
         <h2>Good prompts weren't enough.</h2>
         <div class="columns three">
           <div class="panel"><h3>Instruction<br>overload</h3><p>Important guidance gets lost.</p></div>
@@ -196,9 +216,75 @@
           <div class="panel"><h3>Persuasive<br>plans</h3><p>Readable does not mean correct.</p></div>
         </div>
         <aside class="notes">
-          <p>Mention research-plan-implement and QRSPI once as background, then use plain language. <a href="https://alexlavaee.me/blog/from-rpi-to-qrspi/">From RPI to QRSPI</a> explains why the process evolved.</p>
+          <p>RPI means Research, Plan, Implement. QRSPI made questions, design discussion, and structure explicit before implementation. QRSPI+ extends that approach with goals, delivery phases, parallelization, integration, acceptance testing, and replanning. The next slide compares the workflows.</p>
+          <p><a href="https://alexlavaee.me/blog/from-rpi-to-qrspi/">From RPI to QRSPI</a> explains the earlier evolution; <a href="https://github.com/dfrysinger/qrspi-plus">QRSPI+</a> documents the expanded implementation. They are related approaches, not interchangeable names or guarantees of correctness.</p>
           <p>Ask whether one person knows exactly what to say to make the agent behave. That is a single point of failure.</p>
           <p><a href="https://research.trychroma.com/context-rot">Chroma's Context Rot study</a> supports focused context rather than ever-longer prompts. Do not present practitioner context-window budgets as universal model limits.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight workflow-diagrams">
+        <p class="eyebrow">How the workflow evolved</p>
+        <h2>RPI &rarr; QRSPI &rarr; <span class="accent">QRSPI+</span></h2>
+        <div class="workflow-set">
+          <div class="workflow-lane">
+            <h3>RPI</h3>
+            <div>
+              <div class="workflow-path" role="img" aria-label="RPI: Research, then Plan, then Implement">
+                <span class="workflow-step">Research</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Plan</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Implement</span>
+              </div>
+              <p class="workflow-caption">Understand the code before writing it.</p>
+            </div>
+          </div>
+          <div class="workflow-lane">
+            <h3>QRSPI</h3>
+            <div>
+              <div class="workflow-path" role="img" aria-label="QRSPI alignment: Questions, Research, Design discussion, Structure, Plan">
+                <span class="workflow-step">Questions</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Research</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Design</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Structure</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Plan</span>
+              </div>
+              <div class="workflow-path" role="img" aria-label="QRSPI continues: Work tree, Implement, Pull request">
+                <span class="workflow-continuation" aria-hidden="true">&crarr;</span>
+                <span class="workflow-step">Work tree</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Implement</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Pull request</span>
+              </div>
+            </div>
+          </div>
+          <div class="workflow-lane">
+            <h3 class="accent">QRSPI+</h3>
+            <div>
+              <div class="workflow-path" role="img" aria-label="QRSPI+ full route: Goals, Questions, Research, Design, Phasing, Structure, Plan">
+                <span class="workflow-step">Goals</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Questions</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Research</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Design</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Phasing</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Structure</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Plan</span>
+              </div>
+              <div class="workflow-path" role="img" aria-label="QRSPI+ continues: Parallelize, Implement, Integrate, Test, Pull request. For more phases, Replan returns to Goals.">
+                <span class="workflow-continuation" aria-hidden="true">&crarr;</span>
+                <span class="workflow-step">Parallelize</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Implement</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Integrate</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">Test</span><span class="arrow" aria-hidden="true">&rarr;</span>
+                <span class="workflow-step">PR</span>
+              </div>
+              <p class="workflow-caption accent">More phases? Replan &rarr; Goals &rarr; next phase.</p>
+            </div>
+          </div>
+        </div>
+        <p class="tag bottom">Simplified main paths; QRSPI+ also has a quick-fix route.</p>
+        <aside class="notes">
+          <p>Read each path left to right; the bent arrow continues on the next row. RPI established a deliberate research-before-code sequence. QRSPI adds explicit questions, factual research, design discussion, and a structure outline before the tactical plan, followed by work-tree organization, implementation, and human pull-request review.</p>
+          <p>QRSPI+ is a separate implementation extending that approach. Goals capture why the work matters, Phasing defines delivery slices, and Parallelize organizes isolated task work. Implement includes test-first development and per-task reviews. Integrate checks the combined work; Test checks acceptance and includes human code review before creating the pull request.</p>
+          <p>The QRSPI+ full route is shown, not every error or approval branch. For additional phases, Replan returns to Goals. Integration or acceptance failures can return to implementation. The quick-fix route retains Goals, Questions, Research, Plan, Implement, and Test.</p>
+          <p>Sources: <a href="https://alexlavaee.me/blog/from-rpi-to-qrspi/">RPI and QRSPI overview</a>; <a href="https://github.com/dfrysinger/qrspi-plus#pipeline-overview">QRSPI+ pipeline overview</a>. The point is explicit alignment and independent evidence, not that more boxes alone make a workflow better.</p>
         </aside>
       </section>
       <section class="slide bg-midnight statement">
