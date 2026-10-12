@@ -1,5 +1,9 @@
 # Are Traditional Software Teams a Thing of the Past?
 
+The deck is published at <https://dedac.github.io/ai-software-teams-talk/>
+by the `.github/workflows/pages.yml` workflow whenever `presentation/` changes
+on `main`.
+
 Open [`index.html`](index.html) in a browser. No build, server, or internet
 connection is needed; the fonts are bundled locally. Keep the `assets/` folder
 next to the HTML file when sharing the deck.

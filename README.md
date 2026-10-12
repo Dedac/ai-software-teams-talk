@@ -4,7 +4,8 @@
 
 ## Presentation
 
-Open the [presentation](presentation/index.html) in a browser, or see the
+View the [live deck on GitHub Pages](https://dedac.github.io/ai-software-teams-talk/),
+open the [presentation](presentation/index.html) locally in a browser, or see the
 [presenting and PDF export guide](presentation/README.md). The deck uses large,
 high-contrast type for a large audience and includes presenter notes.
 
