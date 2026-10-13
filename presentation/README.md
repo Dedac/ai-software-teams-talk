@@ -8,7 +8,7 @@ Open [`index.html`](index.html) in a browser. No build, server, or internet
 connection is needed; the fonts are bundled locally. Keep the `assets/` folder
 next to the HTML file when sharing the deck.
 
-The 39-slide deck follows the [repository outline](../README.md), with a
+The 43-slide deck follows the [repository outline](../README.md), with a
 high-contrast Midnight background, green accent, Hubot Sans headlines, and
 Mona Sans body text. Large headlines and sparse slide copy are designed for
 projection to a large audience. The final source slide is an appendix.
@@ -16,6 +16,8 @@ Slides 8 and 9 introduce the RPI-to-QRSPI+ evolution and compare the workflow
 paths; the QRSPI+ diagram shows the full route, with quick-fix details in notes.
 Slides 25–27 cover the hard parts of running agentic engineering systems, and
 slide 28 maps the talk onto GitHub's Agentic Engineering System (AES).
+Slides 29–32 open the people-and-teams section with "You've been promoted to
+manager."
 
 ## Presenting
 
@@ -39,7 +41,7 @@ the outline separately. They contain delivery cues, source links, and research
 caveats; this is not a separate-window presenter console.
 
 Prepare the BeamRS demo or recording separately and switch to it from the
-second slide, before continuing to the thesis. Enterprise cases remain anonymized.
+second slide, before continuing to the thesis. Enterprise examples remain anonymized.
 Case figures trace to the supplied outline; the only research figures
 on slides are METR's, checked against METR's own posts, with study-scope
 caveats in the notes.

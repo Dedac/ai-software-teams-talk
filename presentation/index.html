@@ -94,6 +94,8 @@
     .verdict p.muted { font-size: 28px; }
     .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
     .comparison p { padding: 20px 0; font-size: 32px; border-top: 1px solid var(--gh-muted); }
+    .comparison.three { grid-template-columns: repeat(3, 1fr); gap: 36px; }
+    .comparison.three p { font-size: 28px; padding: 16px 0; }
     .resources { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; }
     .resources a { font-size: 30px; color: var(--gh-text); text-decoration-color: var(--accent); text-underline-offset: 6px; }
     .resources p { font-size: 25px; color: var(--gh-muted); margin-top: 8px; }
@@ -180,7 +182,7 @@
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">Anonymized enterprise case / before AI</p>
+        <p class="eyebrow">A three-year dead end / before AI</p>
         <h2>The Three-Year Rewrite</h2>
         <div class="columns">
           <div class="panel"><h3>A great deal of work</h3><p>Several teams.<br>More than three years.<br>A finished application.</p></div>
@@ -213,7 +215,7 @@
       </section>
       <section class="slide bg-midnight">
         <p class="eyebrow">The rewrite, revisited</p>
-        <h2>Four questions to answer<br><span class="accent">before year one ends.</span></h2>
+        <h2>Four questions<br><span class="accent">to answer first.</span></h2>
         <div class="ledger">
           <p class="ledger-head">Ask up front</p><p class="ledger-head">The Three-Year Rewrite</p>
           <p><strong>Value:</strong> What will it earn or save?</p><p class="muted">It could never pay for itself</p>
@@ -380,7 +382,7 @@
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">Enterprise case B / QRSPI+ / 2026</p>
+        <p class="eyebrow">Case B / QRSPI+ / 2026</p>
         <h2>A workflow built its next release.</h2>
         <div class="columns three">
           <div class="panel"><div class="big">38</div><p class="rule">Tasks</p></div>
@@ -389,7 +391,7 @@
         </div>
         <p class="lead bottom muted">Scale is context. The important part is what slipped.</p>
         <aside class="notes">
-          <p>The workflow was used by a real enterprise team; keep the enterprise anonymous. Its previous version built the v0.7.2 release, with 38 tasks in 20 waves, 32 tracked issues closed, and 2,083 automated tests passing. Those are release-record counts, not a productivity benchmark or a guarantee of correctness.</p>
+          <p>QRSPI+ is not an enterprise case study in itself. It is an implementation that has helped ship enterprise features; keep those teams anonymous. It carries a heavy amount of process and is a step toward what comes next, not the destination. Its previous version built the v0.7.2 release, with 38 tasks in 20 waves, 32 tracked issues closed, and 2,083 automated tests passing. Those are release-record counts, not a productivity benchmark or a guarantee of correctness.</p>
           <p>Sources from the outline: <a href="https://github.com/dfrysinger/qrspi-plus/pull/299">release PR #299</a> and the <a href="https://github.com/dfrysinger/qrspi-plus/releases/tag/v0.7.3">v0.7.3 release record</a>. Distinguish the release built with the previous version from the later release's process improvements.</p>
         </aside>
       </section>
@@ -409,15 +411,19 @@
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">What evolved</p>
+        <p class="eyebrow">What evolved / what's next</p>
         <h2>From confidence to <span class="accent">evidence.</span></h2>
-        <div class="comparison">
+        <div class="comparison three">
           <div><h3>The Relay</h3><p>The builder grades itself.</p><p>Instructions keep growing.</p><p>A report says it passed.</p></div>
           <div><h3 class="accent">QRSPI+</h3><p>Independent checks, then a person.</p><p>Focused steps, measured budget.</p><p>A miss becomes a new check.</p></div>
+          <div><h3 class="accent">What's next</h3><p>The workflow tunes itself.</p><p>Evals against a baseline.</p><p>Keep what wins. Undo the rest.</p></div>
         </div>
         <aside class="notes">
           <p>Compare both implementations, noting their strengths and remaining gaps. The Relay's validation scripts and shared instructions remained valuable foundations.</p>
           <p>Other differences: research is isolated from the desired answer, and production code is blocked until a failing test exists. The safeguard miss proves layered checking still matters.</p>
+          <p>What's next: QRSPI+ is a heavy, fixed pipeline. The next step is a workflow that evaluates and improves itself, which is hill climbing: make one small change, measure it against a baseline, keep it if results get better, and undo it if they don't. GitHub's <a href="https://gist.github.com/EvanBoyle/8c1a97f682d92dab8c09d0e1ea73f4a0">Autonomous delivery skill</a> is one example. A strong-reasoning orchestrator delegates outcomes to faster workers, then periodically asks, "Is this organization helping us get better results faster?"</p>
+          <p>Its loop: observed friction, plausible cause, small workflow change, compare useful progress and quality, then keep, revise, or undo. Change one major variable at a time and compare similar work; a faster easy task does not prove a better process. A change that only adds speed while increasing defects or rework does not count. Remove ceremony that no longer earns its cost; even the fixed pipeline becomes one illustration rather than the universal structure.</p>
+          <p>The evals are the hard part: a fixed set of representative tasks, a baseline, and outcome measures such as first-pass acceptance, defects, integration rework, and time to a usable result. Small samples support hypotheses, not fleet-wide statistics. This connects to the hard-parts section later in the talk.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -566,7 +572,52 @@
           <p>Stocks accumulate over time. Governance covers the unskippable checks, permissions, and usage limits. Shared knowledge covers focused context and structured handoffs: agents can only act on what they can access, so weak knowledge turns into fast, confident mistakes. Customer value is the value of completed work, not the amount of work completed.</p>
           <p>Activities move work through the system: define, deliver, detect. They line up with the QRSPI+ blocks of align, execute, and verify and learn. Detect feeds what was learned back into governance and shared knowledge, as Case B did with its own process gaps.</p>
           <p>Modes describe how people and agents take part: director sets intent, performer does the work, assessor checks it. They are not job titles, and the same person or agent can move between them depending on risk and what governance allows.</p>
-          <p>AES's health check: as agent use grows, escaped defect rates should stay flat or fall, and shared knowledge should improve alongside delivery speed. If they diverge, the operating model needs attention. Transition: the modes lead into what changes for careers and teams.</p>
+          <p>AES's health check: as agent use grows, escaped defect rates should stay flat or fall, and shared knowledge should improve alongside delivery speed. If they diverge, the operating model needs attention. Transition: the modes lead into people and teams, where everyone gets promoted.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">People and teams</p>
+        <h2>Congratulations.<br>You've been promoted<br><span class="accent">to manager.</span></h2>
+        <p class="lead muted">Everyone who works with agents is a manager now.</p>
+        <aside class="notes">
+          <p>Spoken hook: "Congratulations. You've been promoted to manager." Nobody changed your title, but the moment you delegate work to an agent, you are directing labor, checking results, and deciding what counts as done.</p>
+          <p>The AES modes make this concrete: director, performer, assessor. Engineers used to spend most of their time as performers. Now they move between directing and assessing much more often.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">You have access to labor</p>
+        <h2>Your output is<br><span class="accent">the team's output.</span></h2>
+        <div class="rows">
+          <div class="row"><strong>Labor</strong><p>Agents on demand, at any hour.</p></div>
+          <div class="row"><strong>Process</strong><p>How people and agents work together.</p></div>
+          <div class="row"><strong>Output</strong><p>What the whole team ships, verified.</p></div>
+        </div>
+        <aside class="notes">
+          <p>You have access to labor. Your output as an engineer is no longer only the code you write; it is what the people and agents you direct ship, verified and worth having.</p>
+          <p>The <a href="https://www.anthropic.com/news/impact-software-development">Anthropic Economic Index</a> found 79% of Claude Code conversations were delegation rather than collaboration. The work is shifting from doing to directing and verifying.</p>
+          <p>A manager's real job is figuring out the process that gets people to work together most effectively. That is team design, not prompt design, and it is the same work as the workflows earlier in the talk.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Design the communication</p>
+        <h2>Communicate enough<br>to <span class="accent">keep work moving.</span></h2>
+        <div class="columns three">
+          <div class="panel"><h3>Handoffs</h3><p>A document the next<br>agent can pick up.</p></div>
+          <div class="panel"><h3>Status</h3><p>A durable record,<br>not a chat thread.</p></div>
+          <div class="panel"><h3>Escalation</h3><p>Interrupt a person<br>only for a decision.</p></div>
+        </div>
+        <aside class="notes">
+          <p>Managers design the frequency and type of communication. Too chatty, and agents burn tokens and people lose attention. Too quiet, and work drifts or two agents build the same thing. Send a message when it changes what the recipient will do; otherwise, write it down where they can find it.</p>
+          <p>Example: the <a href="https://github.com/dfrysinger/skills/blob/main/skills/mailbox/SKILL.md">mailbox</a> and <a href="https://github.com/dfrysinger/skills/blob/main/skills/handoff/SKILL.md">handoff</a> skills in <a href="https://github.com/dfrysinger/skills">dfrysinger/skills</a>. Named agent sessions hand files and messages to each other, even across computers, using addresses like name@machine. Mailbox is one-shot delivery, explicitly "not a chat protocol." A handoff compacts a conversation into a document a fresh agent can pick up, and ownership of a worktree or task is recorded with the owning agent's address.</p>
+          <p>This is the same lesson as structured handoffs in the hard parts: the format and cadence of communication are part of the process you engineer.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">Audience question</p>
+        <h2>Are we all becoming<br>PMs, or <span class="accent">CEOs?</span></h2>
+        <aside class="notes">
+          <p>Ask the room. A PM decides what's worth building and defines success. A CEO staffs the organization, sets budgets and structure, and is accountable for results. Working with agents asks engineers to do some of both.</p>
+          <p>Transition: whichever answer you pick, responsibilities change, but accountability stays.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
