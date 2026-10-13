@@ -77,6 +77,7 @@ Teams that only write code are."**
 | [Stack Overflow Developer Survey 2026](https://survey.stackoverflow.co/2026/ai) and [results summary](https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/) | 73% of respondents using AI coding assistants or agents use them daily. 48% trust AI when they can easily validate the answers; only 16% extend that trust to most tasks that are not important work decisions. 38% say their organizations set limits on AI usage. Self-selected survey of Stack Overflow users. | 4, 6 |
 | [Mozilla and Ubisoft study of AI review comments](https://www.mozillafoundation.org/ca/research/library/impact-of-llm-based-review-comment-generation-in-practice-a-mixed-open-closed-source-user-study/) | About 7–8% of AI review comments were accepted as written. Small sample with one tool: a single research tool (RevMate) on one off-the-shelf model, across about 587 patch reviews at two organizations. Treat it as indicative that automated review needs human triage, not as a general acceptance rate. | 4 |
 | [GitHub Blog, "60 million Copilot code reviews and counting"](https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/) (2026) | GitHub tunes Copilot code review with a continuous evaluation loop: internal tests against known issues plus production signals (developer reactions and whether flagged issues are fixed before merge). It prioritizes signal over comment volume: in 29% of reviews it says nothing. Vendor-reported figures. | 4, 6 |
+| [GitHub's Agentic Engineering System (AES)](https://github.com/resources/insights/agentic-engineering-system) (2026) and [Well-Architected implementation guide](https://learn.github.com/well-architected/governance/recommendations/agentic-engineering-system-on-github) | A tool-agnostic framework for scaling agent use: three "stocks" (governance, shared knowledge, customer value), three activities (define, deliver, detect), and three modes that people or agents can hold (director, performer, assessor). Its test of healthy adoption: as agent use grows, escaped defects stay flat or fall and shared knowledge improves alongside delivery speed. A vendor framework, not an empirical study. | 6 |
 | [Stanford, "Canaries in the Coal Mine"](https://digitaleconomy.stanford.edu/news/canariesaug26/) (revised Aug 2026) | Employment of 22–25-year-olds fell in AI-exposed jobs, including software development, mainly through reduced hiring; experienced workers in jobs built on tacit knowledge grew. Descriptive, not causal. | 7 |
 | [Anthropic, "How AI Impacts Skill Formation"](https://arxiv.org/abs/2601.20245) (2026) | Developers learning a new library with AI scored 50% vs 67% without, with the biggest gap in debugging; using AI to explain concepts preserved learning. | 7 |
 | [HBS and P&G, "The Cybernetic Teammate"](https://aiinstitute.hbs.edu/the-cybernetic-teammate-how-ai-is-reshaping-collaboration-and-expertise-in-the-workplace/) | In a randomized study of 776 professionals, individuals with AI matched two-person teams without AI, and AI reduced expertise silos. Product development, not software. | 7 |
@@ -125,6 +126,7 @@ Teams that only write code are."**
     or save? Ship a thin slice to production early to find out.
   - **Agree on stopping criteria up front.** Decide what result would make
     the team stop, before the sunk cost makes stopping feel impossible.
+  - Visual: [“Museum of Meaningless Metrics”](https://gambleblog.blob.core.windows.net/backgrounds/post-359-feature-1782352019832-Museum_of_Meaningless_Metrics.png), credited to Gamble Blog on the corresponding deck slide.
 - Analogy: agents add lanes, but review is still a one-lane exit ramp. And
   the highway still has to lead somewhere worth going.
 - Research: DORA 2025 calls AI an amplifier. It raises throughput and
@@ -372,6 +374,20 @@ workflow works.
     quick-fix route is another.
   - Hook: *"Every step in the process should earn its place, just like every
     line of code."*
+- **One framework for all of it: GitHub's Agentic Engineering System
+  ([AES](https://github.com/resources/insights/agentic-engineering-system)).** The lessons in this talk map onto its parts:
+  - **Stocks:** governance (unskippable checks, permissions, limits), shared
+    knowledge (focused context, structured handoffs), and customer value
+    (value of completed work, not amount of work completed).
+  - **Activities:** define, deliver, detect. Roughly the QRSPI+ blocks of
+    align, execute, and verify and learn.
+  - **Modes:** director, performer, assessor. Not job titles; people and
+    agents move between them depending on risk.
+  - Its health check matches our evaluation advice: as delivery speeds up,
+    escaped defects should stay flat or fall, and shared knowledge should
+    get better, not worse.
+  - Transition: the modes lead straight into what changes for careers and
+    teams.
 
 ### 7. What changes for careers and teams (7 min)
 
