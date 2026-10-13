@@ -76,6 +76,16 @@
     .ledger p { font-size: 30px; padding: 10px 0; border-top: 1px solid var(--gh-muted); }
     .ledger strong { font-weight: 650; }
     .ledger .ledger-head { font-family: var(--font-mono); font-size: 21px; text-transform: uppercase; letter-spacing: .06em; color: var(--accent); border-top: 0; padding-top: 0; }
+    .value-layout { display: grid; grid-template-columns: minmax(0, 1fr) 450px; gap: 48px; align-items: center; flex: 1; min-height: 0; }
+    .value-copy h2 { font-size: 76px; line-height: 1.03; margin-bottom: 28px; }
+    .value-copy .lead { font-size: 31px; line-height: 1.3; }
+    .metric-museum { margin: 0; }
+    .metric-museum img { display: block; width: 100%; max-height: 450px; object-fit: contain; background: #fff; }
+    .metric-museum figcaption { margin-top: 10px; font-size: 18px; line-height: 1.3; color: var(--gh-muted); text-align: right; }
+    .metric-museum a { color: var(--accent); }
+    .aes-map .ledger { grid-template-columns: 220px 1fr 1fr; column-gap: 32px; margin-bottom: 22px; }
+    .aes-map .ledger p { font-size: 27px; padding: 12px 0; }
+    .aes-map .lead { font-size: 32px; }
     .verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 22px; }
     .verdict .big { margin: 20px 0; }
     .verdict p { font-size: 32px; }
@@ -183,12 +193,21 @@
           <p>Spoken hook: Agents make building cheap. They don't make it worth building.</p>
         </aside>
       </section>
-      <section class="slide bg-midnight statement">
+      <section class="slide bg-midnight value-slide">
         <p class="eyebrow">Value, not volume</p>
-        <h2><span class="muted">Output</span><br>isn't <span class="accent">outcome.</span></h2>
-        <p class="lead">Tasks closed. Pull requests merged. Code generated.<br><span class="muted">None tells you whether it was worth doing.</span></p>
+        <div class="value-layout">
+          <div class="value-copy">
+            <h2><span class="muted">Output</span><br>isn't <span class="accent">outcome.</span></h2>
+            <p class="lead">Tasks closed. Pull requests merged. Code generated.<br><span class="muted">None tells you whether it was worth doing.</span></p>
+          </div>
+          <figure class="metric-museum">
+            <img src="assets/museum-of-meaningless-metrics.png" alt="Satirical illustration of a museum displaying lines of code, story points, pull requests, and tokens spent as exhibits." />
+            <figcaption>“Museum of Meaningless Metrics” · <a href="https://gambleblog.blob.core.windows.net/backgrounds/post-359-feature-1782352019832-Museum_of_Meaningless_Metrics.png">Gamble Blog</a></figcaption>
+          </figure>
+        </div>
         <aside class="notes">
-          <p>Agents inflate activity measures. Unfinished work is inventory: until it reaches users and earns or saves something, it is a cost.</p>
+          <p>The illustration satirizes activity measures: lines of code, story points, pull requests, and tokens spent. Agents can inflate those measures without proving that the work was valuable.</p>
+          <p>Unfinished work is inventory: until it reaches users and earns or saves something, it is a cost.</p>
           <p>Every line has to be reviewed, run, secured, and maintained. Cheap to write does not mean cheap to own.</p>
         </aside>
       </section>
@@ -530,6 +549,24 @@
         <aside class="notes">
           <p>Teams judge a workflow by a few memorable runs. That can mean keeping a change that made results worse because it feels better, or abandoning a useful one after a single bad run. Compare against the baseline across several runs; METR showed how unreliable "it feels faster" can be. Spoken hook: "We hid our preferences from the research agent. Hide them from the evaluation too."</p>
           <p>Workflows accumulate steps, rules, reviewers, and instructions. Each costs time, tokens, and attention, and extra instructions bring back instruction overload. Track what each gate catches; remove or merge steps that never catch anything. Case B's measured instruction budget and the quick-fix route are examples. Spoken hook: "Every step in the process should earn its place, just like every line of code."</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight aes-map">
+        <p class="eyebrow">GitHub's Agentic Engineering System</p>
+        <h2>The same lessons,<br><span class="accent">one framework.</span></h2>
+        <div class="ledger">
+          <p class="ledger-head"></p><p class="ledger-head">AES</p><p class="ledger-head">In this talk</p>
+          <p><strong>Stocks</strong></p><p>Governance, knowledge, value</p><p class="muted">Checks, context, outcomes</p>
+          <p><strong>Activities</strong></p><p>Define, deliver, detect</p><p class="muted">Align, execute, verify &amp; learn</p>
+          <p><strong>Modes</strong></p><p>Director, performer, assessor</p><p class="muted">People or agents, set by risk</p>
+        </div>
+        <p class="lead bottom">Speed goes up. Escaped defects <span class="accent">don't.</span></p>
+        <aside class="notes">
+          <p><a href="https://github.com/resources/insights/agentic-engineering-system">GitHub's Agentic Engineering System (AES)</a> is a tool-agnostic framework for scaling agent use. Implementation guidance is in <a href="https://learn.github.com/well-architected/governance/recommendations/agentic-engineering-system-on-github">GitHub Well-Architected</a>. It is a vendor framework rather than an empirical study; use it to show that these lessons fit one model.</p>
+          <p>Stocks accumulate over time. Governance covers the unskippable checks, permissions, and usage limits. Shared knowledge covers focused context and structured handoffs: agents can only act on what they can access, so weak knowledge turns into fast, confident mistakes. Customer value is the value of completed work, not the amount of work completed.</p>
+          <p>Activities move work through the system: define, deliver, detect. They line up with the QRSPI+ blocks of align, execute, and verify and learn. Detect feeds what was learned back into governance and shared knowledge, as Case B did with its own process gaps.</p>
+          <p>Modes describe how people and agents take part: director sets intent, performer does the work, assessor checks it. They are not job titles, and the same person or agent can move between them depending on risk and what governance allows.</p>
+          <p>AES's health check: as agent use grows, escaped defect rates should stay flat or fall, and shared knowledge should improve alongside delivery speed. If they diverge, the operating model needs attention. Transition: the modes lead into what changes for careers and teams.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
