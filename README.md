@@ -70,19 +70,19 @@ Teams that only write code are."**
 
 | Study | Key finding | Used in |
 |---|---|---|
-| [DORA 2025 State of AI-assisted Software Development](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report) and [AI Capabilities Model](https://services.google.com/fh/files/misc/2025_dora_ai_capabilities_model.pdf) | AI amplifies a team's existing strengths and weaknesses; higher throughput comes with more instability. Small batches, strong version control, internal platforms, and AI access to internal data help. | 1, 7 |
+| [DORA 2025 State of AI-assisted Software Development](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report) and [AI Capabilities Model](https://services.google.com/fh/files/misc/2025_dora_ai_capabilities_model.pdf) | AI amplifies a team's existing strengths and weaknesses; higher throughput comes with more instability. Small batches, strong version control, internal platforms, and AI access to internal data help. | 1, 8 |
 | [METR study of experienced open-source developers](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) (2025) | Tasks took 19% longer with AI, yet developers believed AI made them about 20% faster. | 2 |
-| [METR update](https://metr.org/blog/2026-02-24-uplift-update/) (Feb 2026) | AI now likely speeds developers up, but selection effects (developers refusing to work without AI) prevent a reliable estimate. Present the 2025 result as historical. | 2 |
-| [Chroma, "Context Rot"](https://research.trychroma.com/context-rot) (2025) | All 18 models tested got worse as input grew longer. Supports focused context per step. | 2, 3 |
-| [Stack Overflow Developer Survey 2025](https://stackoverflow.co/company/press/archive/stack-overflow-2025-developer-survey/) | 84% use or plan to use AI; 46% distrust its accuracy; 66% cite "almost right, but not quite" answers as the top frustration. | 4 |
-| [Veracode GenAI Code Security Report](https://www.veracode.com/blog/genai-code-security-report/) (2025) | 45% of AI-generated code samples contained security flaws; newer models were not more secure. | 4 |
-| [Mozilla and Ubisoft study of AI review comments](https://www.mozillafoundation.org/ca/research/library/impact-of-llm-based-review-comment-generation-in-practice-a-mixed-open-closed-source-user-study/) | Only about 7–8% of AI review comments were accepted as written. Automated review still needs human triage. | 4 |
-| [Stanford, "Canaries in the Coal Mine"](https://digitaleconomy.stanford.edu/news/canariesaug26/) (revised Aug 2026) | Employment of 22–25-year-olds fell in AI-exposed jobs, including software development, mainly through reduced hiring; experienced workers in jobs built on tacit knowledge grew. Descriptive, not causal. | 6 |
-| [Anthropic, "How AI Impacts Skill Formation"](https://arxiv.org/abs/2601.20245) (2026) | Developers learning a new library with AI scored 50% vs 67% without, with the biggest gap in debugging; using AI to explain concepts preserved learning. | 6 |
-| [HBS and P&G, "The Cybernetic Teammate"](https://aiinstitute.hbs.edu/the-cybernetic-teammate-how-ai-is-reshaping-collaboration-and-expertise-in-the-workplace/) | In a randomized study of 776 professionals, individuals with AI matched two-person teams without AI, and AI reduced expertise silos. Product development, not software. | 6 |
-| [Anthropic Economic Index: software development](https://www.anthropic.com/news/impact-software-development) (2025) | 79% of Claude Code conversations were automation (delegation) rather than augmentation. | 5, 6 |
+| [METR update](https://metr.org/blog/2026-02-24-uplift-update/) (Feb 2026) | AI now likely speeds developers up, but selection effects (developers refusing to work without AI) prevent a reliable estimate. Present the 2025 result as historical. | 2, 6 |
+| [Chroma, "Context Rot"](https://research.trychroma.com/context-rot) (2025) | All 18 models tested got worse as input grew longer. Supports focused context per step. | 2, 3, 6 |
+| [Stack Overflow Developer Survey 2026](https://survey.stackoverflow.co/2026/ai) and [results summary](https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/) | 73% of respondents using AI coding assistants or agents use them daily. 48% trust AI when they can easily validate the answers; only 16% extend that trust to most tasks that are not important work decisions. 38% say their organizations set limits on AI usage. Self-selected survey of Stack Overflow users. | 4, 6 |
+| [Mozilla and Ubisoft study of AI review comments](https://www.mozillafoundation.org/ca/research/library/impact-of-llm-based-review-comment-generation-in-practice-a-mixed-open-closed-source-user-study/) | About 7–8% of AI review comments were accepted as written. Small sample with one tool: a single research tool (RevMate) on one off-the-shelf model, across about 587 patch reviews at two organizations. Treat it as indicative that automated review needs human triage, not as a general acceptance rate. | 4 |
+| [GitHub Blog, "60 million Copilot code reviews and counting"](https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/) (2026) | GitHub tunes Copilot code review with a continuous evaluation loop: internal tests against known issues plus production signals (developer reactions and whether flagged issues are fixed before merge). It prioritizes signal over comment volume: in 29% of reviews it says nothing. Vendor-reported figures. | 4, 6 |
+| [Stanford, "Canaries in the Coal Mine"](https://digitaleconomy.stanford.edu/news/canariesaug26/) (revised Aug 2026) | Employment of 22–25-year-olds fell in AI-exposed jobs, including software development, mainly through reduced hiring; experienced workers in jobs built on tacit knowledge grew. Descriptive, not causal. | 7 |
+| [Anthropic, "How AI Impacts Skill Formation"](https://arxiv.org/abs/2601.20245) (2026) | Developers learning a new library with AI scored 50% vs 67% without, with the biggest gap in debugging; using AI to explain concepts preserved learning. | 7 |
+| [HBS and P&G, "The Cybernetic Teammate"](https://aiinstitute.hbs.edu/the-cybernetic-teammate-how-ai-is-reshaping-collaboration-and-expertise-in-the-workplace/) | In a randomized study of 776 professionals, individuals with AI matched two-person teams without AI, and AI reduced expertise silos. Product development, not software. | 7 |
+| [Anthropic Economic Index: software development](https://www.anthropic.com/news/impact-software-development) (2025) | 79% of Claude Code conversations were automation (delegation) rather than augmentation. | 5, 7 |
 
-## Outline (about 45 minutes before Q&A)
+## Outline (about 50 minutes before Q&A)
 
 ### 0. Cold open: "The app worked. It just existed twice." (3 min)
 
@@ -282,13 +282,17 @@ Hooks:
 
 Research context:
 
-- Stack Overflow 2025: the top frustration is answers that are "almost right,
-  but not quite", which is exactly what layered review is for.
-- Veracode 2025: 45% of AI-generated code samples had security flaws, and
-  newer models didn't fix that.
+- Stack Overflow 2026: 48% of developers trust AI when they can easily
+  validate the answers. Layered review is how a team makes answers easy to
+  validate.
 - Mozilla and Ubisoft: only about 7–8% of AI review comments were accepted as
-  written. Contrast with BeamRS, where findings were specific and actionable,
-  and note that humans still triaged every one.
+  written. This was a small study of one research tool, so treat it as
+  indicative rather than a general rate. Contrast with BeamRS, where findings
+  were specific and actionable, and note that humans still triaged every one.
+- GitHub Blog (2026): Copilot code review is tuned for signal rather than
+  comment volume, using evaluation against known issues and whether flagged
+  issues are fixed before merge. Vendor-reported, but it shows a reviewer
+  being evaluated and improved like any other system.
 
 Keep the balance: agents are not infallible, and agent review adds assurance
 without removing human accountability.
@@ -314,7 +318,62 @@ without removing human accountability.
   investigation, documentation updates.
 - Enterprise case: governed automation for triage or maintenance.
 
-### 6. What changes for careers and teams (7 min)
+### 6. The hard parts of agentic engineering systems (5 min)
+
+An agent workflow is itself a system that has to be engineered: evaluated,
+limited, connected, and maintained. These problems remain even when the
+workflow works.
+
+- **English is the programming language.** Natural-language instructions are
+  inherently imprecise, and the model running them is non-deterministic. The
+  same prompt can produce different results, and every ambiguity is
+  interpreted differently on each run.
+  - Pin intent down with things that are precise: acceptance tests, worked
+    examples, schemas, and scripts.
+  - Hook: *"When English is the programming language, every ambiguity is a
+    bug you haven't found yet."*
+- **Defining how to evaluate and improve the system.** Decide what a better
+  run means before changing the workflow: a fixed set of representative
+  tasks, a baseline, and outcome measures such as validated delivery time,
+  rework, escaped defects, review effort, and cost.
+  - Case B filed 15 issues about its own process gaps, then turned them into
+    automatic checks in the next release. Improvement needs that loop, not
+    occasional prompt tweaks.
+  - GitHub's Copilot code review team describes the same loop: evaluate
+    against known issues, then track production signals such as whether
+    flagged issues get fixed.
+- **Setting usage limits.** Agents spend tokens, model requests, time, and
+  money, and can retry or loop without converging. Set budgets per task and
+  per run, cap retries and parallel work, and stop or escalate when a limit
+  is reached.
+  - The cost to run the process belongs in the same economics as the cost to
+    run the product.
+  - Stack Overflow 2026: 38% of respondents say their organizations set
+    limits on AI usage.
+- **Deterministic handoffs.** When one agent hands work to another through
+  prose, the next agent has to interpret it. Hand off structured artifacts
+  that a script can check: required sections, task IDs, file lists, and
+  test results.
+  - The Relay passed long written plans forward. Case B added an automatic
+    check that every merge contains exactly the planned tasks after a merge
+    silently dropped a security safeguard.
+- **Confirmation bias about the system itself.** Teams judge a workflow by a
+  few memorable runs. That can mean keeping a change that made results worse
+  because it feels better, or abandoning a useful one after a single bad run.
+  - Compare against the baseline across several runs; the METR results
+    showed how unreliable "it feels faster" can be.
+  - Hook: *"We hid our preferences from the research agent. Hide them from
+    the evaluation too."*
+- **Trimming the fat.** Workflows accumulate steps, rules, reviewers, and
+  instructions. Each one costs time, tokens, and attention, and extra
+  instructions bring back instruction overload.
+  - Track what each gate catches; remove or merge steps that never catch
+    anything. Case B's measured instruction budget is one example; the
+    quick-fix route is another.
+  - Hook: *"Every step in the process should earn its place, just like every
+    line of code."*
+
+### 7. What changes for careers and teams (7 min)
 
 - Organize around responsibilities, not invented job titles:
 
@@ -350,7 +409,7 @@ without removing human accountability.
 - Enterprise cases: two or three contrasting team designs, including one that
   did not work.
 
-### 7. The process is a product (4 min)
+### 8. The process is a product (4 min)
 
 **This talk was built the same way (1 min).** Show the outline repository's
 history as a short case study:

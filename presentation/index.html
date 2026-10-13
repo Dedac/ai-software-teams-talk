@@ -450,7 +450,7 @@
         <aside class="notes">
           <p><a href="https://github.com/Dedac/BeamRS/pull/2">BeamRS PR #2</a> later fixed the home page's create-frequency button and its accessibility. No review caught it before merging. PRs #1 and #2 had no Copilot code review.</p>
           <p>Keep the balance: automated review adds assurance but does not remove accountability. Research on AI review also shows humans must triage suggestions.</p>
-          <p>Context: <a href="https://stackoverflow.co/company/press/archive/stack-overflow-2025-developer-survey/">Stack Overflow 2025</a>, <a href="https://www.veracode.com/blog/genai-code-security-report/">Veracode's 2025 report</a>, and the <a href="https://www.mozillafoundation.org/ca/research/library/impact-of-llm-based-review-comment-generation-in-practice-a-mixed-open-closed-source-user-study/">Mozilla/Ubisoft review study</a>. No cross-study numeric generalizations are printed on slides.</p>
+          <p>Context: the <a href="https://survey.stackoverflow.co/2026/ai">Stack Overflow 2026 survey</a> (48% trust AI when they can easily validate the answers), the <a href="https://www.mozillafoundation.org/ca/research/library/impact-of-llm-based-review-comment-generation-in-practice-a-mixed-open-closed-source-user-study/">Mozilla/Ubisoft review study</a> (about 7–8% of AI review comments accepted as written; a small study of one research tool), and the <a href="https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/">GitHub Blog on Copilot code review</a>, which evaluates the reviewer for signal rather than comment volume. No cross-study numeric generalizations are printed on slides.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -494,6 +494,42 @@
           <p>Ask: An agent is working in your repository at 3 a.m. What should it be allowed to do, and what should it only recommend?</p>
           <p>In Agentic Workflows, writes go through configured approved actions such as comments, issues, or pull requests. "Approved write actions" does not mean every action requires a live human approval prompt. Match authority to risk.</p>
           <p>The same principles apply locally: focused context, limited authority, visible evidence.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight statement">
+        <p class="eyebrow">The hard parts of agentic engineering</p>
+        <h2>Imprecise instructions.<br>Unpredictable <span class="accent">execution.</span></h2>
+        <p class="lead muted">English is the programming language now.</p>
+        <aside class="notes">
+          <p>An agent workflow is itself a system that has to be engineered: evaluated, limited, connected, and maintained. These problems remain even when the workflow works.</p>
+          <p>Natural-language instructions are inherently imprecise, and the model running them is non-deterministic. The same prompt can produce different results, and each ambiguity can be interpreted differently on each run.</p>
+          <p>Pin intent down with precise artifacts: acceptance tests, worked examples, schemas, and scripts. Spoken hook: "When English is the programming language, every ambiguity is a bug you haven't found yet."</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Run it like a system</p>
+        <h2>The workflow is software.<br><span class="accent">Engineer it like software.</span></h2>
+        <div class="rows">
+          <div class="row"><strong>Evaluate</strong><p>Fixed tasks, a baseline, outcome measures.</p></div>
+          <div class="row"><strong>Limit</strong><p>Budgets for tokens, time, retries, and cost.</p></div>
+          <div class="row"><strong>Hand off</strong><p>Structured artifacts a script can check.</p></div>
+        </div>
+        <aside class="notes">
+          <p>Evaluate: decide what a better run means before changing the workflow. Use a fixed set of representative tasks, a baseline, and outcome measures such as validated delivery time, rework, escaped defects, review effort, and cost. Case B filed 15 issues about its own process gaps and turned them into automatic checks in the next release. <a href="https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/">GitHub describes the same loop</a> for Copilot code review: evaluation against known issues plus production signals.</p>
+          <p>Limit: agents spend tokens, model requests, time, and money, and can retry or loop without converging. Set budgets per task and per run, cap retries and parallel work, and stop or escalate at the limit. The cost to run the process belongs in the same economics as the cost to run the product. In the <a href="https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/">Stack Overflow 2026 survey</a>, 38% of respondents said their organizations set limits on AI usage.</p>
+          <p>Hand off: prose handoffs force the next agent to interpret. Structured artifacts with required sections, task IDs, file lists, and test results can be checked by a script. The Relay passed long written plans forward; Case B added an automatic check that every merge contains exactly the planned tasks after a merge silently dropped a security safeguard.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Guard against ourselves</p>
+        <h2>Judge the process by evidence,<br>not <span class="accent">by favorites.</span></h2>
+        <div class="columns">
+          <div class="panel"><h3>Confirmation bias</h3><p>We keep what feels better.<br>We drop what failed once.</p></div>
+          <div class="panel"><h3>Trim the fat</h3><p>Every step has a cost.<br>Cut what never catches anything.</p></div>
+        </div>
+        <aside class="notes">
+          <p>Teams judge a workflow by a few memorable runs. That can mean keeping a change that made results worse because it feels better, or abandoning a useful one after a single bad run. Compare against the baseline across several runs; METR showed how unreliable "it feels faster" can be. Spoken hook: "We hid our preferences from the research agent. Hide them from the evaluation too."</p>
+          <p>Workflows accumulate steps, rules, reviewers, and instructions. Each costs time, tokens, and attention, and extra instructions bring back instruction overload. Track what each gate catches; remove or merge steps that never catch anything. Case B's measured instruction budget and the quick-fix route are examples. Spoken hook: "Every step in the process should earn its place, just like every line of code."</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
