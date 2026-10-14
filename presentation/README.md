@@ -8,20 +8,25 @@ Open [`index.html`](index.html) in a browser. No build, server, or internet
 connection is needed; the fonts are bundled locally. Keep the `assets/` folder
 next to the HTML file when sharing the deck.
 
-The 44-slide deck follows the [repository outline](../README.md), with a
+The 41-slide deck follows the [repository outline](../README.md), with a
 high-contrast Midnight background, green accent, Hubot Sans headlines, and
 Mona Sans body text. Large headlines and sparse slide copy are designed for
 projection to a large audience. The final source slide is an appendix.
 Slide 2 introduces the broken software-engineering process; slide 3 opens the
-people-and-teams section with "You just got promoted." Slides 12–19 tell the
+people-and-teams section with "You just got promoted." Slides 12–18 tell the
 workflow story in order: lessons, The Relay, the RPI-to-QRSPI+ diagram (slide
 14, full route with quick-fix details in notes), the QRSPI+ case, the
-comparison, and slide 19 on
-what comes next: reduced complexity, evaluation, and review. Slides 27–30 are a natural-language-uncertainty section: every harness,
+comparison, and slide 18 on what comes next: reduced complexity, evaluation,
+and review. Slide 19 summarizes the process as Align, Execute, Verify; slides
+20–21 cover the BeamRS review examples, with the two-layer review setup in
+slide 20's notes. Slide 22 closes the review loop; slides 23–24 introduce
+repository automation and its authority boundaries. Slides 25–28 are a
+natural-language-uncertainty section: every harness,
 skill, and agent is more natural language, illustrated with an ambiguous
-English sentence. Slides 31–32 cover the hard parts of running agentic
-engineering systems, and slide 33 maps the talk onto GitHub's Agentic Engineering System (AES), before
-the careers-and-teams section.
+English sentence. Slides 29–30 cover the hard parts of running agentic
+engineering systems, and slide 31 maps the talk onto GitHub's Agentic
+Engineering System (AES), before the careers-and-teams section. The
+special-thanks slide precedes Q&A and the source appendix.
 
 ## Presenting
 
