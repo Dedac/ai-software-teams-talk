@@ -8,16 +8,20 @@ Open [`index.html`](index.html) in a browser. No build, server, or internet
 connection is needed; the fonts are bundled locally. Keep the `assets/` folder
 next to the HTML file when sharing the deck.
 
-The 43-slide deck follows the [repository outline](../README.md), with a
+The 44-slide deck follows the [repository outline](../README.md), with a
 high-contrast Midnight background, green accent, Hubot Sans headlines, and
 Mona Sans body text. Large headlines and sparse slide copy are designed for
 projection to a large audience. The final source slide is an appendix.
-Slides 8 and 9 introduce the RPI-to-QRSPI+ evolution and compare the workflow
-paths; the QRSPI+ diagram shows the full route, with quick-fix details in notes.
-Slides 25–27 cover the hard parts of running agentic engineering systems, and
-slide 28 maps the talk onto GitHub's Agentic Engineering System (AES).
-Slides 29–32 open the people-and-teams section with "You've been promoted to
-manager."
+Slide 2 introduces the broken software-engineering process; slide 3 opens the
+people-and-teams section with "You just got promoted." Slides 12–19 tell the
+workflow story in order: lessons, The Relay, the RPI-to-QRSPI+ diagram (slide
+14, full route with quick-fix details in notes), the QRSPI+ case, the
+comparison, and slide 19 on
+what comes next: reduced complexity, evaluation, and review. Slides 27–30 are a natural-language-uncertainty section: every harness,
+skill, and agent is more natural language, illustrated with an ambiguous
+English sentence. Slides 31–32 cover the hard parts of running agentic
+engineering systems, and slide 33 maps the talk onto GitHub's Agentic Engineering System (AES), before
+the careers-and-teams section.
 
 ## Presenting
 
@@ -32,7 +36,7 @@ manager."
 | F | Toggle fullscreen, where the browser permits it |
 | Escape | Close overview or notes |
 
-Slide links use hashes, for example `index.html#16`. The on-screen controls
+Slide links use hashes, for example `index.html#12`. The on-screen controls
 also support navigation, overview, notes, and fullscreen.
 
 **Notes are visible on the same screen when enabled.** Do not turn them on
@@ -41,10 +45,10 @@ the outline separately. They contain delivery cues, source links, and research
 caveats; this is not a separate-window presenter console.
 
 Prepare the BeamRS demo or recording separately and switch to it from the
-second slide, before continuing to the thesis. Enterprise examples remain anonymized.
-Case figures trace to the supplied outline; the only research figures
-on slides are METR's, checked against METR's own posts, with study-scope
-caveats in the notes.
+sixth slide, after the opening section and before continuing to the thesis.
+Enterprise examples remain anonymized.
+Case figures trace to the supplied outline; research claims are linked to
+their sources in the outline and relevant speaker notes.
 
 ## PDF export
 
