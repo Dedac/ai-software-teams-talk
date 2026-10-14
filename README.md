@@ -78,16 +78,13 @@ Teams that only write code are."**
 |---|---|---|
 | [DORA 2025 State of AI-assisted Software Development](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report) and [AI Capabilities Model](https://services.google.com/fh/files/misc/2025_dora_ai_capabilities_model.pdf) | AI amplifies a team's existing strengths and weaknesses; higher throughput comes with more instability. Small batches, strong version control, internal platforms, and AI access to internal data help. | 1, 9 |
 | [Chroma, "Context Rot"](https://research.trychroma.com/context-rot) (2025) | All 18 models tested got worse as input grew longer. Supports focused context per step. | 2, 3, 6, 7 |
-| [Stack Overflow Developer Survey 2026](https://survey.stackoverflow.co/2026/ai) and [results summary](https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/) | 73% of respondents using AI coding assistants or agents use them daily. 48% trust AI when they can easily validate the answers; only 16% extend that trust to most tasks that are not important work decisions. 38% say their organizations set limits on AI usage. Self-selected survey of Stack Overflow users. | 4, 7 |
-| [Mozilla and Ubisoft study of AI review comments](https://www.mozillafoundation.org/ca/research/library/impact-of-llm-based-review-comment-generation-in-practice-a-mixed-open-closed-source-user-study/) | About 7–8% of AI review comments were accepted as written. Small sample with one tool: a single research tool (RevMate) on one off-the-shelf model, across about 587 patch reviews at two organizations. Treat it as indicative that automated review needs human triage, not as a general acceptance rate. | 4 |
-| [GitHub Blog, "60 million Copilot code reviews and counting"](https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/) (2026) | GitHub tunes Copilot code review with a continuous evaluation loop: internal tests against known issues plus production signals (developer reactions and whether flagged issues are fixed before merge). It prioritizes signal over comment volume: in 29% of reviews it says nothing. Vendor-reported figures. | 4, 7 |
+| [Stack Overflow Developer Survey 2026](https://survey.stackoverflow.co/2026/ai) and [results summary](https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/) | 73% of respondents using AI coding assistants or agents use them daily. 48% trust AI when they can easily validate the answers; only 16% extend that trust to most tasks that are not important work decisions. 38% say their organizations set limits on AI usage. Self-selected survey of Stack Overflow users. | 7 |
+| [GitHub Blog, "60 million Copilot code reviews and counting"](https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/) (2026) | GitHub tunes Copilot code review with a continuous evaluation loop: internal tests against known issues plus production signals (developer reactions and whether flagged issues are fixed before merge). It prioritizes signal over comment volume: in 29% of reviews it says nothing. Vendor-reported figures. | 7 |
 | [GitHub's Agentic Engineering System (AES)](https://github.com/resources/insights/agentic-engineering-system) (2026) and [Well-Architected implementation guide](https://learn.github.com/well-architected/governance/recommendations/agentic-engineering-system-on-github) | A tool-agnostic framework for scaling agent use: three "stocks" (governance, shared knowledge, customer value), three activities (define, deliver, detect), and three modes that people or agents can hold (director, performer, assessor). Its test of healthy adoption: as agent use grows, escaped defects stay flat or fall and shared knowledge improves alongside delivery speed. A vendor framework, not an empirical study. | Opening, 7 |
-| [Stanford, "Canaries in the Coal Mine"](https://digitaleconomy.stanford.edu/news/canariesaug26/) (revised Aug 2026) | Employment of 22–25-year-olds fell in AI-exposed jobs, including software development, mainly through reduced hiring; experienced workers in jobs built on tacit knowledge grew. Descriptive, not causal. | 8 |
-| [Anthropic, "How AI Impacts Skill Formation"](https://arxiv.org/abs/2601.20245) (2026) | Developers learning a new library with AI scored 50% vs 67% without, with the biggest gap in debugging; using AI to explain concepts preserved learning. | 8 |
 | [HBS and P&G, "The Cybernetic Teammate"](https://aiinstitute.hbs.edu/the-cybernetic-teammate-how-ai-is-reshaping-collaboration-and-expertise-in-the-workplace/) | In a randomized study of 776 professionals, individuals with AI matched two-person teams without AI, and AI reduced expertise silos. Product development, not software. | 8 |
 | [Anthropic Economic Index: software development](https://www.anthropic.com/news/impact-software-development) (2025) | 79% of Claude Code conversations were automation (delegation) rather than augmentation. | Opening, 5, 8 |
 
-## Outline (about 55 minutes before Q&A)
+## Outline (about 52 minutes before Q&A)
 
 ### Pre-intro: The problem and the opportunity (1 min)
 
@@ -309,7 +306,7 @@ Teams that only write code are."**
   - Hook: *"Keep what wins. Undo the rest. Remove any step that no longer
     earns its cost."*
 
-### 4. Two layers of agent review (8 min)
+### 4. Two layers of agent review (5 min)
 
 All findings in this section were made by agents. People decided which to
 accept, made the fixes, and approved the releases.
@@ -339,10 +336,6 @@ seven problems after the local work had passed its own tests and reviews:
 **Closing the loop:** each finding got a commit, a reply, and often a
 regression test, so the next run is harder to fool.
 
-**The miss:** [#2](https://github.com/Dedac/BeamRS/pull/2) later fixed the
-home page's create-frequency button and its accessibility. No review caught it
-before merging. Pull requests #1 and #2 had no Copilot code review.
-
 Hooks:
 
 - *"The local process said done. A second agent disagreed, with specific
@@ -353,24 +346,10 @@ Hooks:
 - *"Write the review into the process instead of relying on someone to
   remember it."*
 
-Research context:
-
-- Stack Overflow 2026: 48% of developers trust AI when they can easily
-  validate the answers. Layered review is how a team makes answers easy to
-  validate.
-- Mozilla and Ubisoft: only about 7–8% of AI review comments were accepted as
-  written. This was a small study of one research tool, so treat it as
-  indicative rather than a general rate. Contrast with BeamRS, where findings
-  were specific and actionable, and note that humans still triaged every one.
-- GitHub Blog (2026): Copilot code review is tuned for signal rather than
-  comment volume, using evaluation against known issues and whether flagged
-  issues are fixed before merge. Vendor-reported, but it shows a reviewer
-  being evaluated and improved like any other system.
-
 Keep the balance: agents are not infallible, and agent review adds assurance
 without removing human accountability.
 
-### 5. Agents beyond the editor (4 min)
+### 5. Agents beyond the editor (3 min)
 
 - Copilot code review already runs in the repository on every pull request.
   GitHub Agentic Workflows extend that to events and schedules.
@@ -393,7 +372,7 @@ without removing human accountability.
   investigation, documentation updates.
 - Enterprise case: governed automation for triage or maintenance.
 
-### 6. Natural language uncertainty (3 min)
+### 6. Natural language uncertainty (4 min)
 
 Every harness, skill, and agent is steered by natural language, and natural
 language is inherently imprecise.
@@ -493,7 +472,7 @@ workflow works.
   - Transition: the modes lead straight into what changes for careers and
     teams.
 
-### 8. What changes for careers and teams (5 min)
+### 8. What changes for careers and teams (4 min)
 
 - Organize around responsibilities, not invented job titles:
 
@@ -508,13 +487,6 @@ workflow works.
 
 - Hook: *"Our agents found the mistakes. Our job was deciding what counted as
   a mistake."*
-- Junior engineers: *"Who here learned by fixing small bugs? Those are the
-  first tasks agents take."* Teams must create new ways to learn debugging,
-  decomposition, and judgment.
-  - Stanford "Canaries" (Aug 2026): early-career employment fell in AI-exposed
-    jobs, mainly through reduced hiring (descriptive, not causal).
-  - Anthropic skill-formation study: learning with AI scored 50% vs 67%,
-    with the biggest gap in debugging, unless AI was used as a tutor.
 - Team shape: HBS/P&G "Cybernetic Teammate" found individuals with AI matched
   two-person teams without it and broke down expertise silos. Ask: *"If one
   person with AI performs like a team, what is the team for?"*
@@ -526,10 +498,11 @@ workflow works.
   to run and the value delivered become more valuable as code gets cheaper.
 - Org chart exercise: add agents as boxes and ask, *"Where do the review
   arrows go?"*
-- Enterprise cases: two or three contrasting team designs, including one that
-  did not work.
+- Keep the discussion grounded in the team-design evidence and the
+  responsibilities shown on the slides; do not add unsupported enterprise
+  examples.
 
-### 9. The process is a product (4 min)
+### 9. The process is a product (3 min)
 
 **This talk was built the same way (1 min).** Show the outline repository's
 history as a short case study:
@@ -560,24 +533,25 @@ history as a short case study:
   validated delivery time, review effort, rework, and late defects. Not
   tasks closed, pull requests merged, or code generated.
 - Hook: *"Every finding should make the next run harder to fool."*
-- One next step per audience:
-  - **Individual contributors:** write goals and a design before involving an
-    agent on one change this week; compare with your usual approach.
-  - **Managers:** measure how much time people spend reviewing agent output
-    before adding more agents. For your next large project, write down what
-    it must earn or save, what it will cost to run, and what would make you
-    stop.
-  - **Platform leaders:** turn one repetitive repository task into an
-    automated workflow with clear permissions and review.
 
-### Close
+### Close and acknowledgments (2 min)
 
 - Return to the opening BeamRS screen: *"How would your team have known?"*
 - Then to the rewrite: *"And how would they have known it was worth
   building at all?"*
-- Final line: *"The advantage isn't having more agents. It's building a
+- Connect the evidence: *"The advantage isn't having more agents. It's building a
   human-agent system that turns intent into verified outcomes, and improves
   when it finds a gap."*
+- Final line: *"Traditional teams aren't a thing of the past. Teams
+  that only write code are."*
+- Thank Daniel Frysinger for QRSPI+ and agent-workflow contributions, the
+  Trash Pandas team for feedback, Evan Boyle for written research on adaptive
+  agent delivery, and Alex Lavaee for "From RPI to QRSPI" and its research.
+
+### Q&A (not timed)
+
+- Invite discussion with *"Plausible isn't proven."* The source appendix
+  follows the discussion.
 
 ## Presenter notes
 

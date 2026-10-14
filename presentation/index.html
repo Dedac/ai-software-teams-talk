@@ -117,9 +117,10 @@
     .relay-case h2 { margin-bottom: 8px; }
     .relay-case .flow { margin: 18px 0 22px; }
     .relay-case .flow .node { padding: 18px 12px; font-size: 28px; }
+    .relay-case .verdict-title { font-size: 32px; margin: 14px 0 10px; }
     .relay-case .verdict { margin: 0; gap: 36px; }
     .relay-case .verdict .panel { padding-top: 16px; }
-    .relay-case .verdict .big { font-size: 100px; margin: 8px 0; }
+    .relay-case .verdict .big { font-family: Arial, sans-serif; font-variant-numeric: lining-nums tabular-nums; font-size: 100px; margin: 8px 0; }
     .relay-case .verdict p { font-size: 28px; }
     .relay-case .lead { margin-top: auto; font-size: 32px; }
     .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
@@ -139,6 +140,7 @@
     .resources { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; }
     .resources a { font-size: 30px; color: var(--gh-text); text-decoration-color: var(--accent); text-underline-offset: 6px; }
     .resources p { font-size: 25px; color: var(--gh-muted); margin-top: 8px; }
+    .acknowledgments .panel a { color: var(--gh-text); text-decoration-color: var(--accent); text-underline-offset: 6px; }
     .notes { display: none; }
     .chrome { position: fixed; bottom: 0; width: 100%; height: 68px; background: var(--gh-bg); border-top: 1px solid var(--gh-surface); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; gap: 16px; }
     .controls { display: flex; gap: 10px; align-items: center; }
@@ -322,7 +324,7 @@
       </section>
       <section class="slide bg-midnight">
         <p class="eyebrow">First agent workflows / RPI &rarr; QRSPI &rarr; QRSPI+</p>
-        <h2>Good prompts weren't enough.</h2>
+        <h2>Building with AI, Good prompts are not enough</h2>
         <div class="columns three">
           <div class="panel"><h3>Instruction<br>overload</h3><p>Important guidance gets lost.</p></div>
           <div class="panel"><h3>Magic<br>words</h3><p>Behavior depends on knowing what to say.</p></div>
@@ -337,13 +339,14 @@
       </section>
       <section class="slide bg-midnight relay-case">
         <p class="eyebrow">Case Study A / The Relay</p>
-        <h2>The report said <span class="accent">PASS.</span></h2>
+        <h2>A Relay Workflow</h2>
         <div class="flow" aria-label="Ideator to planner to coder to tester">
           <div class="node">Ideator</div><span class="arrow" aria-hidden="true">&rarr;</span>
           <div class="node">Planner</div><span class="arrow" aria-hidden="true">&rarr;</span>
           <div class="node">Coder</div><span class="arrow" aria-hidden="true">&rarr;</span>
           <div class="node">Tester</div>
         </div>
+        <h3 class="verdict-title">AI Grades itself</h3>
         <div class="verdict">
           <div class="panel"><p>Required coverage</p><div class="big">&gt;90%</div></div>
           <div class="panel"><p>Reported evidence</p><div class="big">83%</div></div>
@@ -355,7 +358,7 @@
         </aside>
       </section>
       <section class="slide bg-midnight workflow-diagrams">
-        <p class="eyebrow">How the workflow evolved</p>
+        <p class="eyebrow">An evolution of workflows</p>
         <h2>RPI &rarr; QRSPI &rarr; <span class="accent">QRSPI+</span></h2>
         <div class="workflow-set">
           <div class="workflow-lane">
@@ -407,7 +410,6 @@
                 <span class="workflow-step">Test</span><span class="arrow" aria-hidden="true">&rarr;</span>
                 <span class="workflow-step">PR</span>
               </div>
-              <p class="workflow-caption accent">More phases? Replan &rarr; Goals &rarr; next phase.</p>
             </div>
           </div>
         </div>
@@ -416,20 +418,7 @@
           <p>Read each path left to right; the bent arrow continues on the next row. RPI established a deliberate research-before-code sequence. QRSPI adds explicit questions, factual research, design discussion, and a structure outline before the tactical plan, followed by work-tree organization, implementation, and human pull-request review.</p>
           <p>QRSPI+ is a separate implementation extending that approach. Goals capture why the work matters, Phasing defines delivery slices, and Parallelize organizes isolated task work. Implement includes test-first development and per-task reviews. Integrate checks the combined work; Test checks acceptance and includes human code review before creating the pull request.</p>
           <p>The QRSPI+ full route is shown, not every error or approval branch. For additional phases, Replan returns to Goals. Integration or acceptance failures can return to implementation. The quick-fix route retains Goals, Questions, Research, Plan, Implement, and Test.</p>
-          <p>Sources: <a href="https://alexlavaee.me/blog/from-rpi-to-qrspi/">RPI and QRSPI overview</a>; <a href="https://github.com/dfrysinger/qrspi-plus#pipeline-overview">QRSPI+ pipeline overview</a>. The point is explicit alignment and independent evidence, not that more boxes alone make a workflow better. Next: the three blocks behind those boxes.</p>
-        </aside>
-      </section>
-      <section class="slide bg-midnight">
-        <p class="eyebrow">Process as infrastructure</p>
-        <h2>Align. Execute. <span class="accent">Verify.</span></h2>
-        <div class="columns three">
-          <div class="panel"><h3>Align</h3><p>Goals, research,<br>design, slices.</p><p class="muted rule">People decide<br>what and why.</p></div>
-          <div class="panel"><h3>Execute</h3><p>Task specs,<br>isolated work.</p><p class="muted rule">People set<br>boundaries.</p></div>
-          <div class="panel"><h3>Verify &amp; learn</h3><p>Review, integrate,<br>test, replan.</p><p class="muted rule">People own<br>the outcome.</p></div>
-        </div>
-        <aside class="notes">
-          <p><a href="https://github.com/dfrysinger/qrspi-plus">QRSPI+</a> is one implementation, not the only answer. Explain the three blocks instead of listing every pipeline acronym.</p>
-          <p>The first step records why each goal matters. Vertical slices reach working software early enough to test whether it is worth continuing. The Three-Year Rewrite lacked both.</p>
+          <p>Sources: <a href="https://alexlavaee.me/blog/from-rpi-to-qrspi/">RPI and QRSPI overview</a>; <a href="https://github.com/dfrysinger/qrspi-plus#pipeline-overview">QRSPI+ pipeline overview</a>. The point is explicit alignment and independent evidence, not that more boxes alone make a workflow better. Next: see Case Study B put the workflow to work on its next release.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -519,17 +508,16 @@
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">Two layers of agent review</p>
-        <h2>A second review gets a <span class="accent">fresh start.</span></h2>
-        <div class="columns">
-          <div class="panel"><h3>Inside the workflow</h3><p>Review during the build.<br>Check design fidelity.<br>Try a clean environment.</p></div>
-          <div class="panel"><h3>On the pull request</h3><p>Inspect the finished change.<br>Challenge local assumptions.<br>Find what slipped through.</p></div>
+        <p class="eyebrow">Process as infrastructure</p>
+        <h2>Align. Execute. <span class="accent">Verify.</span></h2>
+        <div class="columns three">
+          <div class="panel"><h3>Align</h3><p>Goals, research,<br>design, slices.</p><p class="muted rule">People decide<br>what and why.</p></div>
+          <div class="panel"><h3>Execute</h3><p>Task specs,<br>isolated work.</p><p class="muted rule">People set<br>boundaries.</p></div>
+          <div class="panel"><h3>Verify &amp; learn</h3><p>Review, integrate,<br>test, replan.</p><p class="muted rule">People own<br>the outcome.</p></div>
         </div>
-        <p class="lead bottom">Agents found the issues. People owned the decisions.</p>
         <aside class="notes">
-          <p>Every finding in this section was made by agents. People chose which findings to accept, made the fixes, and approved releases.</p>
-          <p>In BeamRS, local review found handwritten JavaScript where the approved design assigned behavior to Rust. The fix moved it into Rust. During the Leptos upgrade, an independent clean Docker build also exposed an outdated Rust version.</p>
-          <p>Copilot code review then found seven problems across <a href="https://github.com/Dedac/BeamRS/pull/4">PR #4</a> and <a href="https://github.com/Dedac/BeamRS/pull/6">PR #6</a>, after local tests and reviews had passed.</p>
+          <p><a href="https://github.com/dfrysinger/qrspi-plus">QRSPI+</a> is one implementation, not the only answer. Explain the three blocks instead of listing every pipeline acronym.</p>
+          <p>The first step records why each goal matters. Vertical slices reach working software early enough to test whether it is worth continuing. The Three-Year Rewrite lacked both.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -544,6 +532,7 @@
         <aside class="notes">
           <p>These four findings are documented in <a href="https://github.com/Dedac/BeamRS/pull/4">BeamRS PR #4</a>. Profile and frequency pages were making duplicate requests.</p>
           <p>Each finding led to a fix and reply; the duplicated-interface issue also got a browser check. The reviewer examined the process as well as the code.</p>
+          <p>These findings show why a second review from a fresh start matters: the local work had passed its own tests and reviews, but Copilot code review found seven problems across <a href="https://github.com/Dedac/BeamRS/pull/4">PR #4</a> and <a href="https://github.com/Dedac/BeamRS/pull/6">PR #6</a>. Every finding in this section was made by agents; people chose what to accept, made the fixes, and approved releases.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -558,16 +547,6 @@
         <aside class="notes">
           <p>These three findings and their fixes are documented in <a href="https://github.com/Dedac/BeamRS/pull/6">BeamRS PR #6</a>. Explain the consequences in plain language.</p>
           <p>Specific evidence makes findings actionable. This small case provides no measured acceptance rate for agent review.</p>
-        </aside>
-      </section>
-      <section class="slide bg-midnight statement">
-        <p class="eyebrow">The miss</p>
-        <h2>Review still<br><span class="accent">missed a broken button.</span></h2>
-        <p class="lead muted">More assurance. Not infallibility.</p>
-        <aside class="notes">
-          <p><a href="https://github.com/Dedac/BeamRS/pull/2">BeamRS PR #2</a> later fixed the home page's create-frequency button and its accessibility. No review caught it before merging. PRs #1 and #2 had no Copilot code review.</p>
-          <p>Keep the balance: automated review adds assurance but does not remove accountability. Research on AI review also shows humans must triage suggestions.</p>
-          <p>Context: the <a href="https://survey.stackoverflow.co/2026/ai">Stack Overflow 2026 survey</a> (48% trust AI when they can easily validate the answers), the <a href="https://www.mozillafoundation.org/ca/research/library/impact-of-llm-based-review-comment-generation-in-practice-a-mixed-open-closed-source-user-study/">Mozilla/Ubisoft review study</a> (about 7–8% of AI review comments accepted as written; a small study of one research tool), and the <a href="https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/">GitHub Blog on Copilot code review</a>, which evaluates the reviewer for signal rather than comment volume. No cross-study numeric generalizations are printed on slides.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -736,16 +715,6 @@
         </aside>
       </section>
       <section class="slide bg-midnight statement">
-        <p class="eyebrow">Learning cannot be an accidental by-product</p>
-        <h2>Delegate the task.<br><span class="accent">Keep the learning.</span></h2>
-        <p class="lead">Explain. Debug. Decompose. Exercise judgment.</p>
-        <aside class="notes">
-          <p>Ask who learned by fixing small bugs. If agents take those tasks, teams need deliberate ways to teach debugging, decomposition, and judgment. Use AI as a tutor, not simply an answer machine.</p>
-          <p>The outline cites <a href="https://arxiv.org/abs/2601.20245">Anthropic's skill-formation study</a>: using AI to learn a new library impaired learning in some modes, especially debugging, while conceptual explanation preserved learning.</p>
-          <p><a href="https://digitaleconomy.stanford.edu/news/canariesaug26/">Stanford's revised August 2026 Canaries study</a> describes reduced early-career hiring in AI-exposed occupations. The study is descriptive and does not establish that AI caused a specific employment decline.</p>
-        </aside>
-      </section>
-      <section class="slide bg-midnight statement">
         <p class="eyebrow">Audience exercise</p>
         <h2>Add agents to<br>your org chart.<br><span class="accent">Where do review arrows go?</span></h2>
         <aside class="notes">
@@ -782,19 +751,6 @@
           <p>Activity measures can be useful operational signals, but they are not a substitute for user outcomes or sustainable economics.</p>
         </aside>
       </section>
-      <section class="slide bg-midnight">
-        <p class="eyebrow">One next step</p>
-        <h2>Change one part of the system.</h2>
-        <div class="columns three">
-          <div class="panel"><h3>Contributors</h3><p>Write goals and a design before one agent-assisted change.</p></div>
-          <div class="panel"><h3>Managers</h3><p>Measure review effort.<br>Write the value case and stop rule.</p></div>
-          <div class="panel"><h3>Platform leaders</h3><p>Automate one repository task with bounded permissions.</p></div>
-        </div>
-        <aside class="notes">
-          <p>For contributors: try it this week and compare with your usual approach. For managers: measure review effort before adding more agents; for the next large project, write down what it must earn or save, what it costs to run, and what would make you stop.</p>
-          <p>For platform leaders: turn one repetitive repository task into a workflow with clear permissions and review. Keep each action small and observable.</p>
-        </aside>
-      </section>
       <section class="slide bg-midnight statement">
         <p class="eyebrow">Return to the opening</p>
         <h2>How would your team<br>have <span class="accent">known?</span></h2>
@@ -811,12 +767,22 @@
           <p>Deliver the outline's closing answer. Let the statement land before advancing to questions.</p>
         </aside>
       </section>
+      <section class="slide bg-midnight acknowledgments">
+        <p class="eyebrow">Acknowledgments</p>
+        <h2>Special thanks</h2>
+        <div class="columns">
+          <div class="panel"><h3><a href="https://github.com/dfrysinger">Daniel Frysinger</a></h3><p>For his work on QRSPI+ and agent workflows.</p></div>
+          <div class="panel"><h3>Trash Pandas team</h3><p>For their feedback.</p></div>
+          <div class="panel"><h3><a href="https://gist.github.com/EvanBoyle/8c1a97f682d92dab8c09d0e1ea73f4a0">Evan Boyle</a></h3><p>For written research on adaptive agent delivery.</p></div>
+          <div class="panel"><h3><a href="https://alexlavaee.me/blog/from-rpi-to-qrspi/">Alex Lavaee</a></h3><p>For “From RPI to QRSPI” and its research on evolving agent workflows.</p></div>
+        </div>
+      </section>
       <section class="slide bg-midnight statement">
         <p class="eyebrow">Discussion</p>
         <h2>Questions?</h2>
         <p class="lead accent">Plausible isn't proven.</p>
         <aside class="notes">
-          <p>End of the main talk. The following source slide is an appendix for follow-up.</p>
+          <p>End the main talk with discussion. The source appendix follows.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
