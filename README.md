@@ -57,12 +57,12 @@ Teams that only write code are."**
     own experience. Several teams spent more than three years rewriting an
     app, then found it cost more to run than it could ever earn. It was
     scrapped.
-  - **Case A, "The Relay" (2025):** an enterprise service template plus a
+  - **Case Study A, "The Relay" (2025):** an enterprise service template plus a
     separate agent workflow implementation: a reusable instruction file, bootstrap and
     validation prompts, and role agents (ideator → planner → coder → tester)
     that pass work forward through written plans. Used across an AI
     reference architecture (document ingestion, chat orchestration, web UI).
-  - **Case B, QRSPI+ (2026):** not an enterprise case in itself, but an
+  - **Case Study B, QRSPI+ (2026):** not an enterprise case in itself, but an
     open-source workflow implementation that has helped ship enterprise
     features. It is process-heavy, and best seen as a step toward what
     comes next. Its v0.7.2 release was planned, built,
@@ -77,19 +77,59 @@ Teams that only write code are."**
 | Study | Key finding | Used in |
 |---|---|---|
 | [DORA 2025 State of AI-assisted Software Development](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report) and [AI Capabilities Model](https://services.google.com/fh/files/misc/2025_dora_ai_capabilities_model.pdf) | AI amplifies a team's existing strengths and weaknesses; higher throughput comes with more instability. Small batches, strong version control, internal platforms, and AI access to internal data help. | 1, 9 |
-| [METR study of experienced open-source developers](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) (2025) | Tasks took 19% longer with AI, yet developers believed AI made them about 20% faster. | 2 |
-| [METR update](https://metr.org/blog/2026-02-24-uplift-update/) (Feb 2026) | AI now likely speeds developers up, but selection effects (developers refusing to work without AI) prevent a reliable estimate. Present the 2025 result as historical. | 2, 6 |
-| [Chroma, "Context Rot"](https://research.trychroma.com/context-rot) (2025) | All 18 models tested got worse as input grew longer. Supports focused context per step. | 2, 3, 6 |
-| [Stack Overflow Developer Survey 2026](https://survey.stackoverflow.co/2026/ai) and [results summary](https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/) | 73% of respondents using AI coding assistants or agents use them daily. 48% trust AI when they can easily validate the answers; only 16% extend that trust to most tasks that are not important work decisions. 38% say their organizations set limits on AI usage. Self-selected survey of Stack Overflow users. | 4, 6 |
+| [Chroma, "Context Rot"](https://research.trychroma.com/context-rot) (2025) | All 18 models tested got worse as input grew longer. Supports focused context per step. | 2, 3, 6, 7 |
+| [Stack Overflow Developer Survey 2026](https://survey.stackoverflow.co/2026/ai) and [results summary](https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/) | 73% of respondents using AI coding assistants or agents use them daily. 48% trust AI when they can easily validate the answers; only 16% extend that trust to most tasks that are not important work decisions. 38% say their organizations set limits on AI usage. Self-selected survey of Stack Overflow users. | 4, 7 |
 | [Mozilla and Ubisoft study of AI review comments](https://www.mozillafoundation.org/ca/research/library/impact-of-llm-based-review-comment-generation-in-practice-a-mixed-open-closed-source-user-study/) | About 7–8% of AI review comments were accepted as written. Small sample with one tool: a single research tool (RevMate) on one off-the-shelf model, across about 587 patch reviews at two organizations. Treat it as indicative that automated review needs human triage, not as a general acceptance rate. | 4 |
-| [GitHub Blog, "60 million Copilot code reviews and counting"](https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/) (2026) | GitHub tunes Copilot code review with a continuous evaluation loop: internal tests against known issues plus production signals (developer reactions and whether flagged issues are fixed before merge). It prioritizes signal over comment volume: in 29% of reviews it says nothing. Vendor-reported figures. | 4, 6 |
-| [GitHub's Agentic Engineering System (AES)](https://github.com/resources/insights/agentic-engineering-system) (2026) and [Well-Architected implementation guide](https://learn.github.com/well-architected/governance/recommendations/agentic-engineering-system-on-github) | A tool-agnostic framework for scaling agent use: three "stocks" (governance, shared knowledge, customer value), three activities (define, deliver, detect), and three modes that people or agents can hold (director, performer, assessor). Its test of healthy adoption: as agent use grows, escaped defects stay flat or fall and shared knowledge improves alongside delivery speed. A vendor framework, not an empirical study. | 6 |
+| [GitHub Blog, "60 million Copilot code reviews and counting"](https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/) (2026) | GitHub tunes Copilot code review with a continuous evaluation loop: internal tests against known issues plus production signals (developer reactions and whether flagged issues are fixed before merge). It prioritizes signal over comment volume: in 29% of reviews it says nothing. Vendor-reported figures. | 4, 7 |
+| [GitHub's Agentic Engineering System (AES)](https://github.com/resources/insights/agentic-engineering-system) (2026) and [Well-Architected implementation guide](https://learn.github.com/well-architected/governance/recommendations/agentic-engineering-system-on-github) | A tool-agnostic framework for scaling agent use: three "stocks" (governance, shared knowledge, customer value), three activities (define, deliver, detect), and three modes that people or agents can hold (director, performer, assessor). Its test of healthy adoption: as agent use grows, escaped defects stay flat or fall and shared knowledge improves alongside delivery speed. A vendor framework, not an empirical study. | Opening, 7 |
 | [Stanford, "Canaries in the Coal Mine"](https://digitaleconomy.stanford.edu/news/canariesaug26/) (revised Aug 2026) | Employment of 22–25-year-olds fell in AI-exposed jobs, including software development, mainly through reduced hiring; experienced workers in jobs built on tacit knowledge grew. Descriptive, not causal. | 8 |
 | [Anthropic, "How AI Impacts Skill Formation"](https://arxiv.org/abs/2601.20245) (2026) | Developers learning a new library with AI scored 50% vs 67% without, with the biggest gap in debugging; using AI to explain concepts preserved learning. | 8 |
 | [HBS and P&G, "The Cybernetic Teammate"](https://aiinstitute.hbs.edu/the-cybernetic-teammate-how-ai-is-reshaping-collaboration-and-expertise-in-the-workplace/) | In a randomized study of 776 professionals, individuals with AI matched two-person teams without AI, and AI reduced expertise silos. Product development, not software. | 8 |
-| [Anthropic Economic Index: software development](https://www.anthropic.com/news/impact-software-development) (2025) | 79% of Claude Code conversations were automation (delegation) rather than augmentation. | 5, 7, 8 |
+| [Anthropic Economic Index: software development](https://www.anthropic.com/news/impact-software-development) (2025) | 79% of Claude Code conversations were automation (delegation) rather than augmentation. | Opening, 5, 8 |
 
-## Outline (about 52 minutes before Q&A)
+## Outline (about 55 minutes before Q&A)
+
+### Pre-intro: The problem and the opportunity (1 min)
+
+- Hook: *"The software engineering process is broken."*
+- Hold the answer: *"The good news?"* The next slide reveals: *"You just got promoted."*
+
+### Opening: People and teams — "You just got promoted" (5 min)
+
+- Hook: *"You just got promoted."* Everyone who works with agents is a
+  manager now, whether or not their title changed.
+  Visual: the ["I'm the captain now" meme](https://knowyourmeme.com/memes/look-at-me-im-the-captain-now)
+  from *Captain Phillips*, beside the promotion hook.
+  The AES modes (director, performer, assessor) describe the shift:
+  engineers spend less time performing and more time directing and assessing.
+- **State the thesis early (spoken):** if everyone directs agent labor, the
+  bottleneck is no longer writing code. It moved to trusting it: knowing what
+  to build, and proving it works.
+- **You have access to labor.** Agents are capacity on demand. Your output as
+  an engineer is no longer only the code you write; it is what the people and
+  agents you direct ship, verified.
+  - Anthropic Economic Index: 79% of Claude Code conversations were
+    delegation. The work shifts from doing to directing and verifying.
+- **A manager figures out the process that gets people to work together most
+  effectively.** That is team design, not prompt design. The workflows in
+  sections 3 and 7 are examples of that work.
+- **Design the frequency and type of communication** that keeps work moving
+  efficiently:
+  - Handoffs are documents the next agent can pick up; status is a durable
+    record, not a chat thread; escalation interrupts a person only for a
+    decision.
+  - Too chatty burns tokens and attention. Too quiet lets work drift or
+    duplicate. Send a message when it changes what the recipient will do;
+    otherwise write it down where they can find it.
+  - Example: the [`mailbox`](https://github.com/dfrysinger/skills/blob/main/skills/mailbox/SKILL.md) and
+    [`handoff`](https://github.com/dfrysinger/skills/blob/main/skills/handoff/SKILL.md) skills in
+    [dfrysinger/skills](https://github.com/dfrysinger/skills): one-shot
+    messages and compact handoff documents instead of a chat thread.
+- Audience question: *"What are we now? PMs? CEOs? Super Humans? Useless?"* A PM decides what
+  is worth building and defines success. A CEO staffs the organization, sets
+  budgets and structure, and is accountable for results. Working with agents
+  asks engineers to do some of both; it does not make the engineer useless.
+- Transition: *"Let's look at an app that seemed to work."*
 
 ### 0. Cold open: "The app worked. It just existed twice." (3 min)
 
@@ -98,7 +138,8 @@ Teams that only write code are."**
   the whole interface instead of attaching to the page the server had already
   rendered.
 - Ask: *"Would you have approved this if the demo looked right?"*
-- Deliver the thesis.
+- Deliver the thesis visually: the bottleneck moved from writing code to
+  trusting it.
 
 ### 1. The bottleneck moved (6 min)
 
@@ -141,9 +182,8 @@ Teams that only write code are."**
 - Transition: if the constraint moved, the process has to change too, and
   it has to start with why the work is worth doing.
 
-### 2. Why our first agent workflows weren't enough (6 min)
+### 2. Why our first agent workflows weren't enough (5 min)
 
-- The move from research–plan–implement to QRSPI.
 - Three lessons:
   - **Instruction overload:** important guidance gets lost in a growing prompt.
   - **Magic words:** correct behavior shouldn't depend on a secret phrase.
@@ -156,11 +196,7 @@ Teams that only write code are."**
 - Treat the blog's context-window numbers as practitioner rules of thumb, not
   hard limits. Chroma's "Context Rot" study backs the direction: every model
   tested degraded as input grew.
-- Audience moment: ask how much faster AI makes them, then show METR 2025
-  (19% slower while feeling about 20% faster). Follow immediately with METR's
-  2026 update: AI likely helps now, but self-perception is unreliable.
-  *"Plausible isn't proven applies to how fast we feel, too."*
-- **Enterprise case A: "The Relay."** Named for its role agents
+- **Case Study A: "The Relay."** Named for its role agents
   (ideator → planner → coder → tester), each handing a written plan to the
   next like a baton. It worked well
   enough to ship real features, and it shows all three lessons:
@@ -183,6 +219,8 @@ Teams that only write code are."**
     Plausible isn't proven."*
   - Hook: *"Our first process asked the agent how confident it was. Our
     second asked another agent to prove it wrong."*
+- **So the workflow evolved:** RPI → QRSPI → QRSPI+. Each step made
+  alignment and independent evidence more explicit.
 
 ### 3. Turn the process into infrastructure (7 min)
 
@@ -206,7 +244,7 @@ Teams that only write code are."**
   exists."*
 - Be honest about costs: more steps and slower starts. Use the quick-fix route
   for small changes.
-- **Case B: QRSPI+, a step toward what's next (2 min).** An implementation
+- **Case Study B: QRSPI+, a step toward what's next (2 min).** An implementation
   that has helped ship enterprise features, and that also built its own next
   release. It carries a heavy amount of process; treat it as a step toward
   lighter, better-evaluated systems, not the destination.
@@ -245,9 +283,15 @@ Teams that only write code are."**
     can't slip through silently again."*
 - What carried over from The Relay: standard validation scripts and
   shared instruction files became the foundation, not the whole process.
-- **What's next: workflows that hill-climb on evals.** QRSPI+ is a heavy,
-  fixed pipeline. The next step is a workflow that measures and improves its
-  own organization.
+- **What's next: reduced complexity, evaluation, and review.** Closes the
+  section. QRSPI+ is a heavy, fixed route of up to 12 steps. The next step
+  keeps its lessons and sheds ceremony: *Goals → adaptive build → evaluate →
+  review*, then keep what wins and undo the rest.
+  - **Reduced complexity:** only the steps the task needs; add agents or
+    specialists when evidence says they help.
+  - **Evaluation:** a workflow that hill-climbs on evals, testing changes
+    against a baseline of representative tasks.
+  - **Review:** a person still decides what ships.
   - GitHub's [Autonomous delivery skill](https://gist.github.com/EvanBoyle/8c1a97f682d92dab8c09d0e1ea73f4a0)
     is one example. A strong-reasoning orchestrator delegates outcomes to
     faster workers and adapts task boundaries, context, specialization, and
@@ -343,29 +387,62 @@ without removing human accountability.
 
 - Hook: *"An agent is working in your repository at 3 a.m. What should it be
   allowed to do, and what should it only recommend?"*
+- **Illustrative use case, not a real app.** Do not treat AI-generated
+  descriptions or outputs as facts without verification.
 - Examples (not claims about BeamRS): issue clarification, CI failure
   investigation, documentation updates.
 - Enterprise case: governed automation for triage or maintenance.
 
-### 6. The hard parts of agentic engineering systems (5 min)
+### 6. Natural language uncertainty (3 min)
+
+Every harness, skill, and agent is steered by natural language, and natural
+language is inherently imprecise.
+
+- **Imprecise instructions, unpredictable execution.** English is the
+  programming language now. The model running it is non-deterministic: the
+  same prompt can produce different results, and every ambiguity can be
+  interpreted differently on each run.
+- **It's natural language all the way down.** What the model reads at every
+  layer is prose:
+  - **Harness:** the loop is code, but what it tells the model is a system
+    prompt and tool descriptions.
+  - **Skill:** a Markdown file of instructions.
+  - **Agent:** a role described in prose.
+  - **Your prompt:** one more paragraph on top.
+  - QRSPI+, the Autonomous delivery skill, and the mailbox skill are all
+    natural language too. More layers add more interpretation, not more
+    precision, and layers can quietly contradict each other (The Relay's
+    instruction overload).
+- **An English example:** *"I saw the man with the telescope."* Did I use
+  the telescope, or was he holding it? Both readings are correct English.
+  People resolve it with context or by asking; an agent picks one, often
+  silently, and may pick the other next run.
+  - In instructions: *"Only run the tests for files you changed"* — does
+    "only" limit which tests, or whether to do anything else? *"Make it
+    faster"* — for whom, by how much, at what cost?
+  - Ask the audience for a prompt an agent read the other way.
+- **Pin intent down with something precise.** Keep natural language for
+  intent and judgment; back it wherever a misreading is costly:
+  - **Acceptance tests:** done is something that runs.
+  - **Worked examples:** show the reading you meant.
+  - **Schemas:** structure a script can check.
+  - **Scripts:** the same steps every run.
+- Hook: *"When English is the programming language, every ambiguity is a bug
+  you haven't found yet."*
+- Transition: once the workflow is natural language plus checks, it is a
+  system you have to engineer.
+
+### 7. The hard parts of agentic engineering systems (4 min)
 
 An agent workflow is itself a system that has to be engineered: evaluated,
 limited, connected, and maintained. These problems remain even when the
 workflow works.
 
-- **English is the programming language.** Natural-language instructions are
-  inherently imprecise, and the model running them is non-deterministic. The
-  same prompt can produce different results, and every ambiguity is
-  interpreted differently on each run.
-  - Pin intent down with things that are precise: acceptance tests, worked
-    examples, schemas, and scripts.
-  - Hook: *"When English is the programming language, every ambiguity is a
-    bug you haven't found yet."*
 - **Defining how to evaluate and improve the system.** Decide what a better
   run means before changing the workflow: a fixed set of representative
   tasks, a baseline, and outcome measures such as validated delivery time,
   rework, escaped defects, review effort, and cost.
-  - Case B filed 15 issues about its own process gaps, then turned them into
+  - Case Study B filed 15 issues about its own process gaps, then turned them into
     automatic checks in the next release. Improvement needs that loop, not
     occasional prompt tweaks.
   - GitHub's Copilot code review team describes the same loop: evaluate
@@ -383,21 +460,21 @@ workflow works.
   prose, the next agent has to interpret it. Hand off structured artifacts
   that a script can check: required sections, task IDs, file lists, and
   test results.
-  - The Relay passed long written plans forward. Case B added an automatic
+  - The Relay passed long written plans forward. Case Study B added an automatic
     check that every merge contains exactly the planned tasks after a merge
     silently dropped a security safeguard.
 - **Confirmation bias about the system itself.** Teams judge a workflow by a
   few memorable runs. That can mean keeping a change that made results worse
   because it feels better, or abandoning a useful one after a single bad run.
-  - Compare against the baseline across several runs; the METR results
-    showed how unreliable "it feels faster" can be.
+  - Compare against the baseline across several comparable runs rather than
+    trusting an impression from a single memorable result.
   - Hook: *"We hid our preferences from the research agent. Hide them from
     the evaluation too."*
 - **Trimming the fat.** Workflows accumulate steps, rules, reviewers, and
   instructions. Each one costs time, tokens, and attention, and extra
   instructions bring back instruction overload.
   - Track what each gate catches; remove or merge steps that never catch
-    anything. Case B's measured instruction budget is one example; the
+    anything. Case Study B's measured instruction budget is one example; the
     quick-fix route is another.
   - Hook: *"Every step in the process should earn its place, just like every
     line of code."*
@@ -415,40 +492,6 @@ workflow works.
     get better, not worse.
   - Transition: the modes lead straight into what changes for careers and
     teams.
-
-### 7. People and teams: you've been promoted to manager (4 min)
-
-- Hook: *"Congratulations. You've been promoted to manager."* Everyone who
-  works with agents is a manager now, whether or not their title changed. The
-  AES modes (director, performer, assessor) describe the shift: engineers
-  spend less time performing and more time directing and assessing.
-- **You have access to labor.** Agents are capacity on demand. Your output as
-  an engineer is no longer only the code you write; it is what the people and
-  agents you direct ship, verified.
-  - Anthropic Economic Index: 79% of Claude Code conversations were
-    delegation. The work shifts from doing to directing and verifying.
-- **A manager figures out the process that gets people to work together most
-  effectively.** That is team design, not prompt design, and it is the same
-  work as the workflows in sections 3 and 6.
-- **Design the frequency and type of communication** that keeps work moving
-  efficiently:
-  - Handoffs are documents the next agent can pick up; status is a durable
-    record, not a chat thread; escalation interrupts a person only for a
-    decision.
-  - Too chatty burns tokens and attention. Too quiet lets work drift or
-    duplicate. Send a message when it changes what the recipient will do;
-    otherwise write it down where they can find it.
-  - Example: the [`mailbox`](https://github.com/dfrysinger/skills/blob/main/skills/mailbox/SKILL.md) and
-    [`handoff`](https://github.com/dfrysinger/skills/blob/main/skills/handoff/SKILL.md) skills in
-    [dfrysinger/skills](https://github.com/dfrysinger/skills). Named agent sessions hand files and
-    messages to each other, even across computers (`name@machine`). Mailbox
-    is one-shot delivery, "not a chat protocol"; a handoff compacts a
-    conversation into a document a fresh agent can pick up; ownership of a
-    worktree or task is recorded with the owning agent's address.
-- Audience question: *"Are we all becoming PMs, or CEOs?"* A PM decides what
-  is worth building and defines success. A CEO staffs the organization, sets
-  budgets and structure, and is accountable for results. Working with agents
-  asks engineers to do some of both.
 
 ### 8. What changes for careers and teams (5 min)
 
@@ -546,10 +589,10 @@ history as a short case study:
 - If a section has no strong enterprise case, shorten or merge it.
 - Tell the Three-Year Rewrite as a personal story without naming the company,
   app, or teams. Use only figures you can stand behind.
-- Describe Case B as an implementation that has helped ship enterprise
+- Describe Case Study B as an implementation that has helped ship enterprise
   features, not as an enterprise case study. Don't name the enterprise or
   team, and present its heavy process as a step toward what comes next.
-- Anonymize Case A before showing anything: remove internal application
+- Anonymize Case Study A before showing anything: remove internal application
   IDs, file paths, user names, and service names. Present it as a
   implementation that worked and taught us, not as a failure.
 - Check every research figure against its primary source before putting it on
