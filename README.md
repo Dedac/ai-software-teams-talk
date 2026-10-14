@@ -42,7 +42,9 @@ Teams that only write code are."**
   process is being iterated on
 - [QRSPI+](https://github.com/dfrysinger/qrspi-plus): one implementation of a
   structured agent workflow
-- [BeamRS](https://github.com/Dedac/BeamRS): local demo and running case study
+- [BeamRS](https://github.com/Dedac/BeamRS): local demo and running case study,
+  a Rust and Leptos rebuild of the presenter's 2018
+  [Beam](https://github.com/Dedac/Beam) app (Blazor, ASP.NET Core, SQL Server)
 - [dfrysinger/skills](https://github.com/dfrysinger/skills): `mailbox` and `handoff` skills for
   messaging and handing work between named agent sessions
 - [Autonomous delivery skill](https://gist.github.com/EvanBoyle/8c1a97f682d92dab8c09d0e1ea73f4a0):
@@ -84,7 +86,7 @@ Teams that only write code are."**
 | [HBS and P&G, "The Cybernetic Teammate"](https://aiinstitute.hbs.edu/the-cybernetic-teammate-how-ai-is-reshaping-collaboration-and-expertise-in-the-workplace/) | In a randomized study of 776 professionals, individuals with AI matched two-person teams without AI, and AI reduced expertise silos. Product development, not software. | 8 |
 | [Anthropic Economic Index: software development](https://www.anthropic.com/news/impact-software-development) (2025) | 79% of Claude Code conversations were automation (delegation) rather than augmentation. | Opening, 5, 8 |
 
-## Outline (about 53 minutes before Q&A)
+## Outline (about 55 minutes before Q&A)
 
 ### Pre-intro: The problem and the opportunity (1 min)
 
@@ -128,12 +130,35 @@ Teams that only write code are."**
   asks engineers to do some of both; it does not make the engineer useless.
 - Transition: *"Let's look at an app that seemed to work."*
 
-### 0. Cold open: "The app worked. It just existed twice." (3 min)
+### 0. Cold open: "The app worked. It just existed twice." (4 min)
 
-- Show BeamRS working.
+**BeamRS thread: the story of choosing tools.** BeamRS returns at three
+points: here (the tools we chose), section 4 (whether the work used them as
+chosen, and whether they fit), and the close.
+
+- **Same app, new tools (1 min).** Show BeamRS working while introducing it.
+  Beam is the presenter's pun-based social network from 2018 (users join
+  *frequencies*, post *rays*, and *prism* other people's rays), built with
+  Blazor WebAssembly, ASP.NET Core, and SQL Server. BeamRS rebuilds the same
+  features in Rust.
+  - **Why rebuild:** the recorded goals were feature parity, safer behavior
+    (no state-changing GET requests), easier deployment, and a demo that works
+    out of the box with seed data.
+  - **The product stack was a human decision.** It was written into the goals
+    as a constraint: *"Use a PostgreSQL-backed stack with Axum and Leptos."*
+    One Rust codebase renders each page on the server and brings it to life
+    in the browser; Docker runs it.
+  - **The delivery tools were chosen too:** QRSPI+'s full twelve-step route
+    for every change, local Copilot agent sessions, Copilot code review on
+    every pull request, and a completion audit using a different model. The
+    first version was planned, built, and merged on the day the project
+    started.
+  - Hook: *"People chose the stack. Agents built it."*
+- Stay on the demo.
 - Reveal the bug from the Leptos upgrade: the browser built a second copy of
   the whole interface instead of attaching to the page the server had already
-  rendered.
+  rendered. The chosen framework was designed to attach; the upgraded code
+  called the wrong startup function.
 - Ask: *"Would you have approved this if the demo looked right?"*
 - Deliver the thesis visually: the bottleneck moved from writing code to
   trusting it.
@@ -278,7 +303,8 @@ Teams that only write code are."**
   keeps its lessons and sheds ceremony: *Goals → adaptive build → evaluate →
   review*, then keep what wins and undo the rest.
   - **Reduced complexity:** only the steps the task needs; add agents or
-    specialists when evidence says they help.
+    specialists when evidence says they help. BeamRS (section 4) ran all
+    twelve steps even for a version bump, and steps got skipped.
   - **Evaluation:** a workflow that hill-climbs on evals, testing changes
     against a baseline of representative tasks.
   - **Review:** a person still decides what ships.
@@ -325,18 +351,37 @@ Teams that only write code are."**
   - Transition: evaluation tells us whether the process improved; review
     catches what slips through on each change.
 
-### 4. Two layers of agent review (5 min)
+### 4. Two layers of agent review (6 min)
 
 All findings in this section were made by agents. People decided which to
 accept, made the fixes, and approved the releases.
 
 **Layer 1: the local workflow** reviews the work while it is being built.
+Return to the tools chosen in the cold open. Hook: *"Choosing a tool isn't
+using it."*
 
-- Agentic review found that the first BeamRS version used about 227 lines of
-  handwritten JavaScript for behavior the approved design assigned to Rust.
-  The fix moved it into Rust (commit *"hydrate BeamRS frontend from Rust"*).
-- During the Leptos upgrade, an independent clean Docker build exposed an
-  outdated Rust version.
+- **Stack:** agentic review found that the first BeamRS version used about
+  227 lines of handwritten JavaScript for behavior the approved design
+  assigned to Rust. A completion audit using a different model reopened the
+  design gate; the JavaScript was deleted and the behavior moved into Rust
+  (commit *"hydrate BeamRS frontend from Rust"*). The app worked, but not in
+  the stack we chose.
+- **Toolchain:** during the Leptos upgrade, an independent clean Docker build
+  exposed that the pinned Rust version (1.89) was too old for the locked build
+  tools; it was raised to 1.96.
+- **Load testing:** the goal said *"add no new third-party dependency,"* so
+  instead of adopting an outside load-testing tool, the agents built a small
+  harness that drives the app's own router in memory, and recorded what it
+  leaves out: real networking. The next day a follow-up
+  ([#7](https://github.com/Dedac/BeamRS/pull/7)) added real HTTP. Choose the
+  smallest tool that answers today's question, write down its limits, and
+  upgrade when they matter.
+- **Process:** every BeamRS change, including a framework version bump, was
+  configured for QRSPI+'s full twelve-step route. On the smaller changes,
+  steps were quietly skipped, and pull request review flagged the missing
+  integration and replanning records on #4 and #7. A process too heavy for
+  the task gets skipped, which is the case for section 3's *"only the steps
+  the task needs."*
 
 **Layer 2: Copilot code review on the pull request** looks at the finished
 change from a fresh start, without the local session's assumptions. It found
@@ -560,6 +605,8 @@ history as a short case study:
 ### Close and acknowledgments (2 min)
 
 - Return to the opening BeamRS screen: *"How would your team have known?"*
+  The tools were chosen up front; only evidence showed whether the work used
+  them as chosen and whether they fit the job.
 - Then to the rewrite: *"And how would they have known it was worth
   building at all?"*
 - Connect the evidence: *"The advantage isn't having more agents. It's building a
