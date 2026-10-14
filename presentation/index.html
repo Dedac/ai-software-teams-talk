@@ -296,7 +296,7 @@
         <aside class="notes">
           <p>Tell this as a personal story from before AI tools, keeping the company, application, and teams anonymous. These details come from the presenter's own experience in the outline, not a published study.</p>
           <p>Ask: With today's agents, what would have changed? Frame the faster-dead-end counterfactual as a hypothetical; it has no measured productivity result.</p>
-          <p>Spoken hook: Agents make building cheap. They don't make it worth building.</p>
+          <p>Agents make building cheap. They don't make it worth building.</p>
         </aside>
       </section>
       <section class="slide bg-midnight value-slide">
@@ -332,7 +332,7 @@
           <p>Return to the Three-Year Rewrite. The team didn't fail because they built slowly; they failed because nobody tested whether the work could pay for itself until it was finished. Each row pairs a question with what happened in that story.</p>
           <p>Economics: estimate the cost per user or transaction, including agent and model costs, against what it will earn or save. Thin slice: ship something small to production early to find out. Stop rule: agree what result would make the team stop, before sunk cost makes stopping feel impossible.</p>
           <p>Unfinished work is inventory: until it reaches users, it is a cost, and agent-written code adds to that pile faster. Every line still has to be reviewed, run, secured, and maintained.</p>
-          <p>Spoken hook: "We measured how much we finished. Nobody measured whether it was worth finishing." Transition: the process has to start with why the work is worth doing, which leads into how our agent workflows evolved.</p>
+          <p>"We measured how much we finished. Nobody measured whether it was worth finishing." Transition: the process has to start with why the work is worth doing, which leads into how our agent workflows evolved.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -539,7 +539,7 @@
           <p>Pick a fixed set of representative tasks from real past work: features, bug fixes, and refactors your team actually shipped. Run them through the current process to set a baseline, then through the changed process. Change one major thing at a time so you know what made the difference.</p>
           <p>Agents are non-deterministic, so one run proves little. Run each task several times and compare the spread, not a single best result.</p>
           <p>Measure outcomes, not activity: first-pass acceptance, defects found later, integration rework, review effort, time to a usable result, and cost to run. Reject a change that adds speed but increases defects or rework. Small samples support hypotheses, not fleet-wide statistics.</p>
-          <p>Spoken hook: "If you can't show it's better, it's just different." Transition: but tune a process too closely to what is in front of you, and it stops fitting what comes next.</p>
+          <p>"If you can't show it's better, it's just different." Transition: but tune a process too closely to what is in front of you, and it stops fitting what comes next.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -554,7 +554,7 @@
           <p>Every incident adds a rule: a miss leads to a new step, check, or instruction, and they pile up. The process grows to fight last quarter's failures and brings back instruction overload. Track what each step catches; retire or merge steps that stop catching anything.</p>
           <p>Built around today's model: steps and workarounds compensate for the current model's weaknesses. When models improve, those steps become pure cost, and new weaknesses go unchecked. Re-run the evaluation whenever the model or harness changes, and remove workarounds that no longer earn their place.</p>
           <p>Tuned to familiar tasks: every tweak that improves the same handful of tasks can make the process worse at everything else. Borrow the train-and-test split from machine learning: keep a held-out set you only run to confirm a change, never to tune it, and rotate in fresh, live work as the codebase and team change. When replaying past work, start from the commit before the fix, so the agent can't find the answer in history. When a measure becomes the target, it stops being a good measure.</p>
-          <p>Spoken hook: "Build the process for the work you'll have, not just the mistakes you've made." Transition: evaluation tells us whether the process improved; review catches what slips through on each change.</p>
+          <p>"Build the process for the work you'll have, not just the mistakes you've made." Transition: evaluation tells us whether the process improved; review catches what slips through on each change.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -666,7 +666,7 @@
           <p>A classic ambiguous sentence: the grammar allows both readings, and only context tells you which one the speaker meant. People resolve this with shared context and by asking. An agent picks a reading, often without saying so, and may pick the other one on the next run.</p>
           <p>It gets worse with implied information: what the listener fills in that the words never say. "I saw the man with the telescope" can imply he stole my telescope, or that I already found someone I was looking for. Neither is in the sentence; both come from assumed context. Agents fill those gaps too, confidently.</p>
           <p>The same thing happens in instructions. "Only run the tests for files you changed" versus "run the tests only for files you changed": does "only" limit which tests, or whether to run anything else? "Make it faster" does not say faster for whom, by how much, or at what cost. Ask the audience for a prompt they wrote that an agent read the other way.</p>
-          <p>Spoken hook: "When English is the programming language, every ambiguity is a bug you haven't found yet."</p>
+          <p>"When English is the programming language, every ambiguity is a bug you haven't found yet."</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -706,8 +706,8 @@
           <div class="panel"><h3>Trim the fat</h3><p>Every step has a cost.<br>Cut what never catches anything.</p></div>
         </div>
         <aside class="notes">
-          <p>Teams judge a workflow by a few memorable runs. That can mean keeping a change that made results worse because it feels better, or abandoning a useful one after a single bad run. Compare against the baseline across several comparable runs. Spoken hook: "We hid our preferences from the research agent. Hide them from the evaluation too."</p>
-          <p>Workflows accumulate steps, rules, reviewers, and instructions. Each costs time, tokens, and attention, and extra instructions bring back instruction overload. Track what each gate catches; remove or merge steps that never catch anything. Case Study B's measured instruction budget and the quick-fix route are examples. Spoken hook: "Every step in the process should earn its place, just like every line of code."</p>
+          <p>Teams judge a workflow by a few memorable runs. That can mean keeping a change that made results worse because it feels better, or abandoning a useful one after a single bad run. Compare against the baseline across several comparable runs. "We hid our preferences from the research agent. Hide them from the evaluation too."</p>
+          <p>Workflows accumulate steps, rules, reviewers, and instructions. Each costs time, tokens, and attention, and extra instructions bring back instruction overload. Track what each gate catches; remove or merge steps that never catch anything. Case Study B's measured instruction budget and the quick-fix route are examples. "Every step in the process should earn its place, just like every line of code."</p>
         </aside>
       </section>
       <section class="slide bg-midnight aes-map">
