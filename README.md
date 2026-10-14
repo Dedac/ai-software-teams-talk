@@ -84,7 +84,7 @@ Teams that only write code are."**
 | [HBS and P&G, "The Cybernetic Teammate"](https://aiinstitute.hbs.edu/the-cybernetic-teammate-how-ai-is-reshaping-collaboration-and-expertise-in-the-workplace/) | In a randomized study of 776 professionals, individuals with AI matched two-person teams without AI, and AI reduced expertise silos. Product development, not software. | 8 |
 | [Anthropic Economic Index: software development](https://www.anthropic.com/news/impact-software-development) (2025) | 79% of Claude Code conversations were automation (delegation) rather than augmentation. | Opening, 5, 8 |
 
-## Outline (about 52 minutes before Q&A)
+## Outline (about 53 minutes before Q&A)
 
 ### Pre-intro: The problem and the opportunity (1 min)
 
@@ -219,18 +219,11 @@ Teams that only write code are."**
 - **So the workflow evolved:** RPI → QRSPI → QRSPI+. Each step made
   alignment and independent evidence more explicit.
 
-### 3. Turn the process into infrastructure (7 min)
+### 3. Turn the process into infrastructure (8 min)
 
-- QRSPI+ as one implementation, not the only answer. Three blocks:
-
-  | Block | What happens | Human responsibility |
-  |---|---|---|
-  | **Align** | Goals, research, design, delivery slices | Decide what to build and why |
-  | **Execute** | Task specs, safe parallel work, isolated implementation | Set boundaries, resolve big decisions |
-  | **Verify and learn** | Review, integrate, test, replan | Own the outcome, improve the process |
-
-- Ideas to highlight: written records at each step, focused context, approval
-  gates, vertical slices, rules the process enforces rather than reminders.
+- QRSPI+ as one implementation, not the only answer. Ideas to highlight:
+  written records at each step, focused context, approval gates, vertical
+  slices, rules the process enforces rather than reminders.
 - Value comes first: the first step records why each goal matters before
   any research or code, and vertical slices reach working software early
   enough to test whether it's worth continuing. The Three-Year Rewrite had
@@ -305,6 +298,32 @@ Teams that only write code are."**
     statistics.
   - Hook: *"Keep what wins. Undo the rest. Remove any step that no longer
     earns its cost."*
+- **Prove the new process is better.** A process change feels better long
+  before anyone shows it is better. Test it like any other change:
+  - **Same tasks:** a fixed set of representative tasks from real past work
+    (features, bug fixes, refactors the team shipped), not demos.
+  - **Baseline, then change:** run the set through the current process, then
+    the changed one. Change one major thing at a time.
+  - **Many runs:** agents are non-deterministic, so run each task several
+    times and compare the spread, not a single best result.
+  - **Outcomes:** first-pass acceptance, later defects, integration rework,
+    review effort, time to a usable result, and cost to run. Reject speed
+    that adds defects or rework.
+  - Hook: *"If you can't show it's better, it's just different."*
+- **Overfitting the process to today's problems.** A process tuned to the
+  problems we have today can fail on the problems we'll have tomorrow:
+
+  | Risk | Guard |
+  |---|---|
+  | **Every incident adds a rule:** each miss adds a step, check, or instruction until the process fights last quarter's failures and instruction overload returns | Track what each step catches; retire or merge steps that stop catching anything |
+  | **Built around today's model:** workarounds compensate for the current model's weaknesses, become pure cost when models improve, and leave new weaknesses unchecked | Re-run the evaluation whenever the model or harness changes; remove workarounds that no longer earn their place |
+  | **Tuned to familiar tasks:** tweaks that improve the same few tasks can make the process worse at everything else | Keep a held-out set used only to confirm a change, never to tune it, and rotate in fresh, live work; replay past work from the commit before the fix so the answer isn't in history |
+
+  - When a measure becomes the target, it stops being a good measure.
+  - Hook: *"Build the process for the work you'll have, not just the
+    mistakes you've made."*
+  - Transition: evaluation tells us whether the process improved; review
+    catches what slips through on each change.
 
 ### 4. Two layers of agent review (5 min)
 
@@ -396,6 +415,10 @@ language is inherently imprecise.
   the telescope, or was he holding it? Both readings are correct English.
   People resolve it with context or by asking; an agent picks one, often
   silently, and may pick the other next run.
+  - Implied information goes further: the same sentence can imply *"He stole
+    my telescope"* or *"I already found someone I was looking for."* Neither
+    is in the words; both come from assumed context, and agents fill those
+    gaps too.
   - In instructions: *"Only run the tests for files you changed"* — does
     "only" limit which tests, or whether to do anything else? *"Make it
     faster"* — for whom, by how much, at what cost?
@@ -462,8 +485,8 @@ workflow works.
   - **Stocks:** governance (unskippable checks, permissions, limits), shared
     knowledge (focused context, structured handoffs), and customer value
     (value of completed work, not amount of work completed).
-  - **Activities:** define, deliver, detect. Roughly the QRSPI+ blocks of
-    align, execute, and verify and learn.
+  - **Activities:** define, deliver, detect. Roughly the loop from section 3:
+    goals, adaptive build, then evaluate and review.
   - **Modes:** director, performer, assessor. Not job titles; people and
     agents move between them depending on risk.
   - Its health check matches our evaluation advice: as delivery speeds up,

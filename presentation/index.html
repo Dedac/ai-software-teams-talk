@@ -132,6 +132,18 @@
     .ambiguity .quote::after { content: "\201D"; color: var(--accent); }
     .ambiguity .panel h3 { font-family: var(--font-mono); font-size: 22px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
     .ambiguity .panel p { font-size: 34px; }
+    .ambiguity .columns.four { grid-template-columns: repeat(4, 1fr); gap: 28px; }
+    .ambiguity .columns.four .panel p { font-size: 28px; }
+    .ambiguity .panel.implied { border-top-color: var(--gh-muted); }
+    .ambiguity .panel.implied h3 { color: var(--gh-muted); }
+    .outcome-comparison { display: grid; grid-template-columns: 1fr 64px 1fr; align-items: stretch; gap: 20px; margin: auto 0; }
+    .outcome-card { background: var(--gh-surface); border-left: 6px solid var(--accent); padding: 24px 28px; }
+    .outcome-card.activity { border-left-color: var(--gh-muted); }
+    .outcome-label { font: 20px var(--font-mono); color: var(--accent); letter-spacing: .06em; margin-bottom: 12px; }
+    .outcome-card.activity .outcome-label { color: var(--gh-muted); }
+    .outcome-items p { font-size: 29px; line-height: 1.22; padding: 12px 0; border-top: 1px solid var(--gh-muted); }
+    .outcome-card.activity .outcome-items p { color: var(--gh-muted); }
+    .comparison-not-equal { align-self: center; text-align: center; color: var(--gh-muted); font: 750 58px/1 var(--font-display); }
     .nl-stack .row strong { font-family: var(--font-display); }
     .nl-stack h2 { margin-bottom: 24px; }
     .nl-stack .rows { gap: 14px; }
@@ -258,6 +270,7 @@
       <section class="slide bg-midnight statement">
         <p class="eyebrow">The thesis</p>
         <h2>The bottleneck moved<br>from <span class="muted">writing code</span><br>to <span class="accent">trusting it.</span></h2>
+        <p class="lead accent">Plausible isn't Proven</p>
         <aside class="notes">
           <p>Traditional teams are not disappearing. Their constraint is moving. Introduce the repeated line: Plausible isn't proven.</p>
           <p>The second through-line is the value of completed work, not the amount of work completed. Verification includes both correctness and whether the work was worth building.</p>
@@ -504,20 +517,44 @@
           <p>Reduced complexity: start with the smallest organization the task needs and add steps, agents, or specialists only when evidence says they help. The <a href="https://gist.github.com/EvanBoyle/8c1a97f682d92dab8c09d0e1ea73f4a0">Autonomous delivery skill</a> is one example: an orchestrator adapts task boundaries, context, and concurrency as it learns, rather than following a fixed pipeline.</p>
           <p>Evaluation: changes to the workflow are tested against a baseline of representative tasks, measuring first-pass acceptance, defects, rework, and time to a usable result. This is hill climbing: observe friction, guess a cause, make one small change, compare against similar work, then keep, revise, or undo. Speed that adds defects or rework is not a gain.</p>
           <p>Review: people still decide what ships and what counts as done. Independent checks and human review stay; what changes is how much process wraps around them.</p>
-          <p>The evals are the hard part: a fixed set of representative tasks and a baseline. Small samples support hypotheses, not fleet-wide statistics. That leads to review: even a good loop needs layers that are hard to fool.</p>
+          <p>The evals are the hard part: a fixed set of representative tasks and a baseline. Small samples support hypotheses, not fleet-wide statistics. Next: how do we prove a change actually helped?</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">Process as infrastructure</p>
-        <h2>Align. Execute. <span class="accent">Verify.</span></h2>
+        <p class="eyebrow">Evaluate the process</p>
+        <h2>Prove the new process <span class="accent">is better.</span></h2>
+        <div class="flow" aria-label="Past tasks, baseline run, changed run, compare outcomes">
+          <div class="node">Past tasks</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node">Baseline<br>run</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node">Changed<br>run</div><span class="arrow" aria-hidden="true">&rarr;</span>
+          <div class="node">Compare<br>outcomes</div>
+        </div>
         <div class="columns three">
-          <div class="panel"><h3>Align</h3><p>Goals, research,<br>design, slices.</p><p class="muted rule">People decide<br>what and why.</p></div>
-          <div class="panel"><h3>Execute</h3><p>Task specs,<br>isolated work.</p><p class="muted rule">People set<br>boundaries.</p></div>
-          <div class="panel"><h3>Verify &amp; learn</h3><p>Review, integrate,<br>test, replan.</p><p class="muted rule">People own<br>the outcome.</p></div>
+          <div class="panel"><h3>Same tasks</h3><p>Real past work,<br>not demos.</p></div>
+          <div class="panel"><h3>Many runs</h3><p>One good run<br>can be luck.</p></div>
+          <div class="panel"><h3>Outcomes</h3><p>Acceptance, defects,<br>rework, cost.</p></div>
         </div>
         <aside class="notes">
-          <p><a href="https://github.com/dfrysinger/qrspi-plus">QRSPI+</a> is one implementation, not the only answer. Explain the three blocks instead of listing every pipeline acronym.</p>
-          <p>The first step records why each goal matters. Vertical slices reach working software early enough to test whether it is worth continuing. The Three-Year Rewrite lacked both.</p>
+          <p>A process change feels better long before anyone shows it is better. Treat the workflow like any other change: test it.</p>
+          <p>Pick a fixed set of representative tasks from real past work: features, bug fixes, and refactors your team actually shipped. Run them through the current process to set a baseline, then through the changed process. Change one major thing at a time so you know what made the difference.</p>
+          <p>Agents are non-deterministic, so one run proves little. Run each task several times and compare the spread, not a single best result.</p>
+          <p>Measure outcomes, not activity: first-pass acceptance, defects found later, integration rework, review effort, time to a usable result, and cost to run. Reject a change that adds speed but increases defects or rework. Small samples support hypotheses, not fleet-wide statistics.</p>
+          <p>Spoken hook: "If you can't show it's better, it's just different." Transition: but tune a process too closely to what is in front of you, and it stops fitting what comes next.</p>
+        </aside>
+      </section>
+      <section class="slide bg-midnight">
+        <p class="eyebrow">Avoid overfitting</p>
+        <h2>Overfitting the process<br>to <span class="accent">today's problems.</span></h2>
+        <div class="comparison">
+          <div><h3 class="muted">The risk</h3><p>Every incident adds a rule.</p><p>Built around today's model.</p><p>Tuned to familiar tasks.</p></div>
+          <div><h3 class="accent">The guard</h3><p>Retire steps that stop catching.</p><p>Re-test when models change.</p><p>Hold out tasks you never tune on.</p></div>
+        </div>
+        <aside class="notes">
+          <p>A process tuned to the problems we have today can fail on the problems we'll have tomorrow. Three ways it happens, each with a guard.</p>
+          <p>Every incident adds a rule: a miss leads to a new step, check, or instruction, and they pile up. The process grows to fight last quarter's failures and brings back instruction overload. Track what each step catches; retire or merge steps that stop catching anything.</p>
+          <p>Built around today's model: steps and workarounds compensate for the current model's weaknesses. When models improve, those steps become pure cost, and new weaknesses go unchecked. Re-run the evaluation whenever the model or harness changes, and remove workarounds that no longer earn their place.</p>
+          <p>Tuned to familiar tasks: every tweak that improves the same handful of tasks can make the process worse at everything else. Borrow the train-and-test split from machine learning: keep a held-out set you only run to confirm a change, never to tune it, and rotate in fresh, live work as the codebase and team change. When replaying past work, start from the commit before the fix, so the agent can't find the answer in history. When a measure becomes the target, it stops being a good measure.</p>
+          <p>Spoken hook: "Build the process for the work you'll have, not just the mistakes you've made." Transition: evaluation tells us whether the process improved; review catches what slips through on each change.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
@@ -571,15 +608,14 @@
           <div class="node">Bounded<br>agent</div><span class="arrow" aria-hidden="true">&rarr;</span>
           <div class="node">Visible<br>evidence</div>
         </div>
-        <p class="lead">This app isn't real.</p>
-        <p class="tag bottom">Don't believe everything AI generates. Verify it.</p>
+        <p class="lead">This could be GitHub Agentic Workflows.</p>
         <aside class="notes">
           <p>This is an illustrative use case, not a real app or a claim that BeamRS performs these automations. Copilot code review already runs on pull requests. <a href="https://github.github.com/gh-aw/introduction/overview/">GitHub Agentic Workflows</a> extend agent work to repository events and schedules.</p>
           <p>Markdown instructions plus trigger and permission settings compile into GitHub Actions. Treat AI-generated descriptions and outputs as claims to verify. Explain this as governed automation, not unrestricted repository authority.</p>
         </aside>
       </section>
       <section class="slide bg-midnight">
-        <p class="eyebrow">Governed automation</p>
+        <p class="eyebrow">GitHub Agentic Workflows / Governed Automation</p>
         <h2>Define authority <span class="accent">before execution.</span></h2>
         <div class="columns three">
           <div class="panel"><h3>Context</h3><p>A defined trigger.<br>A focused task.</p></div>
@@ -619,13 +655,16 @@
       <section class="slide bg-midnight ambiguity">
         <p class="eyebrow">Natural language uncertainty / an English example</p>
         <h2 class="quote">I saw the man with the telescope.</h2>
-        <div class="columns">
+        <div class="columns four">
           <div class="panel"><h3>Reading 1</h3><p>I used the telescope<br>to see him.</p></div>
           <div class="panel"><h3>Reading 2</h3><p>He was the one<br>holding the telescope.</p></div>
+          <div class="panel implied"><h3>Implied</h3><p>He stole<br>my telescope.</p></div>
+          <div class="panel implied"><h3>Implied</h3><p>I already found<br>someone I was<br>looking for.</p></div>
         </div>
-        <p class="lead bottom">Both are correct English. <span class="accent">An agent picks one.</span></p>
+        <p class="lead bottom">All are plausible. <span class="accent">An agent picks one.</span></p>
         <aside class="notes">
           <p>A classic ambiguous sentence: the grammar allows both readings, and only context tells you which one the speaker meant. People resolve this with shared context and by asking. An agent picks a reading, often without saying so, and may pick the other one on the next run.</p>
+          <p>It gets worse with implied information: what the listener fills in that the words never say. "I saw the man with the telescope" can imply he stole my telescope, or that I already found someone I was looking for. Neither is in the sentence; both come from assumed context. Agents fill those gaps too, confidently.</p>
           <p>The same thing happens in instructions. "Only run the tests for files you changed" versus "run the tests only for files you changed": does "only" limit which tests, or whether to run anything else? "Make it faster" does not say faster for whom, by how much, or at what cost. Ask the audience for a prompt they wrote that an agent read the other way.</p>
           <p>Spoken hook: "When English is the programming language, every ambiguity is a bug you haven't found yet."</p>
         </aside>
@@ -654,7 +693,7 @@
         </div>
         <aside class="notes">
           <p>An agent workflow is itself a system that has to be engineered: evaluated, limited, connected, and maintained. These problems remain even when the workflow works.</p>
-          <p>Evaluate: decide what a better run means before changing the workflow. Use a fixed set of representative tasks, a baseline, and outcome measures such as validated delivery time, rework, escaped defects, review effort, and cost. Case Study B filed 15 issues about its own process gaps and turned them into automatic checks in the next release. <a href="https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/">GitHub describes the same loop</a> for Copilot code review: evaluation against known issues plus production signals.</p>
+          <p>Evaluate: recap slides 19–20 briefly. Decide what a better run means before changing the workflow. Use a fixed set of representative tasks, a baseline, and outcome measures such as validated delivery time, rework, escaped defects, review effort, and cost. Case Study B filed 15 issues about its own process gaps and turned them into automatic checks in the next release. <a href="https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/">GitHub describes the same loop</a> for Copilot code review: evaluation against known issues plus production signals.</p>
           <p>Limit: agents spend tokens, model requests, time, and money, and can retry or loop without converging. Set budgets per task and per run, cap retries and parallel work, and stop or escalate at the limit. The cost to run the process belongs in the same economics as the cost to run the product. In the <a href="https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/">Stack Overflow 2026 survey</a>, 38% of respondents said their organizations set limits on AI usage.</p>
           <p>Hand off: prose handoffs force the next agent to interpret. Structured artifacts with required sections, task IDs, file lists, and test results can be checked by a script. The Relay passed long written plans forward; Case Study B added an automatic check that every merge contains exactly the planned tasks after a merge silently dropped a security safeguard.</p>
         </aside>
@@ -677,13 +716,13 @@
         <div class="ledger">
           <p class="ledger-head"></p><p class="ledger-head">AES</p><p class="ledger-head">In this talk</p>
           <p><strong>Stocks</strong></p><p>Governance, knowledge, value</p><p class="muted">Checks, context, outcomes</p>
-          <p><strong>Activities</strong></p><p>Define, deliver, detect</p><p class="muted">Align, execute, verify &amp; learn</p>
+          <p><strong>Activities</strong></p><p>Define, deliver, detect</p><p class="muted">Goals, build, evaluate &amp; review</p>
           <p><strong>Modes</strong></p><p>Director, performer, assessor</p><p class="muted">People or agents, set by risk</p>
         </div>
         <aside class="notes">
           <p><a href="https://github.com/resources/insights/agentic-engineering-system">GitHub's Agentic Engineering System (AES)</a> is a tool-agnostic framework for scaling agent use. Implementation guidance is in <a href="https://learn.github.com/well-architected/governance/recommendations/agentic-engineering-system-on-github">GitHub Well-Architected</a>. It is a vendor framework rather than an empirical study; use it to show that these lessons fit one model.</p>
           <p>Stocks accumulate over time. Governance covers the unskippable checks, permissions, and usage limits. Shared knowledge covers focused context and structured handoffs: agents can only act on what they can access, so weak knowledge turns into fast, confident mistakes. Customer value is the value of completed work, not the amount of work completed.</p>
-          <p>Activities move work through the system: define, deliver, detect. They line up with the QRSPI+ blocks of align, execute, and verify and learn. Detect feeds what was learned back into governance and shared knowledge, as Case Study B did with its own process gaps.</p>
+          <p>Activities move work through the system: define, deliver, detect. They line up with the loop from earlier: goals, adaptive build, then evaluate and review. Detect feeds what was learned back into governance and shared knowledge, as Case Study B did with its own process gaps.</p>
           <p>Modes describe how people and agents take part: director sets intent, performer does the work, assessor checks it. They are not job titles, and the same person or agent can move between them depending on risk and what governance allows.</p>
           <p>AES's health check: as agent use grows, escaped defect rates should stay flat or fall, and shared knowledge should improve alongside delivery speed. If they diverge, the operating model needs attention. Return to the opening: directing agents changes responsibilities, but accountability stays. Transition into what that means for careers and teams.</p>
         </aside>
@@ -742,9 +781,26 @@
       <section class="slide bg-midnight">
         <p class="eyebrow">Measure outcomes, not activity</p>
         <h2>Did value reach users?</h2>
-        <div class="columns">
-          <div class="panel"><h3 class="accent">Measure</h3><p>Earned or saved value.<br>Cost to run.<br>Validated delivery time.<br>Review, rework, late defects.</p></div>
-          <div class="panel"><h3 class="muted">Don't confuse it with</h3><p class="muted">Tasks closed.<br>Pull requests merged.<br>Story points.<br>Lines generated.</p></div>
+        <div class="outcome-comparison">
+          <div class="outcome-card">
+            <p class="outcome-label">User and business outcomes</p>
+            <div class="outcome-items">
+              <p>Earned or saved value</p>
+              <p>Cost to run</p>
+              <p>Validated delivery time</p>
+              <p>Review, rework, late defects</p>
+            </div>
+          </div>
+          <div class="comparison-not-equal" aria-label="not equal to">≠</div>
+          <div class="outcome-card activity">
+            <p class="outcome-label">Activity signals</p>
+            <div class="outcome-items">
+              <p>Tasks closed</p>
+              <p>Pull requests merged</p>
+              <p>Story points</p>
+              <p>Lines generated</p>
+            </div>
+          </div>
         </div>
         <aside class="notes">
           <p>Start with one workflow, clear permissions, and defined checks. Learn from each run. Include model and agent costs in operating economics.</p>
