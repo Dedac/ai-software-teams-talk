@@ -42,7 +42,9 @@ Teams that only write code are."**
   process is being iterated on
 - [QRSPI+](https://github.com/dfrysinger/qrspi-plus): one implementation of a
   structured agent workflow
-- [BeamRS](https://github.com/Dedac/BeamRS): local demo and running case study
+- [BeamRS](https://github.com/Dedac/BeamRS): local demo and running case study,
+  a Rust and Leptos rebuild of the presenter's 2018
+  [Beam](https://github.com/Dedac/Beam) app (Blazor, ASP.NET Core, SQL Server)
 - [dfrysinger/skills](https://github.com/dfrysinger/skills): `mailbox` and `handoff` skills for
   messaging and handing work between named agent sessions
 - [Autonomous delivery skill](https://gist.github.com/EvanBoyle/8c1a97f682d92dab8c09d0e1ea73f4a0):
@@ -84,14 +86,20 @@ Teams that only write code are."**
 | [HBS and P&G, "The Cybernetic Teammate"](https://aiinstitute.hbs.edu/the-cybernetic-teammate-how-ai-is-reshaping-collaboration-and-expertise-in-the-workplace/) | In a randomized study of 776 professionals, individuals with AI matched two-person teams without AI, and AI reduced expertise silos. Product development, not software. | 8 |
 | [Anthropic Economic Index: software development](https://www.anthropic.com/news/impact-software-development) (2025) | 79% of Claude Code conversations were automation (delegation) rather than augmentation. | Opening, 5, 8 |
 
-## Outline (about 53 minutes before Q&A)
+## Outline (Oct 14 delivery: 40 minutes before Q&A; section timings rounded up)
 
-### Pre-intro: The problem and the opportunity (1 min)
+The transcript begins mid-opening at 2:39:49 PM ET. The pre-intro and
+opening are captured together for 1:38 (2 minutes rounded up), so their
+individual timings cannot be separated. The talk ends at 3:19:17 PM ET
+(39:28 elapsed, rounded up to 40 minutes); Q&A runs through the last
+transcribed cue at 3:32:51 PM ET (13:34, rounded up to 14 minutes).
+Rounded section timings total 44 minutes because each interval is rounded
+up separately.
+
+### Pre-intro and opening: The problem, opportunity, and teams (2 min rounded up; 1:38 captured)
 
 - Hook: *"The software engineering process is broken."*
 - Hold the answer: *"The good news?"* The next slide reveals: *"You just got promoted."*
-
-### Opening: People and teams — "You just got promoted" (5 min)
 
 - Hook: *"You just got promoted."* Everyone who works with agents is a
   manager now, whether or not their title changed.
@@ -102,6 +110,10 @@ Teams that only write code are."**
 - **State the thesis early (spoken):** if everyone directs agent labor, the
   bottleneck is no longer writing code. It moved to trusting it: knowing what
   to build, and proving it works.
+- Audience question: *"What are we now? PMs? CEOs? Super Humans? Useless?"* A PM decides what
+  is worth building and defines success. A CEO staffs the organization, sets
+  budgets and structure, and is accountable for results. Working with agents
+  asks engineers to do some of both; it does not make the engineer useless.
 - **You have access to labor.** Agents are capacity on demand. Your output as
   an engineer is no longer only the code you write; it is what the people and
   agents you direct ship, verified.
@@ -122,23 +134,42 @@ Teams that only write code are."**
     [`handoff`](https://github.com/dfrysinger/skills/blob/main/skills/handoff/SKILL.md) skills in
     [dfrysinger/skills](https://github.com/dfrysinger/skills): one-shot
     messages and compact handoff documents instead of a chat thread.
-- Audience question: *"What are we now? PMs? CEOs? Super Humans? Useless?"* A PM decides what
-  is worth building and defines success. A CEO staffs the organization, sets
-  budgets and structure, and is accountable for results. Working with agents
-  asks engineers to do some of both; it does not make the engineer useless.
 - Transition: *"Let's look at an app that seemed to work."*
 
-### 0. Cold open: "The app worked. It just existed twice." (3 min)
+### 0. Cold open: "The app worked. It just existed twice." (4 min)
 
-- Show BeamRS working.
+**BeamRS thread: the story of choosing tools.** BeamRS returns at three
+points: here (the tools we chose), section 4 (whether the work used them as
+chosen, and whether they fit), and the close.
+
+- **Same app, new tools.** Show BeamRS working while introducing it.
+  Beam is the presenter's pun-based social network from 2018 (users join
+  *frequencies*, post *rays*, and *prism* other people's rays), built with
+  Blazor WebAssembly, ASP.NET Core, and SQL Server. BeamRS rebuilds the same
+  features in Rust.
+  - **Why rebuild:** the recorded goals were feature parity, safer behavior
+    (no state-changing GET requests), easier deployment, and a demo that works
+    out of the box with seed data.
+  - **The product stack was a human decision.** It was written into the goals
+    as a constraint: *"Use a PostgreSQL-backed stack with Axum and Leptos."*
+    One Rust codebase renders each page on the server and brings it to life
+    in the browser; Docker runs it.
+  - **The delivery tools were chosen too:** QRSPI+'s full twelve-step route
+    for every change, local Copilot agent sessions, Copilot code review on
+    every pull request, and a completion audit using a different model. The
+    first version was planned, built, and merged on the day the project
+    started.
+  - Hook: *"People chose the stack. Agents built it."*
+- Stay on the demo.
 - Reveal the bug from the Leptos upgrade: the browser built a second copy of
   the whole interface instead of attaching to the page the server had already
-  rendered.
+  rendered. The chosen framework was designed to attach; the upgraded code
+  called the wrong startup function.
 - Ask: *"Would you have approved this if the demo looked right?"*
 - Deliver the thesis visually: the bottleneck moved from writing code to
   trusting it.
 
-### 1. The bottleneck moved (6 min)
+### 1. The bottleneck moved (5 min)
 
 - Ask: *"If code took no time to write tomorrow, what would still stop your
   team from shipping?"*
@@ -179,7 +210,7 @@ Teams that only write code are."**
 - Transition: if the constraint moved, the process has to change too, and
   it has to start with why the work is worth doing.
 
-### 2. Why our first agent workflows weren't enough (5 min)
+### 2. Why our first agent workflows weren't enough (3 min)
 
 - Three lessons:
   - **Instruction overload:** important guidance gets lost in a growing prompt.
@@ -219,7 +250,7 @@ Teams that only write code are."**
 - **So the workflow evolved:** RPI → QRSPI → QRSPI+. Each step made
   alignment and independent evidence more explicit.
 
-### 3. Turn the process into infrastructure (8 min)
+### 3. Turn the process into infrastructure (11 min)
 
 - QRSPI+ as one implementation, not the only answer. Ideas to highlight:
   written records at each step, focused context, approval gates, vertical
@@ -234,7 +265,7 @@ Teams that only write code are."**
   exists."*
 - Be honest about costs: more steps and slower starts. Use the quick-fix route
   for small changes.
-- **Case Study B: QRSPI+, a step toward what's next (2 min).** An implementation
+- **Case Study B: QRSPI+, a step toward what's next.** An implementation
   that has helped ship enterprise features, and that also built its own next
   release. It carries a heavy amount of process; treat it as a step toward
   lighter, better-evaluated systems, not the destination.
@@ -278,7 +309,8 @@ Teams that only write code are."**
   keeps its lessons and sheds ceremony: *Goals → adaptive build → evaluate →
   review*, then keep what wins and undo the rest.
   - **Reduced complexity:** only the steps the task needs; add agents or
-    specialists when evidence says they help.
+    specialists when evidence says they help. BeamRS (section 4) ran all
+    twelve steps even for a version bump, and steps got skipped.
   - **Evaluation:** a workflow that hill-climbs on evals, testing changes
     against a baseline of representative tasks.
   - **Review:** a person still decides what ships.
@@ -325,18 +357,37 @@ Teams that only write code are."**
   - Transition: evaluation tells us whether the process improved; review
     catches what slips through on each change.
 
-### 4. Two layers of agent review (5 min)
+### 4. Two layers of agent review (3 min)
 
 All findings in this section were made by agents. People decided which to
 accept, made the fixes, and approved the releases.
 
 **Layer 1: the local workflow** reviews the work while it is being built.
+Return to the tools chosen in the cold open. Hook: *"Choosing a tool isn't
+using it."*
 
-- Agentic review found that the first BeamRS version used about 227 lines of
-  handwritten JavaScript for behavior the approved design assigned to Rust.
-  The fix moved it into Rust (commit *"hydrate BeamRS frontend from Rust"*).
-- During the Leptos upgrade, an independent clean Docker build exposed an
-  outdated Rust version.
+- **Stack:** agentic review found that the first BeamRS version used about
+  227 lines of handwritten JavaScript for behavior the approved design
+  assigned to Rust. A completion audit using a different model reopened the
+  design gate; the JavaScript was deleted and the behavior moved into Rust
+  (commit *"hydrate BeamRS frontend from Rust"*). The app worked, but not in
+  the stack we chose.
+- **Toolchain:** during the Leptos upgrade, an independent clean Docker build
+  exposed that the pinned Rust version (1.89) was too old for the locked build
+  tools; it was raised to 1.96.
+- **Load testing:** the goal said *"add no new third-party dependency,"* so
+  instead of adopting an outside load-testing tool, the agents built a small
+  harness that drives the app's own router in memory, and recorded what it
+  leaves out: real networking. The next day a follow-up
+  ([#7](https://github.com/Dedac/BeamRS/pull/7)) added real HTTP. Choose the
+  smallest tool that answers today's question, write down its limits, and
+  upgrade when they matter.
+- **Process:** every BeamRS change, including a framework version bump, was
+  configured for QRSPI+'s full twelve-step route. On the smaller changes,
+  steps were quietly skipped, and pull request review flagged the missing
+  integration and replanning records on #4 and #7. A process too heavy for
+  the task gets skipped, which is the case for section 3's *"only the steps
+  the task needs."*
 
 **Layer 2: Copilot code review on the pull request** looks at the finished
 change from a fresh start, without the local session's assumptions. It found
@@ -368,7 +419,7 @@ Hooks:
 Keep the balance: agents are not infallible, and agent review adds assurance
 without removing human accountability.
 
-### 5. Agents beyond the editor (3 min)
+### 5. Agents beyond the editor (2 min)
 
 - Copilot code review already runs in the repository on every pull request.
   GitHub Agentic Workflows extend that to events and schedules.
@@ -391,7 +442,7 @@ without removing human accountability.
   investigation, documentation updates.
 - Enterprise case: governed automation for triage or maintenance.
 
-### 6. Natural language uncertainty (4 min)
+### 6. Natural language uncertainty (3 min)
 
 Every harness, skill, and agent is steered by natural language, and natural
 language is inherently imprecise.
@@ -495,7 +546,7 @@ workflow works.
   - Transition: the modes lead straight into what changes for careers and
     teams.
 
-### 8. What changes for careers and teams (4 min)
+### 8. What changes for careers and teams (3 min)
 
 - Organize around responsibilities, not invented job titles:
 
@@ -525,9 +576,9 @@ workflow works.
   responsibilities shown on the slides; do not add unsupported enterprise
   examples.
 
-### 9. The process is a product (3 min)
+### 9. The process is a product (1 min)
 
-**This talk was built the same way (1 min).** Show the outline repository's
+**This talk was built the same way.** Show the outline repository's
 history as a short case study:
 
 - **Start from intent:** the abstract went to an agent, which proposed a
@@ -557,9 +608,11 @@ history as a short case study:
   tasks closed, pull requests merged, or code generated.
 - Hook: *"Every finding should make the next run harder to fool."*
 
-### Close and acknowledgments (2 min)
+### Close and acknowledgments (3 min)
 
 - Return to the opening BeamRS screen: *"How would your team have known?"*
+  The tools were chosen up front; only evidence showed whether the work used
+  them as chosen and whether they fit the job.
 - Then to the rewrite: *"And how would they have known it was worth
   building at all?"*
 - Connect the evidence: *"The advantage isn't having more agents. It's building a
@@ -571,7 +624,7 @@ history as a short case study:
   Trash Pandas team for feedback, Evan Boyle for written research on adaptive
   agent delivery, and Alex Lavaee for "From RPI to QRSPI" and its research.
 
-### Q&A (not timed)
+### Q&A and feedback (14 min)
 
 - Invite discussion with *"Plausible isn't proven."* The source appendix
   follows the discussion.
