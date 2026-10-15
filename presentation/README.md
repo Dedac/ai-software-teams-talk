@@ -13,9 +13,10 @@ high-contrast Midnight background, green accent, Hubot Sans headlines, and
 Mona Sans body text. Large headlines and sparse slide copy are designed for
 projection to a large audience. The final source slide is an appendix.
 Slide 2 introduces the broken software-engineering process; slide 3 opens the
-people-and-teams section with "You just got promoted." Slide 6 introduces
-BeamRS and the tools chosen to build it, and slide 7 reveals its duplicated
-interface. Slides 13–19 tell the
+people-and-teams section with "You just got promoted." Slide 4 asks what
+agents make us now; slide 5 follows with the manager's responsibility for
+team output. Slide 6 introduces BeamRS and the tools chosen to build it, and
+slide 7 reveals its duplicated interface. Slides 13–19 tell the
 workflow story in order: lessons, The Relay, the RPI-to-QRSPI+ diagram (slide
 15, full route with quick-fix details in notes), the QRSPI+ case, the
 comparison, and slide 19 on what comes next: reduced complexity, evaluation,
