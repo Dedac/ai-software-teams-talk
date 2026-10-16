@@ -159,7 +159,7 @@ chosen, and whether they fit), and the close.
     every pull request, and a completion audit using a different model. The
     first version was planned, built, and merged on the day the project
     started.
-  - Hook: *"People chose the stack. Agents built it."*
+  - Hook: *"The fully agentic engineering rewrite"*
 - Stay on the demo.
 - Reveal the bug from the Leptos upgrade: the browser built a second copy of
   the whole interface instead of attaching to the page the server had already
